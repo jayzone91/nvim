@@ -56,6 +56,21 @@ return {
         -- add any options here, or leave empty to use the default settings
       })
 
+      local augroup = vim.api.nvim_create_augroup("LSPFormatting", {})
+
+      local on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format()
+            end
+          })
+        end
+      end
+
       local lspconfig = require("lspconfig")
 
       -- Enable some language Servers with the additional completion
@@ -64,6 +79,7 @@ return {
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
           capabilities = capabilities,
+          on_attach = on_attach,
         })
       end
 
@@ -82,9 +98,11 @@ return {
           },
         },
         capabilities = capabilities,
+        on_attach = on_attach,
       })
 
       lspconfig.emmet_ls.setup({
+        on_attach = on_attach,
         capabilities = capabilities,
         filetypes = {
           "html",
