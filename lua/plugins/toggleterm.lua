@@ -21,6 +21,6 @@ return {
         highlights = { border = "Normal", background = "Normal" },
       },
     })
-    vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Open terminal"})
+    vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Open terminal" })
   end,
 }

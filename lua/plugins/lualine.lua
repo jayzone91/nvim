@@ -5,7 +5,7 @@ return {
       theme = "catppuccin",
     },
     sections = {
-      lualine_x = { "filetype",  function()
+      lualine_x = { "filetype", function()
         local msg = "No Lsp"
         local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
         local clients = vim.lsp.get_active_clients()

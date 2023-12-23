@@ -28,15 +28,12 @@ require("lazy").setup({
   performance = {
     rtp = {
       disabled_plugins = {
-      "gzip",
-      "tarPlugin",
-      "tohtml",
-      "tutor",
-      "zipPlugin",
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
       }
     }
   }
 })
-
-
-
