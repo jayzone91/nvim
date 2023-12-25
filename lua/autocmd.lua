@@ -31,3 +31,27 @@ vim.api.nvim_create_autocmd("FileType", {
     )
   end,
 })
+
+-- check if we need to reload a file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  command = "checktime"
+})
+
+-- Highlight on Yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highligh_yank"),
+  callback = function()
+    vim.highlight.on_yank()
+  end
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_split"),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end
+})
