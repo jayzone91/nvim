@@ -26,7 +26,9 @@ vim.o.ignorecase     = true               -- ignore case when completing file na
 vim.o.smarttab       = true               -- use 'shiftwidth' when inserting <Tab>
 vim.o.splitbelow     = true               -- new window from split is below the current one
 vim.o.splitright     = true               -- new window is put right of the current one
-vim.o.swapfile       = false              --  whether to use a swapfile for a buffer
+vim.o.swapfile       = true               -- whether to use a swapfile for a buffer
+vim.o.conceallevel   = 3                  -- whether concealable text is shown or hidden
+vim.o.list           = true               -- show <Tab> and <EOL>
 
 vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
