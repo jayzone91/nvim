@@ -8,6 +8,7 @@ local servers = {
   "emmet_ls",
   "taplo",
   "prismals",
+  "tailwindcss",
 }
 
 return {
@@ -51,7 +52,21 @@ return {
       })
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      capabilities.textDocument.completion.completionItem = {
+        documentationFormat = { "markdown", "plaintext" },
+        snippetSupport = true,
+        preselectSupport = true,
+        insertReplaceSupport = true,
+        labelDetailsSupport = true,
+        deprecatedSupport = true,
+        commitCharactersSupport = true,
+        tagSupport = { valueSet = { 1 } },
+        resolveSupport = {
+          "documentation",
+          "detail",
+          "additionalTextEdits",
+        }
+      }
       require("neodev").setup({
         -- add any options here, or leave empty to use the default settings
       })
@@ -86,6 +101,9 @@ return {
       lspconfig.lua_ls.setup({
         settings = {
           Lua = {
+            diagnostics = {
+              globals = { "vim" }
+            },
             runtime = {
               version = "LuaJIT",
             },
@@ -95,6 +113,8 @@ return {
             completion = {
               callSnippet = "Replace",
             },
+            maxPreload = 100000,
+            preloadFileSize = 10000,
           },
         },
         capabilities = capabilities,
