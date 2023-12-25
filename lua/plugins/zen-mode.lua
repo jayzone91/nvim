@@ -7,7 +7,7 @@ return {
         window = {
           width = .85
         }
-      }, { desc = "Toggle Zen Mode" })
-    end)
+      })
+    end, { desc = "Toggle Zen Mode" })
   end
 }
