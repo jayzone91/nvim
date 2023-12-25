@@ -2,11 +2,11 @@ local servers = {
   "lua_ls",
   "tsserver",
   "cssls",
-  "marksman",
+  "marksman", -- markdown
   "jsonls",
   "html",
   "emmet_ls",
-  "taplo",
+  "taplo", -- Toml
   "prismals",
   "tailwindcss",
 }
