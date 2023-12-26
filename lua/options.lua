@@ -29,6 +29,11 @@ vim.o.splitright     = true               -- new window is put right of the curr
 vim.o.swapfile       = true               -- whether to use a swapfile for a buffer
 vim.o.conceallevel   = 3                  -- whether concealable text is shown or hidden
 vim.o.list           = true               -- show <Tab> and <EOL>
+vim.o.foldenable     = true               -- set to display all folds open
+vim.o.foldlevelstart = 99                 -- 'foldlevel' when starting to edit a file
+vim.o.foldcolumn     = "1"                -- width of the column used to indicate folds
+vim.o.foldlevel      = 99                 -- close folds with a level higher than this
+
 
 vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
