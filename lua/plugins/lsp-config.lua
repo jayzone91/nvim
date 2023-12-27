@@ -14,7 +14,14 @@ local servers = {
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
+    dependencies = { {
+      "sourcegraph/sg.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", --[[ "nvim-telescope/telescope.nvim ]] },
+
+      -- If you have a recent version of lazy.nvim, you don't need to add this!
+      build = "nvim -l build/init.lua",
+    },
+
       {
         -- Show Loading indicator
         "j-hui/fidget.nvim",
@@ -141,7 +148,10 @@ return {
           ["bem.enabled"] = true,
         },
       })
-
+      -- cody
+      require("sg").setup({
+        on_attach = on_attach
+      })
       -- luasnip
       local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load()
