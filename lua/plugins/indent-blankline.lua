@@ -19,8 +19,8 @@ return {
         "notify",
         "toggleterm",
         "lazyterm",
-      }
-    }
+      },
+    },
   },
-  main = "ibl"
+  main = "ibl",
 }

@@ -29,7 +29,7 @@ return {
           "css",
           "prisma",
           "scss",
-          "sql"
+          "sql",
         },
         auto_install = true,
         ignore_install = {},
@@ -38,7 +38,6 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
       })
-    end
+    end,
   },
-
 }

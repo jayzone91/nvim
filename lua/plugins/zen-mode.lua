@@ -5,9 +5,9 @@ return {
     vim.keymap.set("n", "<leader>zz", function()
       require("zen-mode").toggle({
         window = {
-          width = .85
-        }
+          width = 0.85,
+        },
       })
     end, { desc = "Toggle Zen Mode" })
-  end
+  end,
 }

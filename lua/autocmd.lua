@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- check if we need to reload a file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
-  command = "checktime"
+  command = "checktime",
 })
 
 -- Highlight on Yank
@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highligh_yank"),
   callback = function()
     vim.highlight.on_yank()
-  end
+  end,
 })
 
 -- resize splits if window got resized

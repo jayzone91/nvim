@@ -17,24 +17,32 @@ return {
               autoselect_one = true,
               bo = {
                 -- if the file type is one of following, the window will be ignored
-                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+                filetype = { "neo-tree", "neo-tree-popup", "notify" },
                 -- if the buffer type is one of following, the window will be ignored
-                buftype = { 'terminal', "quickfix" },
-              }
-            }
+                buftype = { "terminal", "quickfix" },
+              },
+            },
           })
-        end
-      }
+        end,
+      },
     },
     config = function()
-      vim.fn.sign_define("DiagnosticSignError",
-        { text = " ", texthl = "DiagnosticSignError" })
-      vim.fn.sign_define("DiagnosticSignWarn",
-        { text = " ", texthl = "DiagnosticSignWarn" })
-      vim.fn.sign_define("DiagnosticSignInfo",
-        { text = " ", texthl = "DiagnosticSignInfo" })
-      vim.fn.sign_define("DiagnosticSignHint",
-        { text = "󰌵", texthl = "DiagnosticSignHint" })
+      vim.fn.sign_define(
+        "DiagnosticSignError",
+        { text = " ", texthl = "DiagnosticSignError" }
+      )
+      vim.fn.sign_define(
+        "DiagnosticSignWarn",
+        { text = " ", texthl = "DiagnosticSignWarn" }
+      )
+      vim.fn.sign_define(
+        "DiagnosticSignInfo",
+        { text = " ", texthl = "DiagnosticSignInfo" }
+      )
+      vim.fn.sign_define(
+        "DiagnosticSignHint",
+        { text = "󰌵", texthl = "DiagnosticSignHint" }
+      )
       require("neo-tree").setup({
         close_if_last_window = true,
         popup_border_style = "rounded",
@@ -46,7 +54,7 @@ return {
         sort_function = nil,
         default_component_configs = {
           container = {
-            enable_character_fade = true
+            enable_character_fade = true,
           },
           indent = {
             indent_size = 2,
@@ -65,7 +73,7 @@ return {
             folder_open = "",
             folder_empty = "󰜌",
             default = "*",
-            highlight = "NeoTreeFileIcon"
+            highlight = "NeoTreeFileIcon",
           },
           modified = {
             symbol = "[+]",
@@ -74,22 +82,22 @@ return {
           name = {
             trailing_slash = false,
             use_git_status_colors = true,
-            highlight = "NeoTreeFileName"
+            highlight = "NeoTreeFileName",
           },
           git_status = {
             symbols = {
               -- Change type
-              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-              deleted   = "✖", -- this can only be used in the git_status source
-              renamed   = "󰁕", -- this can only be used in the git_status source
+              added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+              modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+              deleted = "✖", -- this can only be used in the git_status source
+              renamed = "󰁕", -- this can only be used in the git_status source
               -- Status type
               untracked = "",
-              ignored   = "",
-              unstaged  = "󰄱",
-              staged    = "",
-              conflict  = "",
-            }
+              ignored = "",
+              unstaged = "󰄱",
+              staged = "",
+              conflict = "",
+            },
           },
           file_size = {
             enabled = true,
@@ -109,7 +117,7 @@ return {
           },
           symlink_target = {
             enabled = false,
-          }
+          },
         },
         commands = {},
         window = {
@@ -127,7 +135,10 @@ return {
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
             ["<esc>"] = "cancel", -- close preview or floating neo-tree window
-            ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = false } },
+            ["P"] = {
+              "toggle_preview",
+              config = { use_float = true, use_image_nvim = false },
+            },
             -- Read `# Preview Mode` for more information
             ["l"] = "focus_preview",
             ["S"] = "open_split",
@@ -148,8 +159,8 @@ return {
               -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
               -- some commands may take optional config options, see `:h neo-tree-mappings` for details
               config = {
-                show_path = "none" -- "none", "relative", "absolute"
-              }
+                show_path = "none", -- "none", "relative", "absolute"
+              },
             },
             ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
             ["d"] = "delete",
@@ -171,7 +182,7 @@ return {
             ["<"] = "prev_source",
             [">"] = "next_source",
             ["i"] = "show_file_details",
-          }
+          },
         },
         nesting_rules = {},
         filesystem = {
@@ -181,11 +192,9 @@ return {
             hide_gitignore = true,
             hide_hidden = true,
             hide_by_name = {
-              "node_modules"
+              "node_modules",
             },
-            hide_by_pattner = {
-
-            },
+            hide_by_pattner = {},
             always_show = {},
             never_show_by_pattern = {},
           },
@@ -209,7 +218,11 @@ return {
               ["<c-x>"] = "clear_filter",
               ["[g"] = "prev_git_modified",
               ["]g"] = "next_git_modified",
-              ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+              ["o"] = {
+                "show_help",
+                nowait = false,
+                config = { title = "Order by", prefix_key = "o" },
+              },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
               ["og"] = { "order_by_git_status", nowait = false },
@@ -239,7 +252,11 @@ return {
               ["bd"] = "buffer_delete",
               ["<bs>"] = "navigate_up",
               ["."] = "set_root",
-              ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+              ["o"] = {
+                "show_help",
+                nowait = false,
+                config = { title = "Order by", prefix_key = "o" },
+              },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
               ["om"] = { "order_by_modified", nowait = false },
@@ -252,26 +269,30 @@ return {
             window = {
               position = "float",
               mappings = {
-                ["A"]  = "git_add_all",
+                ["A"] = "git_add_all",
                 ["gu"] = "git_unstage_file",
                 ["ga"] = "git_add_file",
                 ["gr"] = "git_revert_file",
                 ["gc"] = "git_commit",
                 ["gp"] = "git_push",
                 ["gg"] = "git_commit_and_push",
-                ["o"]  = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+                ["o"] = {
+                  "show_help",
+                  nowait = false,
+                  config = { title = "Order by", prefix_key = "o" },
+                },
                 ["oc"] = { "order_by_created", nowait = false },
                 ["od"] = { "order_by_diagnostics", nowait = false },
                 ["om"] = { "order_by_modified", nowait = false },
                 ["on"] = { "order_by_name", nowait = false },
                 ["os"] = { "order_by_size", nowait = false },
                 ["ot"] = { "order_by_type", nowait = false },
-              }
-            }
-          }
-        }
+              },
+            },
+          },
+        },
       })
       vim.keymap.set("n", "<leader>e", "<cmd>Neotree reveal<cr>", {})
-    end
+    end,
   },
 }

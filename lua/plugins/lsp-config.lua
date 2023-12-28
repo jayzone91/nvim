@@ -18,12 +18,12 @@ return {
       {
         -- Show Loading indicator
         "j-hui/fidget.nvim",
-        opts = {}
+        opts = {},
       },
-      "hrsh7th/nvim-cmp",         -- Autocompletion Plugin
-      "hrsh7th/cmp-nvim-lsp",     -- LSP Source for nvim-cmp
+      "hrsh7th/nvim-cmp", -- Autocompletion Plugin
+      "hrsh7th/cmp-nvim-lsp", -- LSP Source for nvim-cmp
       "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
-      "L3MON4D3/LuaSnip",         -- Snippets plugin
+      "L3MON4D3/LuaSnip", -- Snippets plugin
       {
         "rafamadriz/friendly-snippets",
         config = function()
@@ -34,6 +34,30 @@ return {
       -- LSP autoinstall
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+
+      -- All other good Stuff
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        config = function()
+          require("mason-tool-installer").setup({
+            ensure_installed = {
+              servers,
+              -- Formatter
+              "stylua",
+              "prettierd",
+              "autopep8",
+              "isort",
+              -- Linter
+              "eslint_d",
+              "markdownlint",
+            },
+            auto_update = true,
+            run_on_start = true,
+            start_delay = 3000,
+          })
+        end,
+      },
+      "nvimtools/none-ls.nvim",
     },
     config = function()
       -- install LSP Servers
@@ -47,7 +71,7 @@ return {
         },
       })
       require("mason-lspconfig").setup({
-        ensure_installed = servers,
+        -- ensure_installed = servers,
         automatic_installation = true,
       })
 
@@ -69,7 +93,7 @@ return {
             buffer = bufnr,
             callback = function()
               vim.lsp.buf.format()
-            end
+            end,
           })
         end
       end
@@ -90,7 +114,7 @@ return {
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim" }
+              globals = { "vim" },
             },
             runtime = {
               version = "LuaJIT",
@@ -144,8 +168,27 @@ return {
           "javascript",
           "javascriptreact",
           "typescript",
-          "typescriptreact"
-        }
+          "typescriptreact",
+        },
+      })
+
+      -- None Ls
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          -- Diagnostics
+          null_ls.builtins.diagnostics.eslint_d,
+          null_ls.builtins.diagnostics.markdownlint,
+
+          -- Formatter
+          null_ls.builtins.formatting.prettierd,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.autopep8,
+          null_ls.builtins.formatting.isort,
+          null_ls.builtins.formatting.markdownlint,
+
+          -- Completions
+        },
       })
 
       -- luasnip
@@ -161,7 +204,7 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
-          ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- Down
+          ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
           -- C-b (back) C-f (forward) for snippet placeholder navigation.
           ["<C-space>"] = cmp.mapping.complete(),
           ["<CR>"] = cmp.mapping.confirm({
