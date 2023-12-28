@@ -53,19 +53,7 @@ return {
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.completion.completionItem = {
-        documentationFormat = { "markdown", "plaintext" },
         snippetSupport = true,
-        preselectSupport = true,
-        insertReplaceSupport = true,
-        labelDetailsSupport = true,
-        deprecatedSupport = true,
-        commitCharactersSupport = true,
-        tagSupport = { valueSet = { 1 } },
-        resolveSupport = {
-          "documentation",
-          "detail",
-          "additionalTextEdits",
-        }
       }
       require("neodev").setup({
         -- add any options here, or leave empty to use the default settings
@@ -145,13 +133,17 @@ return {
       lspconfig.tailwindcss.setup({
         on_attach = on_attach,
         capabilities = capabilities,
-        filetype = {
+        cmd = { "tailwindcss-language-server", "--stdio" },
+        filetypes = {
           "html",
-          "css",
-          "scss",
+          "njk",
+          "nunjucks",
+          "php",
           "sass",
+          "scss",
           "javascript",
           "javascriptreact",
+          "typescript",
           "typescriptreact"
         }
       })
