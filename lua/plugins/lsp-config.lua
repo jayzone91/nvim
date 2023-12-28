@@ -142,6 +142,20 @@ return {
         },
       })
 
+      lspconfig.tailwindcss.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetype = {
+          "html",
+          "css",
+          "scss",
+          "sass",
+          "javascript",
+          "javascriptreact",
+          "typescriptreact"
+        }
+      })
+
       -- luasnip
       local luasnip = require("luasnip")
       require("luasnip.loaders.from_vscode").lazy_load()
