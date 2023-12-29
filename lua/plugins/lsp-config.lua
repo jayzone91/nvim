@@ -271,6 +271,7 @@ return {
             vim.lsp.buf.code_action,
             opts("Code Actions")
           )
+          vim.keymap.set("n", "gR", vim.lsp.buf.rename, opts("Rename"))
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("References"))
           vim.keymap.set("n", "<leader>df", function()
             vim.lsp.buf.format({ async = false })
