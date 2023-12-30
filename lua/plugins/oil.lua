@@ -1,3 +1,5 @@
+local map = require("utils.functions").map
+
 return {
   {
     "stevearc/oil.nvim",
@@ -7,12 +9,7 @@ return {
     config = function()
       require("oil").setup({})
 
-      vim.keymap.set(
-        "n",
-        "<leader>o",
-        "<cmd>Oil<cr>",
-        { desc = "Open Parent Directory" }
-      )
+      map("n", "<leader>o", "<cmd>Oil<cr>", "Open Parent Directory")
     end,
   },
 }

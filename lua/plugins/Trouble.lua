@@ -1,12 +1,10 @@
+local map = require("utils.functions").map
+
 return {
   "folke/trouble.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {},
   config = function()
-    local map = function(mode, key, func, desc)
-      return vim.keymap.set(mode, key, func, { desc = desc })
-    end
-
     local trouble = require("trouble")
 
     map("n", "<leader>xx", function()

@@ -1,3 +1,5 @@
+local map = require("utils.functions").map
+
 return {
   "akinsho/toggleterm.nvim",
   verion = "*",
@@ -21,11 +23,6 @@ return {
         highlights = { border = "Normal", background = "Normal" },
       },
     })
-    vim.keymap.set(
-      "n",
-      "<leader>t",
-      "<cmd>ToggleTerm<cr>",
-      { desc = "Open terminal" }
-    )
+    map("n", "<leader>t", "<cmd>ToggleTerm<cr>", "Open terminal")
   end,
 }

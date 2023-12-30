@@ -1,3 +1,5 @@
+local map = require("utils.functions").map
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -5,29 +7,14 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
-      vim.keymap.set(
-        "n",
-        "<leader>ff",
-        builtin.find_files,
-        { desc = "Find Files" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader>fg",
-        builtin.live_grep,
-        { desc = "Live Grep" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader><space>",
-        builtin.buffers,
-        { desc = "Show open Buffers" }
-      )
-      vim.keymap.set(
+      map("n", "<leader>ff", builtin.find_files, "Find Files")
+      map("n", "<leader>fg", builtin.live_grep, "Live Grep")
+      map("n", "<leader><space>", builtin.buffers, "Show open Buffers")
+      map(
         "n",
         "<leader>fb",
         builtin.current_buffer_fuzzy_find,
-        { desc = "Search current buffer" }
+        "Search current buffer"
       )
 
       -- local actions = require("telescope.actions")
