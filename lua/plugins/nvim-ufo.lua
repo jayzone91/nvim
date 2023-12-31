@@ -61,6 +61,6 @@ return {
       if not winid then
         vim.lsp.buf.hover()
       end
-    end)
+    end, { desc = "Peak folded Lines" })
   end,
 }

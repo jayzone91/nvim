@@ -4,34 +4,115 @@ return {
     enabled = true,
     name = "catppuccin",
     priority = 1000,
-    opts = {
-      integrations = {
-        treesitter = true,
-        neotree = true,
-        telescope = {
-          enabled = true,
-        },
-        native_lsp = {
-          enabled = true,
-          virtual_text = {
-            errors = { "italic" },
-            hints = { "italic" },
-            warnings = { "italic" },
-            information = { "italic" },
-          },
-          underlines = {
-            errors = { "underline" },
-            hints = { "underline" },
-            warnings = { "underline" },
-            information = { "underline" },
-          },
-          inlay_hints = {
-            background = true,
-          },
-        },
-      },
-    },
     config = function()
+      require("catppuccin").setup({
+        flavour = "mocha",
+        background = {
+          light = "latte",
+          dark = "mocha",
+        },
+        transparent_background = true,
+        show_end_of_buffer = false,
+        term_colors = true,
+        dim_inactive = {
+          enabled = false,
+          shade = "dark",
+          percentage = 0.15,
+        },
+        no_italic = false,
+        no_bold = false,
+        no_underline = false,
+        styles = {},
+        color_overrides = {},
+        custom_highlights = {},
+        integrations = {
+          aerial = false,
+          alpha = false,
+          barbar = false,
+          barbecue = false,
+          beacon = false,
+          bufferline = false,
+          coc_nvim = false,
+          dashboard = false,
+          dropbar = {
+            enabled = false,
+            color_mode = false,
+          },
+          fern = false,
+          fidget = true,
+          flash = false,
+          gitsigns = true,
+          harpoon = true,
+          headlines = false,
+          hop = false,
+          indent_blankline = {
+            enabled = true,
+            scope_color = "lavender",
+            colored_indent_levels = true,
+          },
+          leap = false,
+          lightspeed = false,
+          lsp_saga = false,
+          markdown = true,
+          mason = true,
+          mini = {
+            enabled = true,
+            indentscope_color = "lavender",
+          },
+          neotree = false,
+          neogit = false,
+          neotest = false,
+          noice = true,
+          NormalNvim = false,
+          notify = true,
+          cmp = true,
+          dap = false,
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+            },
+            underlines = {
+              errors = { "underline" },
+              hints = { "underline" },
+              warnings = { "underline" },
+              information = { "underline" },
+            },
+            inlay_hints = {
+              background = true,
+            },
+          },
+          navic = {
+            enabled = false,
+          },
+          semantic_tokens = false,
+          nvimtree = false,
+          treesitter_context = false,
+          treesitter = true,
+          ts_rainbow2 = false,
+          ts_rainbow = false,
+          ufo = true,
+          window_picker = true,
+          octo = false,
+          overseer = false,
+          pounce = false,
+          rainbow_delimiters = false,
+          symbols_outline = false,
+          telekasten = false,
+          telescope = {
+            enabled = true,
+          },
+          lsp_trouble = true,
+          gitgutter = false,
+          sandwich = false,
+          vim_sneak = false,
+          vimwiki = false,
+          which_key = true,
+        },
+      })
       vim.cmd.colorscheme("catppuccin")
     end,
   },
@@ -40,33 +121,6 @@ return {
     dir = "D:\\git\\xcad-color.nvim",
     enabled = false,
     priority = 1000,
-    -- opts = {
-    --   integrations = {
-    --     treesitter = true,
-    --     neotree = true,
-    --     telescope = {
-    --       enabled = true,
-    --     },
-    --     native_lsp = {
-    --       enabled = true,
-    --       virtual_text = {
-    --         errors = { "italic" },
-    --         hints = { "italic" },
-    --         warnings = { "italic" },
-    --         information = { "italic" },
-    --       },
-    --       underlines = {
-    --         errors = { "underline" },
-    --         hints = { "underline" },
-    --         warnings = { "underline" },
-    --         information = { "underline" },
-    --       },
-    --       inlay_hints = {
-    --         background = true,
-    --       },
-    --     },
-    --   },
-    -- },
     config = function()
       require("xcad-color").setup()
       vim.cmd.colorscheme("xcad-color")

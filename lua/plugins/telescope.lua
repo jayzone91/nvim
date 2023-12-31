@@ -17,6 +17,10 @@ return {
         "Search current buffer"
       )
 
+      -- add noice
+      pcall(require("telescope").load_extension, "noice")
+      map("n", "<leader>fn", "<cmd>Noice telescope<cr>", "Show noice")
+
       -- local actions = require("telescope.actions")
       local telescope = require("telescope")
       local test, trouble = pcall(require, "trouble.providers.telescope")

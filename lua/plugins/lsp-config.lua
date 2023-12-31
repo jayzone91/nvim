@@ -12,6 +12,15 @@ return {
         -- Show Loading indicator
         "j-hui/fidget.nvim",
         opts = {},
+        config = function()
+          require("fidget").setup({
+            notification = {
+              window = {
+                winblend = 0,
+              },
+            },
+          })
+        end,
       },
       { "folke/neodev.nvim", opts = {} }, -- Neovim api and docs support for lua,
       -- LSP autoinstall
