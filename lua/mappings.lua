@@ -28,3 +28,14 @@ map("t", "<esc>", "<C-\\><C-N>", "")
 
 -- Clear Search
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", "")
+
+-- Diagnositic keymaps
+map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
+map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
+map(
+  "n",
+  "<leader>de",
+  vim.diagnostic.open_float,
+  "Open floating diagnostic message"
+)
+map("n", "<leader>dq", vim.diagnostic.setloclist, "Open diagnostics list")

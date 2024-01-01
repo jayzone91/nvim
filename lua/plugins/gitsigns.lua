@@ -1,5 +1,3 @@
-local map = require("utils.functions").map
-
 -- git signs highlights text that has changed since the list git
 -- commit, and also lets you interactively stage & unstage hunks in a commit.
 
@@ -7,37 +5,72 @@ return {
   "lewis6991/gitsigns.nvim",
   opts = {
     signs = {
-      add = { text = "▎" },
-      change = { text = "▎" },
-      delete = { text = "" },
-      topdelete = { text = "" },
-      changedelete = { text = "▎" },
-      untracked = { text = "▎" },
+      add = { text = "+" },
+      change = { text = "~" },
+      delete = { text = "_" },
+      topdelete = { text = "‾" },
+      changedelete = { text = "~" },
     },
-  },
-  on_attach = function(_)
-    local gs = require("gitsigns")
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
 
-    map("n", "]h", gs.next_hunk, "Next Hunk")
-    map("n", "[h", gs.prev_hunk, "Prev Hunk")
-    map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-    map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-    map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-    map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-    map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-    map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
-    map("n", "<leader>ghb", function()
-      gs.blame_line({ full = true })
-    end, "Blame Line")
-    map("n", "<leader>ghd", gs.diffthis, "Diff This")
-    map("n", "<leader>ghD", function()
-      gs.diffthis("~")
-    end, "Diff This ~")
-    map(
-      { "o", "x" },
-      "ih",
-      ":<C-U>Gitsigns select_hunk<CR>",
-      "GitSigns Select Hunk"
-    )
-  end,
+      local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+      end
+
+      -- Navigation
+      map({ "n", "v" }, "]c", function()
+        if vim.wo.diff then
+          return "]c"
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
+        return "<Ignore>"
+      end, { expr = true, desc = "Jump to next hunk" })
+
+      map({ "n", "v" }, "[c", function()
+        if vim.wo.diff then
+          return "[c"
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
+        return "<Ignore>"
+      end, { expr = true, desc = "Jump to previous hunk" })
+
+      -- Actions
+      -- visual mode
+      map("v", "<leader>hs", function()
+        gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end, { desc = "stage git hunk" })
+      map("v", "<leader>hr", function()
+        gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end, { desc = "reset git hunk" })
+      -- normal mode
+      map("n", "<leader>hs", gs.stage_hunk, { desc = "git stage hunk" })
+      map("n", "<leader>hr", gs.reset_hunk, { desc = "git reset hunk" })
+      map("n", "<leader>hS", gs.stage_buffer, { desc = "git Stage buffer" })
+      map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
+      map("n", "<leader>hR", gs.reset_buffer, { desc = "git Reset buffer" })
+      map("n", "<leader>hp", gs.preview_hunk, { desc = "preview git hunk" })
+      map("n", "<leader>hb", function()
+        gs.blame_line({ full = false })
+      end, { desc = "git blame line" })
+      map("n", "<leader>hd", gs.diffthis, { desc = "git diff against index" })
+      map("n", "<leader>hD", function()
+        gs.diffthis("~")
+      end, { desc = "git diff against last commit" })
+
+      -- Text object
+      map(
+        { "o", "x" },
+        "ih",
+        ":<C-U>Gitsigns select_hunk<CR>",
+        { desc = "select git hunk" }
+      )
+    end,
+  },
 }

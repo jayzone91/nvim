@@ -2,7 +2,7 @@ return {
   "hrsh7th/nvim-cmp", -- Autocompletion Plugin
   dependencies = {
     {
-      "L3MON4D3/LuaSnip", -- Snippets plugin
+      "L3MON4D3/LuaSnip",           -- Snippets plugin
       dependencies = {
         "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
       },
@@ -18,6 +18,8 @@ return {
     -- luasnip
     local luasnip = require("luasnip")
     require("luasnip.loaders.from_vscode").lazy_load()
+    luasnip.config.setup({})
+
     -- nvim cmp setup
     local cmp = require("cmp")
     cmp.setup({
@@ -26,13 +28,16 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      completion = {
+        completeopt = "menu,menuone,noinsert",
+      },
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
-        ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- Down
         -- C-b (back) C-f (forward) for snippet placeholder navigation.
         ["<C-space>"] = cmp.mapping.complete(),
         ["<CR>"] = cmp.mapping.confirm({
@@ -62,6 +67,7 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
+        { name = "path" },
       },
     })
   end,
