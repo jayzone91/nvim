@@ -3,7 +3,7 @@ return {
   opts = {
     options = {
       theme = "catppuccin",
-      -- theme = "auto"
+      -- theme = "auto",
     },
     sections = {
       lualine_a = {
