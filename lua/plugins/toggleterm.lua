@@ -2,6 +2,8 @@ local map = require("utils.functions").map
 
 return {
   "akinsho/toggleterm.nvim",
+  lazy = true,
+  event = "VeryLazy",
   verion = "*",
   config = function()
     require("toggleterm").setup({

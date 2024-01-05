@@ -2,6 +2,8 @@ local map = require("utils.functions").map
 
 return {
   "folke/trouble.nvim",
+  lazy = true,
+  event = "BufEnter",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {},
   config = function()

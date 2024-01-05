@@ -6,6 +6,8 @@ local linters = utils.linters
 return {
   {
     "neovim/nvim-lspconfig",
+    lazy = true,
+    event = "BufEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp", -- LSP Source for nvim-cmp
       {

@@ -1,6 +1,8 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    event = "BufEnter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
