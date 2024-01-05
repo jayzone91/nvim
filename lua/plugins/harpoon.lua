@@ -2,6 +2,8 @@ local map = require("utils.functions").map
 
 return {
   "ThePrimeagen/harpoon",
+  lazy = true,
+  event = "BufEnter",
   branch = "harpoon2",
   dependencies = "nvim-lua/plenary.nvim",
   config = function()

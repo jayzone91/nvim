@@ -1,5 +1,7 @@
 return {
   "hrsh7th/nvim-cmp", -- Autocompletion Plugin
+  lazy = true,
+  event = "InsertEnter",
   dependencies = {
     {
       "L3MON4D3/LuaSnip",           -- Snippets plugin

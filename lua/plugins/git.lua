@@ -1,4 +1,4 @@
 return {
-  "tpope/vim-fugitive",
-  "tpope/vim-rhubarb",
+  { "tpope/vim-fugitive", lazy = true, event = "BufEnter" },
+  { "tpope/vim-rhubarb",  lazy = true, event = "BufEnter" },
 }

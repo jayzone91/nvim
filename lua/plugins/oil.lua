@@ -3,6 +3,8 @@ local map = require("utils.functions").map
 return {
   {
     "stevearc/oil.nvim",
+    lazy = true,
+    event = "VeryLazy",
     opts = {},
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },

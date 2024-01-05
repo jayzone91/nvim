@@ -4,6 +4,8 @@
 
 return {
   "RRethy/vim-illuminate",
+  lazy = true,
+  event = "BufEnter",
   opts = {
     delay = 200,
     large_file_cutoff = 2000,

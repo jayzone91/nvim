@@ -1,5 +1,7 @@
 return {
   "kevinhwang91/nvim-ufo",
+  lazy = true,
+  event = "BufEnter",
   dependencies = {
     "kevinhwang91/promise-async",
     "nvim-treesitter/nvim-treesitter",
