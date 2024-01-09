@@ -44,6 +44,15 @@ return {
       },
     },
     config = function()
+      -- Organize Imports in TS
+      local function organize_imports()
+        local params = {
+          command = "_typescript.organizeImports",
+          arguments = { vim.api.nvim_buf_get_name(0) },
+          title = "",
+        }
+        vim.lsp.buf.execute_command(params)
+      end
       -- install LSP Servers
       require("mason").setup({
         ui = {
@@ -71,8 +80,24 @@ return {
       }
 
       local augroup = vim.api.nvim_create_augroup("LSPFormatting", {})
+      local importGroup = vim.api.nvim_create_augroup("ImportGroup", {})
 
       local on_attach = function(client, bufnr)
+        -- Sort Imports on Save? TEST!
+        if client.supports_method("_typescript.organizeImports") then
+          vim.api.nvim_clear_autocmds({
+            group = importGroup,
+            buffer = bufnr,
+          })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = importGroup,
+            buffer = bufnr,
+            callback = function()
+              organize_imports()
+            end,
+          })
+        end
+
         -- Autoformat on Save
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({
@@ -162,6 +187,17 @@ return {
         },
         capabilities = capabilities,
         on_attach = on_attach,
+      })
+
+      lspconfig.tsserver.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        commands = {
+          OrganizeImports = {
+            organize_imports,
+            description = "Organize Imports",
+          },
+        },
       })
 
       lspconfig.emmet_ls.setup({
