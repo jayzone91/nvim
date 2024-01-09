@@ -14,7 +14,7 @@ function M.cowboy()
   ---@type table?
   local id
   local ok = true
-  for _, key in ipairs({ "h", "j", "k", "l", "+", "-" }) do
+  for _, key in ipairs({ "j", "k", "+", "-" }) do
     local count = 0
     local timer = assert(vim.loop.new_timer())
     local map = key
@@ -23,13 +23,18 @@ function M.cowboy()
         count = 0
       end
       if count >= 10 then
-        ok, id = pcall(vim.notify, "Hold it Cowboy!", vim.log.levels.WARN, {
-          icon = "🤠",
-          replace = id,
-          keep = function()
-            return count >= 10
-          end,
-        })
+        ok, id = pcall(
+          vim.notify,
+          "Do you even try to use Motions!?",
+          vim.log.levels.WARN,
+          {
+            icon = "😡",
+            replace = id,
+            keep = function()
+              return count >= 10
+            end,
+          }
+        )
         if not ok then
           id = nil
           return map

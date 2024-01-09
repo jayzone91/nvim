@@ -44,7 +44,7 @@ map(
 map("n", "<leader>dq", vim.diagnostic.setloclist, "Open diagnostics list")
 
 -- disable arrow keys to better lern vim motions.
-map("n", "<Up>", "", "")
-map("n", "<Down>", "", "")
-map("n", "<Left>", "", "")
-map("n", "<Right>", "", "")
+map({"n","i","v"}, "<Up>", "", "")
+map({"n","i","v"}, "<Down>", "", "")
+map({"n","i","v"}, "<Left>", "", "")
+map({"n","i","v"}, "<Right>", "", "")

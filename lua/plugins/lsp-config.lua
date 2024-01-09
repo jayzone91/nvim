@@ -83,19 +83,34 @@ return {
       local importGroup = vim.api.nvim_create_augroup("ImportGroup", {})
 
       local on_attach = function(client, bufnr)
-        -- Sort Imports on Save? TEST!
-        if client.supports_method("_typescript.organizeImports") then
-          vim.api.nvim_clear_autocmds({
-            group = importGroup,
-            buffer = bufnr,
-          })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = importGroup,
-            buffer = bufnr,
-            callback = function()
-              organize_imports()
-            end,
-          })
+        local bo = vim.bo.filetype
+        local function uses_tsserver()
+          if
+              bo == "typescript"
+              or bo == "typescriptreact"
+              or bo == "javascript"
+              or bo == "javascriptreact"
+          then
+            return true
+          else
+            return false
+          end
+        end
+        if uses_tsserver() then
+          -- Sort Imports on Save? TEST!
+          if client.supports_method("_typescript.organizeImports") then
+            vim.api.nvim_clear_autocmds({
+              group = importGroup,
+              buffer = bufnr,
+            })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              group = importGroup,
+              buffer = bufnr,
+              callback = function()
+                organize_imports()
+              end,
+            })
+          end
         end
 
         -- Autoformat on Save
