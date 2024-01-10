@@ -1,6 +1,7 @@
 local M = {}
 
 M.servers = {
+  "pyright",
   "rust_analyzer",
   "lua_ls",
   "tsserver",

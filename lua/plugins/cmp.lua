@@ -8,7 +8,7 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     {
-      "L3MON4D3/LuaSnip",           -- Snippets plugin
+      "L3MON4D3/LuaSnip", -- Snippets plugin
       dependencies = {
         "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
       },
@@ -25,10 +25,10 @@ return {
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0
-          and vim.api
-          .nvim_buf_get_lines(0, line - 1, line, true)[1]
-          :sub(col, col)
-          :match("%s")
+        and vim.api
+            .nvim_buf_get_lines(0, line - 1, line, true)[1]
+            :sub(col, col)
+            :match("%s")
           == nil
     end
     -- luasnip
@@ -55,7 +55,7 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.expand_or:jumpable() then
+          elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_befor() then
             cmp.complete()
