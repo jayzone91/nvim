@@ -86,10 +86,10 @@ return {
         local bo = vim.bo.filetype
         local function uses_tsserver()
           if
-              bo == "typescript"
-              or bo == "typescriptreact"
-              or bo == "javascript"
-              or bo == "javascriptreact"
+            bo == "typescript"
+            or bo == "typescriptreact"
+            or bo == "javascript"
+            or bo == "javascriptreact"
           then
             return true
           else
@@ -177,6 +177,18 @@ return {
           on_attach = on_attach,
         })
       end
+
+      lspconfig.rust_analyzer.setup({
+        settings = {
+          ["rust-analyzer"] = {
+            diagnostics = {
+              enable = true,
+            },
+          },
+        },
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
 
       lspconfig.lua_ls.setup({
         settings = {
