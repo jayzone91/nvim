@@ -1,7 +1,7 @@
 local map = require("utils.functions").map
-local cowboy = require("utils.functions").cowboy
+-- local cowboy = require("utils.functions").cowboy
 
-cowboy()
+-- cowboy()
 
 map("n", "<leader>qq", "<cmd>qa<cr>", "Quit Neovim")
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", "Save File")
