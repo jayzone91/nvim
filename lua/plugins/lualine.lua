@@ -31,6 +31,20 @@ return {
           end
           return msg
         end,
+        function()
+          local win = "󰨡"
+          local mac = ""
+          local other = ""
+          local msg = ""
+          if vim.fn.has("win32") == 1 then
+            msg = win
+          elseif vim.fn.has("macunix") == 1 then
+            msg = mac
+          else
+            msg = other
+          end
+          return msg
+        end,
       },
     },
   },
