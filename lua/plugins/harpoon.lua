@@ -1,5 +1,3 @@
-local map = require("utils.functions").map
-
 return {
   "ThePrimeagen/harpoon",
   lazy = true,
@@ -7,6 +5,9 @@ return {
   branch = "harpoon2",
   dependencies = "nvim-lua/plenary.nvim",
   config = function()
+    local map = function(m, k, f, d)
+      return vim.keymap.set(m, k, f, { desc = d })
+    end
     local harpoon = require("harpoon")
     harpoon:setup({})
 

@@ -1,5 +1,3 @@
-local map = require("utils.functions").map
-
 return {
   "folke/trouble.nvim",
   lazy = true,
@@ -7,6 +5,10 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {},
   config = function()
+    local map = function(m, k, f, d)
+      return vim.keymap.set(m, k, f, { desc = d })
+    end
+
     local trouble = require("trouble")
 
     map("n", "<leader>xx", function()
@@ -27,5 +29,5 @@ return {
     map("n", "gR", function()
       trouble.toggle("lsp_references")
     end, "lsp_references")
-  end,
+  end
 }

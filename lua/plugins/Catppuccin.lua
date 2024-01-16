@@ -46,7 +46,7 @@ return {
           headlines = false,
           hop = false,
           indent_blankline = {
-            enabled = true,
+            enabled = false,
             scope_color = "lavender",
             colored_indent_levels = true,
           },
@@ -56,13 +56,13 @@ return {
           markdown = true,
           mason = true,
           mini = {
-            enabled = true,
+            enabled = false,
             indentscope_color = "lavender",
           },
           neotree = false,
           neogit = false,
           neotest = false,
-          noice = true,
+          noice = false,
           NormalNvim = false,
           notify = true,
           cmp = true,
@@ -94,7 +94,7 @@ return {
           treesitter = true,
           ts_rainbow2 = false,
           ts_rainbow = false,
-          ufo = true,
+          ufo = false,
           window_picker = true,
           octo = false,
           overseer = false,
@@ -114,16 +114,6 @@ return {
         },
       })
       vim.cmd.colorscheme("catppuccin")
-    end,
-  },
-  {
-    -- Testing
-    dir = "D:\\git\\xcad-color.nvim",
-    enabled = false,
-    priority = 1000,
-    config = function()
-      require("xcad-color").setup()
-      vim.cmd.colorscheme("xcad-color")
     end,
   },
 }

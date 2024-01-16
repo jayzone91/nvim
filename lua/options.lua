@@ -42,9 +42,6 @@ vim.o.hlsearch = false                 -- Set highlight on search
 -- Remove this option if you want your OS clipboard to remain independant
 vim.o.clipboard = "unnamedplus"
 
-vim.o.undofile = true
-vim.o.undodir = vim.fn.stdpath("cache") .. "/undo"
-vim.o.undolevels = 10000
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
