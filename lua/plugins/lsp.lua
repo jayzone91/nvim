@@ -1,5 +1,5 @@
 local servers = {
-  "ruff_lsp",
+  "pylsp",
   "rust_analyzer",
   "lua_ls",
   "tsserver",
@@ -243,6 +243,21 @@ return {
       },
       capabilities = capabilities,
       on_attach = on_attach,
+    })
+
+    lspconfig.pylsp.setup({
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = {
+              ignore = { "W391" },
+              maxLineLength = 80,
+            },
+          },
+        },
+      },
+      on_attach = on_attach,
+      capabilities = capabilities,
     })
   end,
 }
