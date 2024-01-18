@@ -11,13 +11,32 @@ return {
         return vim.fn.executable("make") == 1
       end,
     },
+    {
+      "nvim-telescope/telescope-file-browser.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+    },
   },
   config = function()
     local map = function(m, k, f, d)
       return vim.keymap.set(m, k, f, { desc = d })
     end
     require("telescope").setup({
+      extensions = {
+        file_browser = {
+          hijack_netrw = true,
+          grouped = true,
+          select_buffer = true,
+        },
+      },
       defaults = {
+        theme = "center",
+        sorting_strategy = "ascending",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_height = 0.3,
+          },
+        },
         mappings = {
           i = {
             ["<C-u>"] = false,
@@ -28,6 +47,8 @@ return {
     })
     -- Enable telescope fzf native, if installed
     pcall(require("telescope").load_extension, "fzf")
+    -- Enable telescope file Briowser Plugin
+    pcall(require("telescope").load_extension, "file_browser")
 
     -- Telescope live_grep in git root
     -- Function to find the git root directory based on the current buffer's path
@@ -45,6 +66,7 @@ return {
     )
 
     map("n", "<leader>gf", builtin.git_files, "Search [G]it [F]iles")
+    map("n", "<leader>e", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr><esc>", "Open File Browser")
 
     -- Enable Telescope Noice Support, if installed
     local testNoice = pcall(require("telescope").load_extension, "noice")

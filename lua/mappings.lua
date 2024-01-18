@@ -6,7 +6,7 @@ end
 map("n", "<leader>qq", "<cmd>qa<cr>", "Quit Neovim")
 map({ "i", "x", "n", "s", "v" }, "<C-s>", "<cmd>w<cr><esc>", "Save File")
 
-map("n", "<leader>e", "<cmd>Ex<cr>", "Open Netrw")
+-- map("n", "<leader>e", "<cmd>Ex<cr>", "Open Netrw")
 
 -- Duplicate Lines
 map("n", "<leader>k", "YP", "Duplicate Line Up")

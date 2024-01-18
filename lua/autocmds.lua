@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "qf",
     "query",
     "checkhealth",
+    "telescope",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
