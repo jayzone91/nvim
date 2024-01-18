@@ -1,5 +1,5 @@
 local servers = {
-  "pyright",
+  "ruff_lsp",
   "rust_analyzer",
   "lua_ls",
   "tsserver",
