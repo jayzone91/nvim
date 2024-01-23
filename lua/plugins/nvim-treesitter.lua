@@ -17,8 +17,6 @@ return {
             "vim",
             "vimdoc",
             "query",
-            "elixir",
-            "heex",
             "javascript",
             "html",
             "typescript",
