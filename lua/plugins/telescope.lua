@@ -66,7 +66,12 @@ return {
     )
 
     map("n", "<leader>gf", builtin.git_files, "Search [G]it [F]iles")
-    map("n", "<leader>e", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr><esc>", "Open File Browser")
+    map(
+      "n",
+      "<leader>e",
+      "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr><esc>",
+      "Open File Browser"
+    )
 
     -- Enable Telescope Noice Support, if installed
     local testNoice = pcall(require("telescope").load_extension, "noice")

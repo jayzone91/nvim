@@ -29,5 +29,5 @@ return {
     map("n", "gR", function()
       trouble.toggle("lsp_references")
     end, "lsp_references")
-  end
+  end,
 }
