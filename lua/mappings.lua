@@ -77,7 +77,7 @@ map("n", "<leader>sv", "<cmd>split<cr>", { desc = "Split Screen Vertical" })
 map("n", "<C-t>", "<cmd>tabedit<cr>")
 map("n", "<Tab>", "<cmd>tabnext<cr>")
 map("n", "<S-Tab>", "<cmd>tabprev<cr>")
-map("n", "<C-w>", "<cmd>tabclose<cr>")
+map("n", "<leader>w", "<cmd>tabclose<cr>")
 
 -- Easy Leave Terminal Mode
 map("t", "<esc>", "<C-\\>>C.N>")

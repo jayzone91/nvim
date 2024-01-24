@@ -7,5 +7,4 @@ return {
     vim.o.timeoutlen = 300
   end,
   opts = {},
-  config = function() end,
 }

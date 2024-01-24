@@ -51,10 +51,10 @@ return {
     },
     {
       -- Add Autocomplete / Snippet Support
-      "hrsh7th/nvim-cmp", -- Autocompletion Plugin
-      "hrsh7th/cmp-nvim-lsp", -- LSP Source for nvim-cmp
+      "hrsh7th/nvim-cmp",         -- Autocompletion Plugin
+      "hrsh7th/cmp-nvim-lsp",     -- LSP Source for nvim-cmp
       "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
-      "L3MON4D3/LuaSnip", -- Snippets plugins
+      "L3MON4D3/LuaSnip",         -- Snippets plugins
     },
     {
       -- Add fancy loading indicator
@@ -132,9 +132,6 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
-        -- Enable Completion triggered by <c-x><c-o>
-        vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
         -- Buffer local mappings
         -- see `:help vim.lsp.*` for documentation on any of the below functions
         local opts = function(desc)
@@ -165,6 +162,7 @@ return {
           vim.lsp.buf.references,
           opts("Go to References")
         )
+        vim.keymap.set("n", "gR", vim.lsp.buf.rename, opts("Rename"))
         vim.keymap.set(
           { "n", "v" },
           "<space>ca",
@@ -184,10 +182,10 @@ return {
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0
-        and vim.api
-            .nvim_buf_get_lines(0, line - 1, line, true)[1]
-            :sub(col, col)
-            :match("%s")
+          and vim.api
+          .nvim_buf_get_lines(0, line - 1, line, true)[1]
+          :sub(col, col)
+          :match("%s")
           == nil
     end
 
@@ -203,9 +201,9 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-      mappings = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      mapping = cmp.mapping.preset.insert({
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
@@ -216,8 +214,8 @@ return {
             cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
+            -- elseif has_words_before() then
+            --   cmp.complete()
           else
             fallback()
           end
