@@ -1,8 +1,38 @@
-vim.g.mapleader = " "
+require("options")
+require("mappings")
+require("autocmds")
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Lazy Plugin Manager
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-vim.loader.enable()
-
-require("nycrat")
+require("lazy").setup({
+  spec = {
+    { import = "plugins" },
+  },
+  defaults = {
+    lazy = false,
+  },
+  checker = { enabled = true }, -- Check for Updates on Startup
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+})
