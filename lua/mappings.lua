@@ -1,6 +1,3 @@
----@param mode string | table
----@param key string | fun()
----@param opts? table
 local map = function(mode, key, func, opts)
   return vim.keymap.set(mode, key, func, opts)
 end

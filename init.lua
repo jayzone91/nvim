@@ -2,7 +2,6 @@ require("options")
 require("mappings")
 require("autocmds")
 
--- Lazy Plugin Manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -22,16 +21,44 @@ require("lazy").setup({
   },
   defaults = {
     lazy = false,
+    version = false, -- always use the latest git commit
   },
-  checker = { enabled = true }, -- Check for Updates on Startup
+  checker = {
+    enabled = true,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
-        "gzip",
         "tarPlugin",
         "tohtml",
         "tutor",
         "zipPlugin",
+      },
+    },
+  },
+  ui = {
+    icons = {
+      cmd = " ",
+      config = "",
+      event = "",
+      ft = " ",
+      init = " ",
+      import = " ",
+      keys = " ",
+      lazy = "󰒲 ",
+      loaded = "●",
+      not_loaded = "○",
+      plugin = " ",
+      runtime = " ",
+      require = "󰢱 ",
+      source = " ",
+      start = "",
+      task = "✔ ",
+      list = {
+        "●",
+        "➜",
+        "★",
+        "‒",
       },
     },
   },

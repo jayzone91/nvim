@@ -1,33 +1,48 @@
 return {
-  "kyazdani42/nvim-tree.lua",
-  version = "*",
-  lazy = false,
-  dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  "nvim-tree/nvim-tree.lua",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
   config = function()
+    -- disable netrw at the very start
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+
+    -- optionally enable 24-bit colour
+    vim.o.termguicolors = true
+
     require("nvim-tree").setup({
       view = {
-        -- side = "right",
-        -- width = 40,
-        float = {
-          enable = true,
-          open_win_config = {
-            width = math.floor(vim.o.columns * 0.8),
-            height = vim.o.lines - 6,
-            row = 2,
-            col = math.floor(vim.o.columns * 0.1),
-          },
+        width = 30,
+      },
+      actions = {
+        open_file = {
+          quit_on_open = true,
         },
       },
-      actions = { open_file = { quit_on_open = true } },
-      filters = { dotfiles = false, custom = { "^.DS_Store$", "^\\.git$" } },
-      git = { enable = true, ignore = false, timeout = 500 },
+      renderer = {
+        group_empty = true,
+      },
+      filters = {
+        dotfiles = true,
+        custom = {
+          "^.DS_STORE$",
+          "^\\.git$",
+          "node_modules",
+        },
+      },
+      git = {
+        enable = true,
+        ignore = false,
+        timeout = 500,
+      },
     })
 
     vim.keymap.set(
       "n",
       "<leader>e",
       "<Cmd>NvimTreeToggle<CR>",
-      { silent = true, desc = "Open NvimTree" }
+      { silent = true, desc = "Open Nvimtree" }
     )
   end,
 }

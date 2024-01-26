@@ -1,5 +1,9 @@
 # Neovim Installation
 
+## Used Font
+CaskaydiaCove
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
+
 ## Pre
 Install the following Software to use Neovim
 
@@ -15,12 +19,10 @@ scoop install main/make
 scoop install main/ripgrep
 scoop install main/python
 scoop install main/gcc
+scoop install gzip
 ```
 
 Other Software:
 [NodeJS LTS](https://nodejs.org/en/download/)
 
-[Java JDK](https://www.oracle.com/de/java/technologies/downloads/)
-
-[Groovy](https://groovy.apache.org/download.html)
 
