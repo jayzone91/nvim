@@ -1,5 +1,7 @@
 # Neovim Installation
 
+test
+
 ## Used Font
 CaskaydiaCove
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
