@@ -1,3 +1,8 @@
+-- Formatters to install
+local formatters = {
+  "stylua",
+}
+
 return {
   "stevearc/conform.nvim",
   priority = 100,
@@ -6,11 +11,10 @@ return {
     cmd = "Mason",
     build = ":MasonUpdate",
     opts = {
-      ensure_installed = {
-        "stylua",
-      },
+      ensure_installed = formatters,
     },
     config = function(_, opts)
+      -- Make sure all Formatters are installed.
       require("mason").setup(opts)
       local mr = require("mason-registry")
       mr:on("package:install:success", function()
@@ -40,6 +44,7 @@ return {
     end,
   },
   config = function()
+    -- manual set the formatters for the different fyletypes.
     require("conform").setup({
       formatters_by_ft = {
         lua = { "stylua" },
