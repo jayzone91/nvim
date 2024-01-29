@@ -4,6 +4,7 @@ local servers = {
   "tsserver",
   "rust_analyzer",
   "pyright",
+  "htmx",
 }
 
 return {
