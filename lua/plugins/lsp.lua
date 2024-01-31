@@ -121,6 +121,7 @@ return {
       local code_actions = null_ls.builtins.code_actions
 
       require("mason-null-ls").setup({
+        automatic_installation = true,
         ensure_installed = {
           "eslint_d",
           "prettierd",
