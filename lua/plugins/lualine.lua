@@ -7,7 +7,11 @@ return {
         theme = "catppuccin",
         globalstatus = true,
         component_separators = { left = "", right = "" },
-        section_separators = { left = "█", right = "█" },
+        section_separators = { left = "", right = "" },
+        disabled_filetypes = {
+          statusline = {},
+          winbar = {},
+        },
       },
       sections = {
         lualine_b = {

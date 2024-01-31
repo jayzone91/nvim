@@ -28,7 +28,7 @@ vim.opt.smartcase = true
 
 vim.opt.updatetime = 50
 
-vim.opt.completeopt = {"menuone", "noselect"}
+vim.opt.completeopt = { "menuone", "noselect" }
 
 vim.opt.undofile = true
 
@@ -43,3 +43,5 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 8
 
 vim.opt.colorcolumn = "80"
+
+vim.opt.confirm = true
