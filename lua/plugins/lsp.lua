@@ -122,6 +122,7 @@ return {
           "eslint_d",
           "prettierd",
           "stylua",
+          "djlint",
         },
       })
 
@@ -130,6 +131,7 @@ return {
         sources = {
           formatting.prettierd,
           formatting.stylua,
+          formatting.djlint,
 
           diagnostics.eslint_d.with({
             condition = function(utils)
@@ -139,6 +141,7 @@ return {
                 "eslintrc.json",
               })
             end,
+            diagnostics.djlint,
           }),
 
           code_actions.eslint_d.with({
