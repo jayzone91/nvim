@@ -29,6 +29,7 @@ return {
           ".sl",
           "_build",
           ".next",
+          ".target",
         },
         hidden = true,
       },
