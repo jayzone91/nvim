@@ -9,7 +9,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "nvimtools/none-ls.nvim",
       "nvim-lua/plenary.nvim",
-      "folke/neodev.nvim",
+      { "folke/neodev.nvim", opts = {} },
       "j-hui/fidget.nvim",
       "jay-babu/mason-null-ls.nvim",
     },
@@ -34,6 +34,9 @@ return {
             Lua = {
               workspace = { checkThirdParty = false },
               telemetry = { enabled = false },
+              completion = {
+                callSnippet = "Replace",
+              },
             },
           },
         },
