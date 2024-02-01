@@ -1,12 +1,16 @@
 # Neovim Installation
 
-test
+TODO:
+
+- TSSERVER LSP Schmiert ab.
 
 ## Used Font
+
 CaskaydiaCove
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
 
 ## Pre
+
 Install the following Software to use Neovim
 
 ### Windows
@@ -26,5 +30,3 @@ scoop install gzip
 
 Other Software:
 [NodeJS LTS](https://nodejs.org/en/download/)
-
-
