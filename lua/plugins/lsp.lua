@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
+    lazy = true,
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
     dependencies = {
       "williamboman/mason.nvim",
@@ -10,7 +11,12 @@ return {
       "nvimtools/none-ls.nvim",
       "nvim-lua/plenary.nvim",
       { "folke/neodev.nvim", opts = {} },
-      "j-hui/fidget.nvim",
+      {
+        "j-hui/fidget.nvim",
+        lazy = true,
+        event = "BufReadPost",
+        config = function() require("fidget").setup({}) end,
+      },
       "jay-babu/mason-null-ls.nvim",
     },
     config = function()
