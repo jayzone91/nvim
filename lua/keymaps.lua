@@ -6,6 +6,13 @@ end
 map({ "i", "x", "n", "s", "v" }, "<c-s>", "<cmd>w<cr><esc>")
 map("i", "<c-c>", "<esc>")
 
+-- increment and decrement numbers
+map("n", "+", "<C-a>")
+map("n", "-", "<c-x>")
+
+-- delete word backwards
+map("n", "dw", "vb\"_d")
+
 -- better up/down
 map(
   { "n", "x" },
