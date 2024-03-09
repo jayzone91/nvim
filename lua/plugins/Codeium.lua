@@ -1,4 +1,5 @@
 return {
+  -- https://codeium.com/
   -- Code AI Completion
   -- Start with ":Codeium Auth" and paste your API Token
   "Exafunction/codeium.vim",
