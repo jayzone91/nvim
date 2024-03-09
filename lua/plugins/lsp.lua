@@ -146,13 +146,18 @@ return {
     -- nvim-cmp setup
     local cmp = require 'cmp'
     cmp.setup {
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
-      }, completion = {
-      completeopt = "menu,menuone,noinsert",
-    },
+      },
+      completion = {
+        completeopt = "menu,menuone,noinsert",
+      },
       mapping = cmp.mapping.preset.insert({
         ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
         ['<C-d>'] = cmp.mapping.scroll_docs(4),  -- Down
@@ -180,16 +185,17 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
-      }), experimental = {
-      ghost_text = {
-        hl_group = "CmpGhostText",
+      }),
+      experimental = {
+        ghost_text = {
+          hl_group = "CmpGhostText",
+        },
       },
-    },
       sources = {
         { name = 'nvim_lsp' },
-        { name = "path" },
-        { name = 'luasnip' },
-        { name = "buffer" },
+        { name = "path",    max_item_count = 3 },
+        { name = 'luasnip', max_item_count = 3 },
+        { name = "buffer",  max_item_count = 5 },
       },
     }
     -- Use LSPAttach autocmd to only map the following keys
