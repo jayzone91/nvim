@@ -1,6 +1,8 @@
 return {
   -- Code AI Completion
-  "Exafunxtion/codeium.vim",
+  -- Start with ":Codeium Auth" and paste your API Token
+  "Exafunction/codeium.vim",
+  lazy = false,
   config = function()
     vim.keymap.set("i", "<c-g>", function() return vim.fn["codeium#Accept"]() end,
       { expr = true, silent = true }
