@@ -2,9 +2,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = vim.api.nvim_create_augroup("format_on_save", { clear = true }),
   pattern = { "*" },
   callback = function()
-    if vim.fn.exists(":Format") > 0 then
-      vim.cmd.Format()
-    end
+    vim.lsp.buf.format()
   end,
   desc = "Format Buffer on Save",
 })

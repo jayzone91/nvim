@@ -1,7 +1,7 @@
 -- Mappings
 
 -- Save File with CTRL-S
-vim.keymap.set({"i", "x", "n", "s", "v"}, "<c-s>", "<cmd>w<cr><esc>")
+vim.keymap.set({ "i", "x", "n", "s", "v" }, "<c-s>", "<cmd>w<cr><esc>")
 
 -- Leave Insert mode with CTRL-C
 vim.keymap.set("i", "<c-c>", "<esc>")
@@ -88,5 +88,3 @@ vim.keymap.set("t", "<esc>", "<C-\\>>C.N>")
 
 -- Select all
 vim.keymap.set("n", "<C-a>", "gg<S-v>G")
-
-

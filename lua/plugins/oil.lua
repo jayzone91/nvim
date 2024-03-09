@@ -31,7 +31,7 @@ return {
 
       columns = {
         "icons",
- --       "permissions",
+        --       "permissions",
         "size",
       },
 
@@ -50,7 +50,7 @@ return {
       prompt_save_on_select_new_entry = false,
     })
 
-    vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", {desc = "Open OIL" })
+    vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Open OIL" })
   end,
   dependencies = {
     "nvim-tree/nvim-web-devicons",

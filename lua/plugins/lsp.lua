@@ -9,28 +9,31 @@ return {
     { "folke/neodev.nvim", opts = {} },
     -- CMP for autocomplete
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-buffer","hrsh7th/cmp-path",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
     "hrsh7th/cmp-nvim-lsp",
     -- Snippets for autocompletion
-    "saadparwaiz1/cmp_luasnip",  -- Snippets source for nvim-cmp
+    "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
     -- Snippets plugin
-    {"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp"},
-	dependencies = {
-          "rafamadriz/friendly-snippets",
-	},
+    {
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+      -- install jsregexp (optional!).
+      build = "make install_jsregexp"
+    },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
   },
   config = function()
     -- Automatically install LSP Servers
     require("mason").setup({
       ui = {
         icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗"
         }
       }
     })
@@ -55,7 +58,7 @@ return {
 
     require("neodev").setup()
     local luasnip = require 'luasnip'
-require("luasnip.loaders.from_vscode").lazy_load()
+    require("luasnip.loaders.from_vscode").lazy_load()
     -- Enable Snippet capabilities for completion
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -63,7 +66,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
     -- Setup language Servers.
     local lspconfig = require("lspconfig")
-    
+
     lspconfig.bashls.setup({
       capabilities = capabilities,
     })
@@ -107,44 +110,44 @@ require("luasnip.loaders.from_vscode").lazy_load()
     })
     lspconfig.lua_ls.setup({
       on_init = function(client)
-      local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
-        return
-      end
+        local path = client.workspace_folders[1].name
+        if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+          return
+        end
 
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = {
-        -- Tell the language server which version of Lua you're using
-        -- (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT'
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+          runtime = {
+            -- Tell the language server which version of Lua you're using
+            -- (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT'
+          },
+          -- Make the server aware of Neovim runtime files
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              vim.env.VIMRUNTIME
+              -- Depending on the usage, you might want to add additional paths here.
+              -- "${3rd}/luv/library"
+              -- "${3rd}/busted/library",
+            }
+            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+            -- library = vim.api.nvim_get_runtime_file("", true)
+          }
+        })
+      end,
+      settings = {
+        Lua = {
+          workspace = {
+            checkThirdParty = false,
+          },
+          codeLens = {
+            enable = true,
+          },
+          completion = {
+            callSnippet = "Replace",
+          },
+        },
       },
-      -- Make the server aware of Neovim runtime files
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME
-          -- Depending on the usage, you might want to add additional paths here.
-          -- "${3rd}/luv/library"
-          -- "${3rd}/busted/library",
-        }
-        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-        -- library = vim.api.nvim_get_runtime_file("", true)
-      }
-    })
-  end,
-  settings = {
-    Lua = {
-      workspace = {
-        checkThirdParty = false,
-      },
-      codeLens = {
-        enable = true,
-      },
-      completion = {
-        callSnippet = "Replace",
-      },
-    },
-  },
       capabilities = capabilities,
     })
     lspconfig.rust_analyzer.setup({
@@ -157,55 +160,55 @@ require("luasnip.loaders.from_vscode").lazy_load()
       },
       capabilities = capabilities,
     })
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },completion = {
-        completeopt = "menu,menuone,noinsert",
-      },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-    ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
-    -- C-b (back) C-f (forward) for snippet placeholder navigation.
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    -- nvim-cmp setup
+    local cmp = require 'cmp'
+    cmp.setup {
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      }, completion = {
+      completeopt = "menu,menuone,noinsert",
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),experimental = {
-        ghost_text = {
-          hl_group = "CmpGhostText",
+      mapping = cmp.mapping.preset.insert({
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
+        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
+        -- C-b (back) C-f (forward) for snippet placeholder navigation.
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
         },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+      }), experimental = {
+      ghost_text = {
+        hl_group = "CmpGhostText",
       },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = "path" },
-    { name = 'luasnip' },
-    { name = "buffer" },
-  },
-}
+    },
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = "path" },
+        { name = 'luasnip' },
+        { name = "buffer" },
+      },
+    }
     -- Use LSPAttach autocmd to only map the following keys
     -- after the language server attaches to the current buffer
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -213,7 +216,7 @@ cmp.setup {
       callback = function(ev)
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    
+
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf }
@@ -234,7 +237,7 @@ cmp.setup {
         vim.keymap.set('n', '<space>f', function()
           vim.lsp.buf.format { async = true }
         end, opts)
-    end,
-  })
-end,
+      end,
+    })
+  end,
 }
