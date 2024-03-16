@@ -13,8 +13,8 @@ return {
       options = {
         theme = "catppuccin",
         globalstatus = true,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+        -- section_separators = { left = "", right = "" },
         disabled_filetypes = {
           statusline = {},
           winbar = {},
@@ -28,13 +28,18 @@ return {
       --]]
       -- Each sections holds its components e.g. Vim's current mode.
       sections = {
-        lualine_b = {
+        lualine_a = {
+          { "mode", right_padding = 2 },
           { "branch", icon = "" },
           "diff",
+        },
+        lualine_b = {
+          { "filename", path = 1 },
           "diagnostics",
         },
         lualine_c = {
-          { "filename", path = 1 },
+          "%=",
+          { "harpoon2", separator = "", }
         },
         lualine_x = {
           "filetype",

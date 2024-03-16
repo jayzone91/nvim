@@ -40,4 +40,4 @@ require("lazy").setup({
       "zipPlugin",
     },
   },
-},{})
+}, {})
