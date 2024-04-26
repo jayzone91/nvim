@@ -72,7 +72,21 @@ return {
 
     vim.keymap.set(
       "n",
-      "<leader>/",
+      "<leader>ft",
+      ":TodoTelescope<CR>",
+      { desc = "Show Todos" }
+    )
+
+    vim.keymap.set(
+      "n",
+      "<leader>xt",
+      ":TodoTrouble",
+      { desc = "Open Todos in Trouble" }
+    )
+
+    vim.keymap.set(
+      "n",
+      "<leader>sf",
       function()
         builtin.current_buffer_fuzzy_find(
           require("telescope.themes").get_dropdown({

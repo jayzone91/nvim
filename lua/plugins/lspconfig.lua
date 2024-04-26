@@ -106,6 +106,7 @@ return {
       pyright = {},
       rust_analyzer = {},
       tsserver = {},
+      tailwindcss = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -123,6 +124,7 @@ return {
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format Lua
       "prettierd", -- Used to format Javascript
+      "prettier",
       "isort",
       "black", -- Used to format Python
     })

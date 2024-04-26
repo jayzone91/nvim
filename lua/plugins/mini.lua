@@ -9,8 +9,8 @@ return {
     require("mini.surround").setup()
 
     -- Simple and easy statusline
-    local statusline = require("mini.statusline")
-    statusline.setup({ use_icons = true })
-    statusline.section_location = function() return "%21:%-2v" end
+    -- local statusline = require("mini.statusline")
+    -- statusline.setup({ use_icons = true })
+    -- statusline.section_location = function() return "%21:%-2v" end
   end,
 }
