@@ -1,4 +1,5 @@
--- "gc" to comment visual regions/lines
 return {
-  'numToStr/Comment.nvim', opts = {}, lazy = false,
+  -- use "gc" to comment visual regions/lines / use "gcc" to comment in insert
+  "numToStr/Comment.nvim",
+  opts = {},
 }

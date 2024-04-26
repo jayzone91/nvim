@@ -6,5 +6,5 @@ return {
   },
   opts = {
     signs = false,
-  }
+  },
 }
