@@ -1,45 +1,18 @@
-https://dotfyle.com/plugins/MunifTanjim/nui.nvim
 
-https://dotfyle.com/plugins/numToStr/Comment.nvim
 
-https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim
 
-https://dotfyle.com/plugins/folke/which-key.nvim
 
-https://dotfyle.com/plugins/windwp/nvim-autopairs
 
-https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects
 
-https://dotfyle.com/plugins/folke/trouble.nvim
 
-https://dotfyle.com/plugins/rcarriga/nvim-notify
 
-https://dotfyle.com/plugins/folke/todo-comments.nvim
 
-https://dotfyle.com/plugins/stevearc/dressing.nvim
 
-https://dotfyle.com/plugins/folke/noice.nvim
 
-https://dotfyle.com/plugins/windwp/nvim-ts-autotag
 
-https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context
 
-https://dotfyle.com/plugins/JoosepAlviste/nvim-ts-context-commentstring
 
-https://dotfyle.com/plugins/iamcco/markdown-preview.nvim
 
-https://dotfyle.com/plugins/onsails/lspkind.nvim
 
-https://dotfyle.com/plugins/ThePrimeagen/harpoon
 
-https://dotfyle.com/plugins/RRethy/vim-illuminate
 
-https://dotfyle.com/plugins/mfussenegger/nvim-lint
-
-https://dotfyle.com/plugins/nvim-pack/nvim-spectre
-
-https://dotfyle.com/plugins/debugloop/telescope-undo.nvim
-
-https://dotfyle.com/plugins/folke/twilight.nvim
-
-https://dotfyle.com/plugins/nvim-tree/nvim-tree.lua

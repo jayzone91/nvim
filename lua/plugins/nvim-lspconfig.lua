@@ -3,9 +3,11 @@
 
 local servers = require("config").server
 local formatters = require("config").formatters
+local linters = require("config").linters
 
 return {
   "neovim/nvim-lspconfig",
+  lazy = true,
   event = "BufEnter",
   dependencies = {
     -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.
@@ -22,11 +24,11 @@ return {
 
     -- 💫 Extensible UI for Neovim notifications and LSP progress messages.
     -- https://github.com/j-hui/fidget.nvim
-    { "j-hui/fidget.nvim", opts = {}, lazy = false },
+    { "j-hui/fidget.nvim", opts = {} },
 
     -- 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
     -- https://github.com/folke/neodev.nvim
-    { "folke/neodev.nvim", opts = {}, lazy = false },
+    { "folke/neodev.nvim", opts = {} },
   },
   config = function()
     -- Create Mappings for LSP
@@ -140,7 +142,9 @@ return {
     mason.setup()
 
     local ensure_installed = vim.tbl_keys(servers or {})
+    local lint = vim.tbl_values(linters or {})
     vim.list_extend(ensure_installed, formatters)
+    vim.list_extend(ensure_installed, lint)
 
     local mti_test, mti = pcall(require, "mason-tool-installer")
     if not mti_test then

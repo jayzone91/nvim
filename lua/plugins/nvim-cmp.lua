@@ -2,6 +2,7 @@ return {
   -- A completion plugin for neovim coded in Lua.
   -- https://github.com/hrsh7th/nvim-cmp
   "hrsh7th/nvim-cmp",
+  lazy = true,
   event = "InsertEnter",
   dependencies = {
     {
@@ -39,18 +40,33 @@ return {
     -- nvim-cmp source for path
     -- https://github.com/hrsh7th/cmp-path
     "hrsh7th/cmp-path",
+
+    -- vscode-like pictograms for neovim lsp completion items
+    -- https://github.com/onsails/lspkind.nvim
+    "onsails/lspkind.nvim",
   },
   config = function()
     local cmp = require("cmp")
+    local lspkind = require("lspkind")
     local luasnip = require("luasnip")
     luasnip.config.setup({})
 
     cmp.setup({
+
       snippet = {
         expand = function(args) luasnip.lsp_expand(args.body) end,
       },
       completion = { completeopt = "menu,menuone,noinsert" },
-
+      ---@diagnostic disable-next-line:missing-fields
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol",
+          maxwidth = 50,
+          ellipsis_char = "...",
+          show_labelDetails = true,
+          before = function(_, vim_item) return vim_item end,
+        }),
+      },
       mapping = cmp.mapping.preset.insert({
         -- Select the [n]ext item
         ["<C-n>"] = cmp.mapping.select_next_item(),

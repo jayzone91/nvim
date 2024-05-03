@@ -2,6 +2,7 @@ return {
   -- Find, Filter, Preview, Pick. All lua, all the time.
   -- https://github.com/nvim-telescope/telescope.nvim
   "nvim-telescope/telescope.nvim",
+  lazy = true,
   event = "VimEnter",
   branch = "0.1.x",
   dependencies = {
@@ -31,6 +32,9 @@ return {
     -- Telescope extension that provides handy functionality about plugins installed via lazy.nvim
     -- https://github.com/tsakirist/telescope-lazy.nvim
     "tsakirist/telescope-lazy.nvim",
+    -- A telescope extension to view and search your undo tree 🌴
+    -- https://github.com/debugloop/telescope-undo.nvim
+    "debugloop/telescope-undo.nvim",
   },
   config = function()
     local telescope = require("telescope")
@@ -42,6 +46,19 @@ return {
           override_file_sorter = true, -- override the file sorter
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
           -- the default case_mode is "smart_case"
+        },
+        undo = {
+          use_delta = true,
+          use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
+          side_by_side = true,
+          layout_strategy = "vertical",
+          diff_context_lines = vim.o.scrolloff,
+          entry_format = "state #$ID, $STAT, $TIME",
+          time_format = "",
+          saved_only = false,
+          layout_config = {
+            preview_height = 0.8,
+          },
         },
         lazy = {
           -- Whether or not to show the icon in the first column
@@ -130,6 +147,7 @@ return {
     pcall(telescope.load_extension, "fzf")
     pcall(telescope.load_extension, "luasnip")
     pcall(telescope.load_extension, "lazy")
+    pcall(telescope.load_extension, "undo")
 
     local builtin = require("telescope.builtin")
 
@@ -184,7 +202,7 @@ return {
     )
     vim.keymap.set(
       "n",
-      "<leader>sf",
+      "<leader>fs",
       function()
         builtin.current_buffer_fuzzy_find(
           require("telescope.themes").get_dropdown({
@@ -201,12 +219,17 @@ return {
       "<cmd>Telescope luasnip<cr>",
       { desc = "Find LuaSnip" }
     )
-
     vim.keymap.set(
       "n",
       "<leader>fz",
       "<cmd>Telescope lazy<cr>",
       { desc = "Search Lazy" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>fu",
+      "<cmd>Telescope undo<cr>",
+      { desc = "Search Undotree" }
     )
   end,
 }
