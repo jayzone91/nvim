@@ -1,3 +1,6 @@
+-- Vim / NeoVim Options.
+-- https://neovim.io/doc/user/quickref.html#option-list
+
 local o = vim.o
 
 o.autoindent = true -- take indent for new line from previous line
@@ -32,3 +35,5 @@ o.softtabstop = 2 -- number of spaces that <Tab> uses while editing
 o.tabstop = 2 -- number of spaces that <Tab> in file uses
 o.title = true -- let Vim set the title of the window
 o.wrap = false -- long lines wrap around the end of the file
+o.expandtab = true
+o.shiftwidth = 2

@@ -1,19 +1,37 @@
+-- Quickstart configs for Nvim LSP
+-- https://github.com/neovim/nvim-lspconfig
+
+local servers = require("config").server
+local formatters = require("config").formatters
+local linters = require("config").linters
+
 return {
   "neovim/nvim-lspconfig",
+  lazy = true,
+  event = "BufEnter",
   dependencies = {
-    -- Auto install LSPs and related tools to stdpath for Neovim
+    -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.
+    -- https://github.com/williamboman/mason.nvim
     { "williamboman/mason.nvim", config = true },
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-    -- Usefull status Updates for LSP.
+    -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
+    -- https://github.com/williamboman/mason-lspconfig.nvim
+    { "williamboman/mason-lspconfig.nvim" },
+
+    -- Install and upgrade third party tools automatically
+    -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+    { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+
+    -- 💫 Extensible UI for Neovim notifications and LSP progress messages.
+    -- https://github.com/j-hui/fidget.nvim
     { "j-hui/fidget.nvim", opts = {} },
 
-    -- "neodev" configures Lua LSP for the Neovim config, runtie and plugins
-    -- used for completion, annotations and signatures of Neovim apis
+    -- 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
+    -- https://github.com/folke/neodev.nvim
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
+    -- Create Mappings for LSP
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
@@ -26,26 +44,30 @@ return {
           )
         end
 
-        map(
-          "gd",
-          require("telescope.builtin").lsp_definitions,
-          "[G]oto [D]efinition"
-        )
-        map(
-          "gr",
-          require("telescope.builtin").lsp_references,
-          "[G]oto [R]eferences"
-        )
-        map(
-          "gI",
-          require("telescope.builtin").lsp_implementations,
-          "[G]oto [I]mplementation"
-        )
-        map(
-          "<leader>D",
-          require("telescope.builtin").lsp_type_definitions,
-          "Type [D]efinition"
-        )
+        local telescope_test, builtin = pcall(require, "telescope.builtin")
+        if telescope_test then
+          map(
+            "gd",
+            require("telescope.builtin").lsp_definitions,
+            "[G]oto [D]efinition"
+          )
+          map(
+            "gr",
+            require("telescope.builtin").lsp_references,
+            "[G]oto [R]eferences"
+          )
+          map(
+            "gI",
+            require("telescope.builtin").lsp_implementations,
+            "[G]oto [I]mplementation"
+          )
+          map(
+            "<leader>D",
+            require("telescope.builtin").lsp_type_definitions,
+            "Type [D]efinition"
+          )
+        end
+
         map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
         map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -81,6 +103,16 @@ return {
             "[T]oggle Inlay [H]ints"
           )
         end
+
+        if client.name == "tailwindcss" then
+          pcall(require("telescope").load_extension, "tailiscope")
+          vim.keymap.set(
+            "n",
+            "<leader>ft",
+            "<cmd>Telescope tailiscope<cr>",
+            { desc = "Find tailwindcss" }
+          )
+        end
       end,
     })
 
@@ -102,48 +134,44 @@ return {
         vim.tbl_deep_extend("force", capabilities, cmp.default_capabilities())
     end
 
-    local servers = {
-      pyright = {},
-      rust_analyzer = {},
-      tsserver = {},
-      tailwindcss = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
-      },
-    }
+    local mason_test, mason = pcall(require, "mason")
+    if not mason_test then
+      return
+    end
 
-    require("mason").setup()
+    mason.setup()
 
     local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      "stylua", -- Used to format Lua
-      "prettierd", -- Used to format Javascript
-      "prettier",
-      "isort",
-      "black", -- Used to format Python
-    })
-    require("mason-tool-installer").setup({
+    local lint = vim.tbl_values(linters or {})
+    vim.list_extend(ensure_installed, formatters)
+    vim.list_extend(ensure_installed, lint)
+
+    local mti_test, mti = pcall(require, "mason-tool-installer")
+    if not mti_test then
+      return
+    end
+
+    mti.setup({
       ensure_installed = ensure_installed,
       auto_update = true,
-      run_on_start = true,
-      start_delay = 3000, -- 3 second delay
+      run_on_startup = true,
+      start_delay = 3000,
     })
 
-    require("mason-lspconfig").setup({
+    local mlsp_test, mlsp = pcall(require, "mason-lspconfig")
+    if not mlsp_test then
+      return
+    end
+
+    mlsp.setup({
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend(
+          server.capabilites = vim.tbl_deep_extend(
             "force",
             {},
             capabilities,
-            server.capabilites or {}
+            server.capabilities or {}
           )
           require("lspconfig")[server_name].setup(server)
         end,

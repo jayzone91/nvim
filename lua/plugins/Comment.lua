@@ -1,5 +1,7 @@
 return {
-  -- use "gc" to comment visual regions/lines / use "gcc" to comment in insert
+  -- ⚡ Smart and Powerful commenting plugin for neovim ⚡
+  -- https://github.com/numToStr/Comment.nvim
   "numToStr/Comment.nvim",
+  lazy = false,
   opts = {},
 }

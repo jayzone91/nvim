@@ -1,10 +1,13 @@
 return {
-  -- Autocompletion
+  -- A completion plugin for neovim coded in Lua.
+  -- https://github.com/hrsh7th/nvim-cmp
   "hrsh7th/nvim-cmp",
+  lazy = true,
   event = "InsertEnter",
   dependencies = {
-    -- Snippet Engine & its associated nvim-cmp source
     {
+      -- Snippet Engine for Neovim written in Lua.
+      -- https://github.com/L3MON4D3/LuaSnip
       "L3MON4D3/LuaSnip",
       build = (function()
         -- Build Step is needed for regex support in snippets.
@@ -16,10 +19,9 @@ return {
         return "make install_jsregexp"
       end)(),
       dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
         {
+          -- Set of preconfigured snippets for different languages.
+          -- https://github.com/rafamadriz/friendly-snippets
           "rafamadriz/friendly-snippets",
           config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
@@ -27,25 +29,44 @@ return {
         },
       },
     },
+    -- luasnip completion source for nvim-cmp
+    -- https://github.com/saadparwaiz1/cmp_luasnip
     "saadparwaiz1/cmp_luasnip",
 
-    -- Adds other completion capabilities.
-    --  nvim-cmp does not ship with all sources by default. They are split
-    --  into multiple repos for maintenance purposes.
+    -- nvim-cmp source for neovim builtin LSP client
+    -- https://github.com/hrsh7th/cmp-nvim-lsp
     "hrsh7th/cmp-nvim-lsp",
+
+    -- nvim-cmp source for path
+    -- https://github.com/hrsh7th/cmp-path
     "hrsh7th/cmp-path",
+
+    -- vscode-like pictograms for neovim lsp completion items
+    -- https://github.com/onsails/lspkind.nvim
+    "onsails/lspkind.nvim",
   },
   config = function()
     local cmp = require("cmp")
+    local lspkind = require("lspkind")
     local luasnip = require("luasnip")
     luasnip.config.setup({})
 
     cmp.setup({
+
       snippet = {
         expand = function(args) luasnip.lsp_expand(args.body) end,
       },
       completion = { completeopt = "menu,menuone,noinsert" },
-
+      ---@diagnostic disable-next-line:missing-fields
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol",
+          maxwidth = 50,
+          ellipsis_char = "...",
+          show_labelDetails = true,
+          before = function(_, vim_item) return vim_item end,
+        }),
+      },
       mapping = cmp.mapping.preset.insert({
         -- Select the [n]ext item
         ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -65,7 +86,6 @@ return {
         --  Generally you don't need this, because nvim-cmp will display
         --  completions whenever it has completion options available.
         ["<C-Space>"] = cmp.mapping.complete({}),
-
         -- Think of <c-l> as moving to the right of your snippet expansion.
         --  So if you have a snippet that's like:
         --  function $name($args)

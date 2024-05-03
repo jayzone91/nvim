@@ -1,146 +1,88 @@
--- Diagnostic Mappings
-vim.keymap.set(
-  "n",
-  "<leader>de",
-  vim.diagnostic.open_float,
-  { desc = "Show Diagnostic [E]rror messages" }
+-- Vim Mappings (Plugin specific mappings are in the plugin specs)
+
+---@param mode string|table
+---@param key string
+---@param func string|function
+---@param opts table?
+local map = function(mode, key, func, opts)
+  vim.keymap.set(mode, key, func, opts or {})
+end
+
+-- save file with CTRL-S
+map(
+  { "i", "x", "n", "s", "v" },
+  "<c-s>",
+  "<cmd>w<cr><esc>",
+  { desc = "Save File" }
 )
 
--- Save File with CTRL-S
-vim.keymap.set({ "i", "x", "n", "s", "v" }, "<c-s>", "<cmd>w<cr><esc>")
+-- Leave Insert mode with CTRL-c
+map("i", "<c-c>2", "<esc>")
 
--- Leave Insert mode with CTRL-C
-vim.keymap.set("i", "<c-c>", "<esc>")
-
--- increment and decrement
-vim.keymap.set("n", "+", "<c-a>")
-vim.keymap.set("n", "-", "<c-x>")
-
--- delete word backwards
-vim.keymap.set("n", "dw", "vb\"_d")
+-- Increment and decrement
+map("n", "+", "<c-a>")
+map("n", "-", "<c-x>")
 
 -- better up/down
-vim.keymap.set(
+map(
+  { "n", "x" },
+  "<down>",
+  "v:count == 0 ? 'gj' : 'j'",
+  { expr = true, silent = true }
+)
+map(
   { "n", "x" },
   "j",
   "v:count == 0 ? 'gj' : 'j'",
   { expr = true, silent = true }
 )
-vim.keymap.set(
+map(
   { "n", "x" },
-  "<Down>",
-  "v:count == 0 ? 'gj' : 'j'",
+  "<up>",
+  "v:count == 0 ? 'gk' : 'k'",
   { expr = true, silent = true }
 )
-vim.keymap.set(
+map(
   { "n", "x" },
   "k",
   "v:count == 0 ? 'gk' : 'k'",
   { expr = true, silent = true }
 )
-vim.keymap.set(
-  { "n", "x" },
-  "<Up>",
-  "v:count == 0 ? 'gk' : 'j'",
-  { expr = true, silent = true }
-)
 
 -- Duplicate Lines
-vim.keymap.set("n", "<leader>k", "YP", { desc = "Duplicate Line Up" })
-vim.keymap.set("n", "<leader><up>", "YP", { desc = "Duplicate Line Up" })
-vim.keymap.set("n", "<leader>j", "Yp", { desc = "Duplicate Line Down" })
-vim.keymap.set("n", "<leader><down>", "Yp", { desc = "Duplicate Line Down" })
+map("n", "<leader><down>", "Yp")
+map("n", "<leader>j", "Yp")
+map("n", "<leader><up>", "YP")
+map("n", "<leader>k", "YP")
 
 -- Move Lines
-vim.keymap.set("n", "<a-j>", "<cmd>m .+1<cr>==", { desc = "Move Line Down" })
-vim.keymap.set("n", "<a-down>", "<cmd>m .+1<cr>==", { desc = "Move Line Down" })
+map("n", "<a-down>", "<cmd>m .+1<cr>==")
+map("n", "<a-j>", "<cmd>m .+1<cr>==")
+map("n", "<a-up>", "<cmd>m .-2<cr>==")
+map("n", "<a-k>", "<cmd>m .-2<cr>==")
 
-vim.keymap.set("n", "<a-k>", "<cmd>m .-2<cr>==", { desc = "Move Line Up" })
-vim.keymap.set("n", "<a-up>", "<cmd>m .-2<cr>==", { desc = "Move Line Up" })
+-- Move windows using the CTRL key
+map("n", "<c-h>", "<C-w>h", { remap = true })
+map("n", "<c-left>", "<C-w>h", { remap = true })
+map("n", "<c-j>", "<C-w>j", { remap = true })
+map("n", "<c-down>", "<C-w>j", { remap = true })
+map("n", "<c-k>", "<C-w>k", { remap = true })
+map("n", "<c-up>", "<C-w>k", { remap = true })
+map("n", "<c-l>", "<C-w>l", { remap = true })
+map("n", "<c-right>", "<C-w>l", { remap = true })
 
--- Move Window using the <ctrl> key.
-vim.keymap.set(
-  "n",
-  "<C-h>",
-  "<C-w>h",
-  { desc = "Go to left window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-left>",
-  "<C-w>h",
-  { desc = "Go to left window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-j>",
-  "<C-w>j",
-  { desc = "Go to lower window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-down>",
-  "<C-w>j",
-  { desc = "Go to lower window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-k>",
-  "<C-w>k",
-  { desc = "Go to upper window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-up>",
-  "<C-w>k",
-  { desc = "Go to upper window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-l>",
-  "<C-w>l",
-  { desc = "Go to right window", remap = true }
-)
-vim.keymap.set(
-  "n",
-  "<C-right>",
-  "<C-w>l",
-  { desc = "Go to right window", remap = true }
-)
+-- Clear search with <esc>
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 
--- Clear Search with <esc>
-vim.keymap.set(
-  { "i", "n" },
-  "<esc>",
-  "<cmd>noh<cr><esc>",
-  { desc = "Escape and clear hlsearch" }
-)
+-- Exit vim
+map("n", "<leader>qq", "<cmd>qa<cr>")
 
--- quit
-vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+-- split Window
+map("n", "<leader>ss", "<cmd>vsplit<cr>", { desc = "Split Screen horizontal" })
+map("n", "<leader>sv", "<cmd>split<cr>", { desc = "Split Screen vertical" })
 
--- Split Window
-vim.keymap.set(
-  "n",
-  "<leader>ss",
-  "<cmd>vsplit<cr>",
-  { desc = "Split Screen Horizontal" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>sv",
-  "<cmd>split<cr>",
-  { desc = "Split Screen Vertical" }
-)
+-- Easy way to leave terminal mode
+map("t", "<esc>", "<C-\\>>C.N>")
 
--- Tabs
-vim.keymap.set("n", "<C-t>", "<cmd>tabedit<cr>")
-vim.keymap.set("n", "<Tab>", "<cmd>tabnext<cr>")
-vim.keymap.set("n", "<S-Tab>", "<cmd>tabprev<cr>")
-vim.keymap.set("n", "<leader>w", "<cmd>tabclose<cr>")
-
--- Easy Leave Terminal Mode
-vim.keymap.set("t", "<esc>", "<C-\\>>C.N>")
-
--- Select all
-vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+-- Select All
+map({ "i", "n" }, "<C-a>", "<esc>gg<S-v>G")
