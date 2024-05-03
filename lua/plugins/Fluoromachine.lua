@@ -10,6 +10,7 @@
 
 return {
   "maxmx03/fluoromachine.nvim",
+  cond = false,
   lazy = false,
   priority = 1000,
   config = function()
@@ -25,5 +26,6 @@ return {
       ---@type boolean | "full"
       transparent = true,
     })
+    -- vim.cmd.colorscheme("fluoromachine")
   end,
 }

@@ -9,7 +9,7 @@ return {
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = "fluoromachine",
+        theme = "palenight",
       },
       sections = {
         lualine_c = {
