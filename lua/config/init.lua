@@ -16,6 +16,7 @@ M.server = {
     },
   },
   tailwindcss = {},
+  tsserver = {},
 }
 
 M.formatters = {
