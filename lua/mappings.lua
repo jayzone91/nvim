@@ -17,7 +17,7 @@ map(
 )
 
 -- Leave Insert mode with CTRL-c
-map("i", "<c-c>2", "<esc>")
+map("i", "<c-c>", "<esc>")
 
 -- Increment and decrement
 map("n", "+", "<c-a>")
@@ -50,10 +50,10 @@ map(
 )
 
 -- Duplicate Lines
-map("n", "<leader><down>", "Yp")
-map("n", "<leader>j", "Yp")
-map("n", "<leader><up>", "YP")
-map("n", "<leader>k", "YP")
+map("n", "<leader><down>", "Yp", { desc = "Duplicate Line Down" })
+map("n", "<leader>j", "Yp", { desc = "Duplicate Line Down" })
+map("n", "<leader><up>", "YP", { desc = "Duplicate Line Up" })
+map("n", "<leader>k", "YP", { desc = "Duplicate Line Up" })
 
 -- Move Lines
 map("n", "<a-down>", "<cmd>m .+1<cr>==")
@@ -75,7 +75,7 @@ map("n", "<c-right>", "<C-w>l", { remap = true })
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 
 -- Exit vim
-map("n", "<leader>qq", "<cmd>qa<cr>")
+map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit Neovim" })
 
 -- split Window
 map("n", "<leader>ss", "<cmd>vsplit<cr>", { desc = "Split Screen horizontal" })

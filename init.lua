@@ -1,15 +1,11 @@
--- Setting options
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 require("options")
+require("autocmds")
 
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.maplocalleader = " " -- Same for `maplocalleader`
-
--- Setting mappings
-require("mappings")
-
--- lazy.nvim is a modern plugin manager for Neovim.
+-- install Lazy Plugin Manager
 -- https://github.com/folke/lazy.nvim
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -17,43 +13,33 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
-  -- Just Import complete "plugins" Folder
+require("lazy").setup({
   { import = "plugins" },
-}
-
-local opts = {
+}, {
   defaults = {
-    lazy = false, -- should plugins be lazy-loaded?
-    version = false, -- always use the latest git commit
+    lazy = false,
+    version = false,
   },
   install = {
-    -- install missing plugins on startup
     missing = true,
   },
   checker = {
-    -- automatically check for plugin updates
     enabled = true,
-    notify = true,
+    notify = false,
   },
   change_detection = {
-    -- automatically check for config file changes and reload the ui
-    enabled = true,
-    notify = false, -- get a notification when changes are found
+    notify = false,
   },
   performance = {
     rtp = {
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
@@ -61,9 +47,6 @@ local opts = {
       },
     },
   },
-}
+})
 
-require("lazy").setup(plugins, opts)
-
--- Include Autocmds
-require("autocmds")
+require("mappings")

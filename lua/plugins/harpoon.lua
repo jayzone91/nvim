@@ -1,6 +1,4 @@
 return {
-  -- A per project, auto updating and editable marks utility for fast file navigation.
-  -- https://github.com/ThePrimeagen/harpoon/tree/harpoon2
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   config = function()
@@ -11,35 +9,33 @@ return {
       "n",
       "<leader>a",
       function() harpoon:list():add() end,
-      { desc = "Add File to Harpoon List" }
+      { desc = "Add File to harpoon" }
     )
     vim.keymap.set(
       "n",
       "<c-e>",
       function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-      { desc = "Toggle Quick Menu" }
-    )
-
-    for i = 1, 9, 1 do
-      vim.keymap.set(
-        "n",
-        "<c-" .. i .. ">",
-        function() harpoon:list():select(i) end,
-        { desc = "Select File " .. i }
-      )
-    end
-
-    vim.keymap.set(
-      "n",
-      "<leader>-",
-      function() harpoon:list():prev() end,
-      { desc = "Select Prev File" }
+      { desc = "Toggle Quick menu" }
     )
     vim.keymap.set(
       "n",
       "<leader>+",
       function() harpoon:list():next() end,
-      { desc = "Select Next File" }
+      { desc = "Select next file" }
     )
+    vim.keymap.set(
+      "n",
+      "<leader>-",
+      function() harpoon:list():prev() end,
+      { desc = "Select prev file" }
+    )
+
+    for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+      vim.keymap.set(
+        "n",
+        string.format("<leader>", idx),
+        function() harpoon:list():select(idx) end
+      )
+    end
   end,
 }

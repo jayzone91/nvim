@@ -1,7 +1,9 @@
 return {
-  -- Indent guides for Neovim
-  -- https://github.com/lukas-reineke/indent-blankline.nvim
   "lukas-reineke/indent-blankline.nvim",
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile" },
   main = "ibl",
-  opts = {},
+  opts = {
+    indent = { char = "┊" },
+  },
 }
