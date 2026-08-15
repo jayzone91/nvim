@@ -67,6 +67,7 @@ return {
       end
 
       lint.linters_by_ft = {
+        nix = { "statix" },
         prisma = { "prisma_validate" },
         sh = { "shellcheck" },
       }
