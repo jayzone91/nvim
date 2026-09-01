@@ -1,0 +1,6 @@
+require("plugins.pretty-comments")
+require("plugins.mason")
+require("plugins.nvim-lspconfig")
+require("plugins.lazydev")
+require("plugins.conform")
+require("plugins.misc")

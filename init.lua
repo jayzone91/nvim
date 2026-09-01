@@ -1,8 +1,9 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- ╭─────────────────────────────────╮
+-- │      Meine NeoVim Config.       │
+-- │     Erstellt am 01.09.2026      │
+-- │    Author: Johannes Kirchner    │
+-- ╰─────────────────────────────────╯
 
 require("config.options")
-require("config.keymaps")
-require("config.autocmds")
-require("config.lsp")
-require("config.lazy")
+
+require("plugins")
