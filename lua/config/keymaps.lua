@@ -1,19 +1,31 @@
 local map = vim.keymap.set
 
--- Normal mode
+--    ╭─────────────────────────────────────────╮
+--    │               Normal mode               │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<Up>", "gk")
 map("n", "<Down>", "gj")
 
--- Visual mode
+--    ╭─────────────────────────────────────────╮
+--    │               Visual mode               │
+--    ╰─────────────────────────────────────────╯
+
 map("x", "<Up>", "gk")
 map("x", "<Down>", "gj")
 
--- Save
+--    ╭─────────────────────────────────────────╮
+--    │                  Save                   │
+--    ╰─────────────────────────────────────────╯
+
 map({ "n", "i", "x" }, "<C-s>", "<cmd>write<cr>", {
 	desc = "Save File",
 })
 
--- Quit
+--    ╭─────────────────────────────────────────╮
+--    │                  Quit                   │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<leader>qq", "<cmd>qa<cr>", {
 	desc = "Quit Neovim",
 })
@@ -22,7 +34,10 @@ map("n", "<leader>qw", "<cmd>close<cr>", {
 	desc = "Close Window",
 })
 
--- Split Navgation
+--    ╭─────────────────────────────────────────╮
+--    │             Split Navgation             │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<C-Left>", "<C-w>h", {
 	desc = "Window Left",
 })
@@ -39,7 +54,10 @@ map("n", "<C-Right>", "<C-w>l", {
 	desc = "Window Right",
 })
 
--- Split Resize
+--    ╭─────────────────────────────────────────╮
+--    │              Split Resize               │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<leader>wrh", "<cmd>vertical resize -2<cr>", {
 	desc = "Resize Window Left",
 })
@@ -56,7 +74,10 @@ map("n", "<leader>wrj", "<cmd>resize -2<cr>", {
 	desc = "Resize Window Down",
 })
 
--- Splits
+--    ╭─────────────────────────────────────────╮
+--    │                 Splits                  │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<leader>wv", "<cmd>vsplit<cr>", {
 	desc = "Split Vertical",
 })
@@ -77,7 +98,10 @@ map("n", "<leader>we", "<C-w>=", {
 	desc = "Equal Window Sizes",
 })
 
--- Move lines
+--    ╭─────────────────────────────────────────╮
+--    │               Move lines                │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<A-Down>", "<cmd>move .+1<cr>==", {
 	desc = "Move Line Down",
 })
@@ -94,7 +118,10 @@ map("x", "<A-Up>", ":move '<-2<cr>gv=gv", {
 	desc = "Move Selection Up",
 })
 
--- Duplicate lines
+--    ╭─────────────────────────────────────────╮
+--    │             Duplicate lines             │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<A-S-Down>", "<cmd>copy .<cr>", {
 	desc = "Duplicate Line Down",
 })
@@ -111,18 +138,27 @@ map("x", "<A-S-Up>", ":copy '<-1<cr>gv", {
 	desc = "Duplicate Selection Up",
 })
 
--- Keep cursor centered
+--    ╭─────────────────────────────────────────╮
+--    │          Keep cursor centered           │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
--- Paste without replacing clipboard
+--    ╭─────────────────────────────────────────╮
+--    │    Paste without replacing clipboard    │
+--    ╰─────────────────────────────────────────╯
+
 map("x", "p", '"_dP', {
 	desc = "Paste Without Overwrite",
 })
 
--- Clear search highlight
+--    ╭─────────────────────────────────────────╮
+--    │         Clear search highlight          │
+--    ╰─────────────────────────────────────────╯
+
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", {
 	desc = "Clear Search Highlight",
 })

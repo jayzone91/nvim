@@ -2,7 +2,10 @@ local group = vim.api.nvim_create_augroup("UserConfig", {
 	clear = true,
 })
 
--- Highlight copied text
+--    ╭─────────────────────────────────────────────────────────╮
+--    │                  Highlight copied text                  │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = group,
 	callback = function()
@@ -12,7 +15,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Absolute numbers in Insert mode
+--    ╭─────────────────────────────────────────────────────────╮
+--    │             Absolute numbers in Insert mode             │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("InsertEnter", {
 	group = group,
 	callback = function()
@@ -22,7 +28,10 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 	end,
 })
 
--- Relative numbers in Normal / Visual mode
+--    ╭─────────────────────────────────────────────────────────╮
+--    │        Relative numbers in Normal / Visual mode         │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("InsertLeave", {
 	group = group,
 	callback = function()
@@ -32,7 +41,10 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	end,
 })
 
--- Inactive windows use absolute numbers
+--    ╭─────────────────────────────────────────────────────────╮
+--    │          Inactive windows use absolute numbers          │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost" }, {
 	group = group,
 	callback = function()
@@ -51,7 +63,10 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained" }, {
 	end,
 })
 
--- Close utility windows with q
+--    ╭─────────────────────────────────────────────────────────╮
+--    │              Close utility windows with q               │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("FileType", {
 	group = group,
 	pattern = {
@@ -71,7 +86,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Restore last cursor position
+--    ╭─────────────────────────────────────────────────────────╮
+--    │              Restore last cursor position               │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = group,
 	callback = function(event)
@@ -84,7 +102,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
--- Automatically reload files changed outside Neovim
+--    ╭─────────────────────────────────────────────────────────╮
+--    │    Automatically reload files changed outside Neovim    │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd({
 	"FocusGained",
 	"TermClose",
@@ -94,7 +115,10 @@ vim.api.nvim_create_autocmd({
 	command = "checktime",
 })
 
--- Resize splits when terminal size changes
+--    ╭─────────────────────────────────────────────────────────╮
+--    │        Resize splits when terminal size changes         │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("VimResized", {
 	group = group,
 	callback = function()
@@ -102,7 +126,10 @@ vim.api.nvim_create_autocmd("VimResized", {
 	end,
 })
 
--- Create missing parent directories before saving
+--    ╭─────────────────────────────────────────────────────────╮
+--    │     Create missing parent directories before saving     │
+--    ╰─────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = group,
 	callback = function(event)
