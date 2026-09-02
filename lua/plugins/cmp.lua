@@ -113,6 +113,8 @@ cmp.setup({
 				vim_item.abbr = vim_item.abbr:sub(1, 47) .. "..."
 			end
 
+			vim_item = require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
+
 			return vim_item
 		end,
 	},

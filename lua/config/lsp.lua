@@ -43,7 +43,14 @@ M.lsp = {
 			},
 		},
 	},
-	jsonls = {},
+	jsonls = {
+		settings = {
+			json = {
+				schemas = require("schemastore").json.schemas(),
+				validate = { enable = true },
+			},
+		},
+	},
 	marksman = {},
 	prismals = {},
 	tailwindcss = {
@@ -113,7 +120,17 @@ M.lsp = {
 			},
 		},
 	},
-	yamlls = {},
+	yamlls = {
+		settings = {
+			yaml = {
+				schemaStore = {
+					enable = false,
+					url = "",
+				},
+				schemas = require("schemastore").yaml.schemas(),
+			},
+		},
+	},
 }
 
 return M
