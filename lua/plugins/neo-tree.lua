@@ -7,7 +7,6 @@ vim.pack.add({
 
 require("neo-tree").setup({
 	close_if_last_window = true,
-	popup_border_style = "winborder",
 	clipboard = {
 		sync = "none",
 	},

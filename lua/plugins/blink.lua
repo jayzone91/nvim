@@ -13,7 +13,7 @@ cmp.build():pwait()
 cmp.setup({
 	keymap = {
 		preset = "super-tab",
-		["<CR>"] = { "accept", "fallback" },
+		["<CR>"] = { "select_and_accept", "fallback" },
 	},
 	completion = {
 		list = {

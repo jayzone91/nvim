@@ -1,3 +1,4 @@
+require("plugins.treesitter")
 require("plugins.pretty-comments")
 require("plugins.mason")
 require("plugins.nvim-lspconfig")
