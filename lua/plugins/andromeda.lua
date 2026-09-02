@@ -3,3 +3,7 @@ vim.pack.add({
 })
 
 vim.cmd.colorscheme("andromeda")
+
+vim.api.nvim_set_hl(0, "CmpSel", {
+	link = "PmenuSel",
+})
