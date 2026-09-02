@@ -14,5 +14,6 @@ require("plugins.snacks")
 require("plugins.render-markdown")
 require("plugins.neo-tree")
 require("plugins.trouble")
+require("plugins.todo-comments")
 
 require("plugins.which-key")
