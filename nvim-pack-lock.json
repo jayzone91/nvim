@@ -81,6 +81,10 @@
       "rev": "ddff8bd3eccedf043bd73f5bf89cf90d2d6d8105",
       "src": "https://github.com/smjonas/inc-rename.nvim"
     },
+    "incline.nvim": {
+      "rev": "debd628e9395f7a9da57bdc31ce75ca6b40a880b",
+      "src": "https://github.com/b0o/incline.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
@@ -88,6 +92,10 @@
     "lspkind.nvim": {
       "rev": "c7274c48137396526b59d86232eabcdc7fed8a32",
       "src": "https://github.com/onsails/lspkind.nvim"
+    },
+    "lualine.nvim": {
+      "rev": "221ce6b2d999187044529f49da6554a92f740a96",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "40276c4df7e6bdce6801d6c035c6227f9115a855",
@@ -126,9 +134,17 @@
       "rev": "2ffe79f1f021def8dd1fcd81deb16f1bb0d989f3",
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
+    "nvim-colorizer.lua": {
+      "rev": "72a05f62c52241bc7441c820eb53946f92b2e6a4",
+      "src": "https://github.com/NvChad/nvim-colorizer.lua"
+    },
     "nvim-lspconfig": {
       "rev": "bbe6b383a1e85d3a84b54a43f7d9d83567c150cb",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-navic": {
+      "rev": "455808fd0fae06e6d70fadfd61432275db8f34ce",
+      "src": "https://github.com/SmiteshP/nvim-navic"
     },
     "nvim-treesitter": {
       "rev": "427e9222363d07c32d6db6169e4049c28d58d141",
@@ -153,6 +169,10 @@
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "tailwindcss-colorizer-cmp.nvim": {
+      "rev": "3d3cd95e4a4135c250faf83dd5ed61b8e5502b86",
+      "src": "https://github.com/roobert/tailwindcss-colorizer-cmp.nvim"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
