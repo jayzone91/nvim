@@ -8,7 +8,7 @@ require("snacks").setup({
 	bufdelete = { enabled = true },
 	dashboard = {
 		enabled = true,
-		presets = {
+		preset = {
 			keys = {
 				{ icon = "x ", key = "e", desc = "Explorer", action = ":Neotree" },
 				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },

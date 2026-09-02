@@ -12,3 +12,7 @@ require("plugins.autotag")
 require("plugins.andromeda")
 require("plugins.snacks")
 require("plugins.render-markdown")
+require("plugins.neo-tree")
+require("plugins.trouble")
+
+require("plugins.which-key")
