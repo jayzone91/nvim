@@ -12,4 +12,5 @@ wk.add({
 	{ "<leader>w", group = "Windows" },
 	{ "<leader>wr", group = "Resize" },
 	{ "<leader>q", group = "Quit" },
+	{ "<leader>a", group = "AI" },
 })

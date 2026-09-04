@@ -1,13 +1,13 @@
-local group = vim.api.nvim_create_augroup("UserConfig", {
-	clear = true,
-})
+local function augroup(name)
+	return vim.api.nvim_create_augroup("UserConfig_" .. name, { clear = true })
+end
 
---    ╭─────────────────────────────────────────────────────────╮
---    │                  Highlight copied text                  │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │                    Highlight copied text                    │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = group,
+	group = augroup("text_yank_post"),
 	callback = function()
 		vim.highlight.on_yank({
 			timeout = 150,
@@ -15,9 +15,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │             Absolute numbers in Insert mode             │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │               Absolute numbers in Insert mode               │
+--    ╰─────────────────────────────────────────────────────────────╯
+local group = augroup("line_numbers")
 
 vim.api.nvim_create_autocmd("InsertEnter", {
 	group = group,
@@ -28,9 +29,9 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │        Relative numbers in Normal / Visual mode         │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │          Relative numbers in Normal / Visual mode           │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd("InsertLeave", {
 	group = group,
@@ -41,9 +42,9 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │          Inactive windows use absolute numbers          │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │            Inactive windows use absolute numbers            │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost" }, {
 	group = group,
@@ -63,35 +64,63 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained" }, {
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │              Close utility windows with q               │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │                Close utility windows with q                 │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd("FileType", {
-	group = group,
+	group = augroup("close_with_q"),
 	pattern = {
+		"PlenaryTestPopup",
 		"checkhealth",
+		"dap-float",
+		"dbout",
+		"gitsigns-blame",
+		"grug-far",
 		"help",
 		"lspinfo",
-		"man",
+		"neotest-output",
+		"neotest-output-panel",
+		"neotest-summary",
+		"notify",
 		"qf",
+		"spectre_panel",
 		"startuptime",
+		"tsplayground",
 	},
 	callback = function(event)
-		vim.keymap.set("n", "q", "<cmd>close<cr>", {
-			buffer = event.buf,
-			silent = true,
-			desc = "Close Window",
-		})
+		vim.bo[event.buf].buflisted = false
+		vim.schedule(function()
+			vim.keymap.set("n", "q", function()
+				vim.cmd("close")
+				pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+			end, {
+				buffer = event.buf,
+				silent = true,
+				desc = "Quit Buffer",
+			})
+		end)
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │              Restore last cursor position               │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │    Make it easier to close man ffiles when opened inline    │
+--    ╰─────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("man_unlisted"),
+	pattern = { "man" },
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+	end,
+})
+
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │                Restore last cursor position                 │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-	group = group,
+	group = augroup("restore"),
 	callback = function(event)
 		local mark = vim.api.nvim_buf_get_mark(event.buf, '"')
 		local line_count = vim.api.nvim_buf_line_count(event.buf)
@@ -102,36 +131,36 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │    Automatically reload files changed outside Neovim    │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │      Automatically reload files changed outside Neovim      │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd({
 	"FocusGained",
 	"TermClose",
 	"TermLeave",
 }, {
-	group = group,
+	group = augroup("reload"),
 	command = "checktime",
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │        Resize splits when terminal size changes         │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │          Resize splits when terminal size changes           │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd("VimResized", {
-	group = group,
+	group = augroup("resize"),
 	callback = function()
 		vim.cmd("tabdo wincmd =")
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │     Create missing parent directories before saving     │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │       Create missing parent directories before saving       │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	group = group,
+	group = augroup("missing_directories"),
 	callback = function(event)
 		if event.match:match("^%w%w+://") then
 			return
@@ -145,9 +174,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
---    ╭─────────────────────────────────────────────────────────╮
---    │                   Set Blade filetype                    │
---    ╰─────────────────────────────────────────────────────────╯
+--    ╭─────────────────────────────────────────────────────────────╮
+--    │                     Set Blade filetype                      │
+--    ╰─────────────────────────────────────────────────────────────╯
 
 vim.filetype.add({
 	pattern = {

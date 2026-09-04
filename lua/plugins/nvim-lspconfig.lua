@@ -4,14 +4,6 @@ vim.pack.add({
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-if pcall(require, "cmp_nvim_lsp") then
-	capabilities = vim.tbl_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-end
-
-if pcall(require, "blink.cmp") then
-	capabilities = vim.tbl_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
-end
-
 local on_attach = function() end
 
 for server, config in pairs(require("config.lsp").lsp) do

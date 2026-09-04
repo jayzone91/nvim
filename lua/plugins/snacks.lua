@@ -103,14 +103,14 @@ require("snacks").setup({
 	profiler = { enabled = true },
 	quickfile = { enabled = false },
 	rename = { enabled = true },
-	scope = { enabled = false },
+	scope = { enabled = true },
 	scroll = { enabled = false },
 	statuscolumn = { enabled = true },
 	terminal = { enabled = false },
 	toggle = { enabled = true },
 	util = { enabled = true },
 	win = { enabled = true },
-	words = { enabled = false },
+	words = { enabled = true },
 	zen = { enabled = false },
 
 	styles = {

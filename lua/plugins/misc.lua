@@ -7,7 +7,15 @@ vim.pack.add({
 	"https://github.com/lewis6991/gitsigns.nvim",
 })
 
-require("fidget").setup()
-require("mini.icons").setup()
+require("fidget").setup({})
+require("mini.icons").setup({
+	file = {
+		[".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+		["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+	},
+	filetype = {
+		dotenv = { glyph = "", hl = "MiniIconsYellow" },
+	},
+})
 require("lspkind").init()
 require("gitsigns").setup()
