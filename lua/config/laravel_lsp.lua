@@ -1,5 +1,7 @@
 local M = {}
 
+local cache_file = vim.fs.joinpath(vim.fn.stdpath("cache"), "laravel-lsp-path")
+
 local function run(args)
 	local result = vim.system(args, { text = true }):wait()
 
@@ -20,7 +22,28 @@ local function composer()
 	return executable
 end
 
-local function bin()
+local function cached_bin()
+	local file = io.open(cache_file, "r")
+
+	if not file then
+		return
+	end
+
+	local executable = vim.trim(file:read("*a"))
+	file:close()
+
+	if executable ~= "" and vim.uv.fs_stat(executable) then
+		return executable
+	end
+end
+
+local function cache_bin(executable)
+	local file = assert(io.open(cache_file, "w"))
+	file:write(executable)
+	file:close()
+end
+
+local function find_bin()
 	local dir = run({
 		composer(),
 		"global",
@@ -36,13 +59,14 @@ local function bin()
 		local executable = vim.fs.joinpath(dir, name)
 
 		if vim.uv.fs_stat(executable) then
+			cache_bin(executable)
 			return executable
 		end
 	end
 end
 
 function M.ensure()
-	local executable = bin()
+	local executable = cached_bin() or find_bin()
 
 	if executable then
 		return executable
@@ -59,10 +83,10 @@ function M.ensure()
 		"--no-progress",
 	})
 
-	executable = bin()
+	executable = find_bin()
 
 	if not executable then
-		error("Laravel LSP wurde installiert, aber das Binarys wurde nicht gefunden")
+		error("Laravel LSP wurde installiert, aber das Binary wurde nicht gefunden")
 	end
 
 	return executable
@@ -75,9 +99,15 @@ function M.update()
 		"update",
 		"laravel/lsp",
 		"--with-all-dependencies",
-		"-no-interaction",
-		"-no-progress",
+		"--no-interaction",
+		"--no-progress",
 	})
+
+	local executable = find_bin()
+
+	if not executable then
+		error("Laravel LSP wurde aktualisiert, aber das Binary wurde nicht gefunden")
+	end
 
 	print("Laravel LSP aktualisiert")
 end
