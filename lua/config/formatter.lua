@@ -1,6 +1,8 @@
 local M = {}
 
 M.formatter = {
+	php = { "pint" },
+	blade = { "blade-formatter" },
 	lua = { "stylua" },
 	javascript = { "prettier" },
 	typescript = { "prettier" },

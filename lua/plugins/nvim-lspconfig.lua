@@ -18,7 +18,7 @@ for server, config in pairs(require("config.lsp").lsp) do
 	config = config or {}
 
 	config = vim.tbl_deep_extend("force", {
-		capabilities = capabilites,
+		capabilities = capabilities,
 		on_attach = on_attach,
 	}, config)
 

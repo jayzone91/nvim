@@ -11,7 +11,7 @@ require("neo-tree").setup({
 		sync = "none",
 	},
 	enable_git_status = true,
-	enable_diagnositcs = true,
+	enable_diagnostics = true,
 	sort_case_insensitive = false,
 	event_handlers = {
 		{

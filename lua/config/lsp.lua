@@ -1,6 +1,18 @@
 local M = {}
 
 M.lsp = {
+	laravel_lsp = {
+		cmd = { require("config.laravel_lsp").ensure() },
+		filetypes = { "php", "blade" },
+		root_dir = function(bufnr, on_dir)
+			local root = vim.fs.root(bufnr, "artisan")
+
+			if root then
+				on_dir(root)
+			end
+		end,
+	},
+	intelephense = {},
 	lua_ls = {
 		Lua = {
 			runtime = { version = "LuaJIT" },

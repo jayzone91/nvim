@@ -144,3 +144,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		end
 	end,
 })
+
+--    ╭─────────────────────────────────────────────────────────╮
+--    │                   Set Blade filetype                    │
+--    ╰─────────────────────────────────────────────────────────╯
+
+vim.filetype.add({
+	pattern = {
+		[".*%.blade%.php"] = "blade",
+	},
+})

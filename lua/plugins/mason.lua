@@ -15,8 +15,14 @@ local formatter = require("config.formatter").formatter
 
 local ensure_installed = {}
 
+local externally_managed = {
+	laravel_lsp = true,
+}
+
 for x, _ in pairs(lsp) do
-	table.insert(ensure_installed, x)
+	if not externally_managed[x] then
+		table.insert(ensure_installed, x)
+	end
 end
 
 for _, x in pairs(formatter) do

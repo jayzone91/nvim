@@ -6,7 +6,7 @@ local formatter = require("config.formatter").formatter
 
 require("conform").setup({
 	formatters_by_ft = formatter,
-	formatter = {
+	formatters = {
 		["markdown-toc"] = {
 			condition = function(_, ctx)
 				for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do

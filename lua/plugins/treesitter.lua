@@ -9,6 +9,7 @@ ts.setup()
 
 local parsers = {
 	"bash",
+	"blade",
 	"css",
 	"dockerfile",
 	"go",
@@ -19,6 +20,7 @@ local parsers = {
 	"markdown",
 	"markdown_inline",
 	"nix",
+	"php",
 	"python",
 	"regex",
 	"sql",
