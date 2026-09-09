@@ -4,10 +4,37 @@ return {
   lazy = false,
   opts = {
     bigfile = {enabled = true},
-    explorer = {enabled = true},
+    explorer = {enabled = true, replace_netrw = true},
     input = {enabled = true},
-    notifier = {enabled = true},
-    picker = {enabled = true},
+    notifier = {enabled = true, timeout = 3000},
+    picker = {
+      enabled = true,
+      sources = {
+        explorer = {
+          layout = {
+            preset = "sidebar",
+            layout = {
+              position = "left",
+              width = 32,
+            },
+          },
+          auto_close = false,
+          follow_file = true,
+          tree = true,
+          hidden = true,
+          ignored = false,
+          win = {
+            list = {
+              keys = {
+                ["<CR>"] = "confirm",
+                ["<leader>h"] = "edit_split",
+                ["<leader>v"] = "edit_vsplit",
+              }
+            }
+          },
+        }
+      }
+    },
     quickfile = {enabled = true},
     rename = {enabled = true},
     terminal = {enabled = true},
