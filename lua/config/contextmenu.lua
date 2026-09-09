@@ -1,5 +1,5 @@
 local function menu(command)
-  vim.cmd(command)
+	vim.cmd(command)
 end
 
 -- Remove Neovim's default context menu

@@ -1,8 +1,8 @@
 local map = function(mode, key, func, desc)
-	return vim.keymap.set(mode, key, func, {desc = desc or ""})
+	return vim.keymap.set(mode, key, func, { desc = desc or "" })
 end
 
-map({"n", "i", "x"}, "<C-s>", "<cmd>write<cr>", "Save File")
+map({ "n", "i", "x" }, "<C-s>", "<cmd>write<cr>", "Save File")
 
 map("n", "<leader>qq", "<cmd>qa<cr>", "Quit Neovim")
 
@@ -37,4 +37,3 @@ map("n", "<leader>wh", "<cmd>split<cr>", "Split Horizontal")
 map("n", "<leader>wc", "<cmd>close<cr>", "Close Window")
 map("n", "<leader>wo", "<cmd>only<cr>", "Close Other Windows")
 map("n", "<leader>we", "<C-w>=", "Equal Window Size")
-

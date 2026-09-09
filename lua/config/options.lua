@@ -19,6 +19,7 @@ opt.tabstop = tab
 opt.softtabstop = tab
 opt.smartindent = true
 opt.breakindent = true
+opt.backspace = "indent,eol,start"
 
 -- Search
 opt.ignorecase = true
