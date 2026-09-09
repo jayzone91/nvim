@@ -1,0 +1,28 @@
+return {
+  "folke/snacks.nvim",
+  priority = 1000,
+  lazy = false,
+  opts = {
+    bigfile = {enabled = true},
+    explorer = {enabled = true},
+    input = {enabled = true},
+    notifier = {enabled = true},
+    picker = {enabled = true},
+    quickfile = {enabled = true},
+    rename = {enabled = true},
+    terminal = {enabled = true},
+  },
+  keys = {
+    {"<C-p>", function() Snacks.picker.files() end, desc = "Quick Open"},
+    {"<leader>ff", function() Snacks.picker.files() end, desc = "Search Files"},
+    {"<C-S-p>", function() Snacks.picker.commands() end, desc = "Command Palette"},
+    {"<C-S-f>", function() Snacks.picker.grep() end, desc = "Search in Files"},
+    {"<leader>fg", function() Snacks.picker.grep() end, desc = "Live Grep"},
+    {"<leader>t", function() Snacks.terminal() end, desc = "Terminal"},
+    {"<leader>fr", function() Snacks.picker.recent() end, desc = "Recent Files"},
+    {"<leader>fb", function() Snacks.picker.buffers() end, desc = "Open Buffers"},
+    {"<leader><space>", function() Snacks.picker.buffers() end, desc = "Open Buffers"},
+    {"<C-b>", function() Snacks.explorer() end, desc = "Explorer"},
+    {"<leader>e", function() Snacks.explorer() end, desc = "Explorer"},
+  },
+}

@@ -14,12 +14,12 @@ map("n", "<C-Up>", "<C-w>k", "Window Up")
 map("n", "<C-Right>", "<C-w>l", "Window Right")
 
 map("n", "<A-Down>", "<cmd>move .+1<cr>==", "Move Line Down")
-map("n", "<A-Up>", "<cmd>move .2<cr>==", "Move Line Up")
+map("n", "<A-Up>", "<cmd>move .-2<cr>==", "Move Line Up")
 map("x", "<A-Down>", ":move '>+1<cr>gv=gv", "Move Selection Down")
 map("x", "<A-Up>", ":move '<-2<cr>gv=gv", "Move Selection Up")
 
-map("n", "<A-S-Down>", "<cmd>copy .<cr>", "Duplicate Line Down")
 map("n", "<A-S-Up>", "<cmd>copy .-1<cr>", "Duplicate Line Up")
+map("n", "<A-S-Down>", "<cmd>copy .<cr>", "Duplicate Line Down")
 map("x", "<A-S-Down>", ":copy '><cr>gv", "Duplicate Selection Down")
 map("x", "<A-S-Up>", ":copy '<-1<cr>gv", "Duplicate Selection Up")
 
