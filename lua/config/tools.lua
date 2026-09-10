@@ -9,8 +9,6 @@ M.lsp = {
 		},
 	},
 	tailwindcss = {
-		filetype_exclude = { "markdown" },
-		filetype_include = {},
 		settings = {
 			tailwindCSS = {
 				classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
@@ -42,10 +40,8 @@ M.lsp = {
 		filetypes = {
 			"javascript",
 			"javascriptreact",
-			"javascript.jsx",
 			"typescript",
 			"typescriptreact",
-			"typescript.tsx",
 		},
 		settings = {
 			complete_function_calls = true,
@@ -129,8 +125,6 @@ M.formatter = {
 	typescript = { "prettier" },
 	javascriptreact = { "prettier" },
 	typescriptreact = { "prettier" },
-	["javascript.jsx"] = { "prettier" },
-	["typescript.tsx"] = { "prettier" },
 	html = { "prettier" },
 	css = { "prettier" },
 	scss = { "prettier" },
