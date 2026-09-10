@@ -22,32 +22,58 @@ local parser = {
 }
 
 return {
-	"nvim-treesitter/nvim-treesitter",
-	lazy = false,
-	build = ":TSUpdate",
-	config = function()
-		local install = {}
-		local autocmd = {}
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		config = function()
+			local install = {}
+			local autocmd = {}
 
-		for name, config in pairs(parser) do
-			if config.install then
-				table.insert(install, name)
+			for name, config in pairs(parser) do
+				if config.install then
+					table.insert(install, name)
+				end
+
+				if config.autocmd then
+					table.insert(autocmd, name)
+				end
 			end
 
-			if config.autocmd then
-				table.insert(autocmd, name)
-			end
-		end
+			local ts = require("nvim-treesitter")
 
-		local ts = require("nvim-treesitter")
+			ts.install(install)
 
-		ts.install(install)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = autocmd,
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		event = { "BufReadPost", "BufNewFile" },
+		opts = function()
+			local context = require("treesitter-context")
 
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = autocmd,
-			callback = function()
-				vim.treesitter.start()
-			end,
-		})
-	end,
+			Snacks.toggle({
+				name = "Treesitter Context",
+				get = context.enabled,
+				set = function(enabled)
+					if enabled then
+						context.enable()
+					else
+						context.disable()
+					end
+				end,
+			}):map("<leader>ut")
+
+			return {
+				mode = "cursor",
+				max_lines = 3,
+			}
+		end,
+	},
 }
