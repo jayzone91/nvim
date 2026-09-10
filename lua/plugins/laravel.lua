@@ -30,6 +30,30 @@ local function setup_laravel_lsp()
 	vim.lsp.enable("laravel_ls")
 end
 
+local function artisan()
+	local root = vim.fs.root(0, "artisan")
+
+	if not root then
+		return
+	end
+
+	Snacks.input({
+		prompt = "Artisan: ",
+	}, function(command)
+		if not command or command == "" then
+			return
+		end
+
+		Snacks.terminal({ "php", "artisan", unpack(vim.split(command, "%s+")) }, {
+			cwd = root,
+			win = {
+				position = "bottom",
+				height = 0.35,
+			},
+		})
+	end)
+end
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -56,5 +80,8 @@ return {
 				end,
 			})
 		end,
+		keys = {
+			{ "<leader>la", artisan, desc = "Laravel Artisan" },
+		},
 	},
 }
