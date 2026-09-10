@@ -143,6 +143,7 @@ M.formatter = {
 	go = { "goimports", "gofumpt" },
 	markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
 	mdx = { "prettier" },
+	yaml = { "prettier" },
 }
 
 return M

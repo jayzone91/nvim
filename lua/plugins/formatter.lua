@@ -14,7 +14,7 @@ return {
 					end
 				end,
 			},
-			["markdown-cli2"] = {
+			["markdownlint-cli2"] = {
 				condition = function(_, ctx)
 					local diag = vim.tbl_filter(function(d)
 						return d.source == "markdownlint"
