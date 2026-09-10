@@ -1,6 +1,14 @@
 return {
 	"folke/trouble.nvim",
 	cmd = "Trouble",
+	opts = {
+		modes = {
+			diagnostics_buffer = {
+				mode = "diagnostics",
+				filter = { buf = 0 },
+			},
+		},
+	},
 	keys = {
 		{
 			"<leader>xx",
@@ -12,7 +20,7 @@ return {
 		{
 			"<leader>xX",
 			function()
-				require("trouble").toggle({ mode = "diagnostics", filter = { buf = 0 } })
+				require("trouble").toggle("diagnostics_buffer")
 			end,
 			desc = "Buffer Problems",
 		},
@@ -24,5 +32,4 @@ return {
 			desc = "Quickfix",
 		},
 	},
-	opts = {},
 }
