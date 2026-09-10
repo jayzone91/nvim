@@ -9,6 +9,7 @@ return {
 		notifier = { enabled = true, timeout = 3000 },
 		picker = {
 			enabled = true,
+			ui_select = true,
 			sources = {
 				explorer = {
 					layout = {
@@ -38,6 +39,7 @@ return {
 		quickfile = { enabled = true },
 		rename = { enabled = true },
 		terminal = { enabled = true },
+		words = { enabled = true },
 	},
 	keys = {
 		{
@@ -116,6 +118,62 @@ return {
 				Snacks.explorer()
 			end,
 			desc = "Explorer",
+		},
+		{
+			"<leader>cr",
+			function()
+				Snacks.picker.lsp_references()
+			end,
+			desc = "References",
+		},
+		{
+			"<leader>cd",
+			function()
+				Snacks.picker.lsp_definitions()
+			end,
+			desc = "Definitions",
+		},
+		{
+			"<leader>ci",
+			function()
+				Snacks.picker.lsp_implementations()
+			end,
+			desc = "Implementations",
+		},
+		{
+			"<leader>ct",
+			function()
+				Snacks.picker.lsp_type_definitions()
+			end,
+			desc = "Type Definitions",
+		},
+		{
+			"<leader>cs",
+			function()
+				Snacks.picker.lsp_symbols()
+			end,
+			desc = "Document Symbols",
+		},
+		{
+			"<leader>cS",
+			function()
+				Snacks.picker.lsp_workspace_symbols()
+			end,
+			desc = "Workspace Symbols",
+		},
+		{
+			"<A-n>",
+			function()
+				Snacks.words.jump(vim.v.count1)
+			end,
+			desc = "Next Reference",
+		},
+		{
+			"<A-p>",
+			function()
+				Snacks.words.jump(-vim.v.count1)
+			end,
+			desc = "Previous Reference",
 		},
 	},
 }

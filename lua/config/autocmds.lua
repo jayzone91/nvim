@@ -72,13 +72,21 @@ autocmd("BufWritePre", {
 autocmd("LspAttach", {
 	group = augroup("lsp_attach"),
 	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if not client then
+			return
+		end
+
+		if client:supports_method("textDocument/inlayHint") then
+			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+		end
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = event.buf })
 		end
 
 		map("n", "<F12>", vim.lsp.buf.definition, "Go to Definition")
 		map("n", "<F2>", vim.lsp.buf.rename, "Rename Symbol")
-		map({ "n", "x" }, "<C-.>", vim.lsp.buf.code_action, "Code Action")
+		map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
 		map("n", "<F8>", function()
 			vim.diagnostic.jump({
 				count = 1,
@@ -92,24 +100,91 @@ autocmd("LspAttach", {
 				float = true,
 			})
 		end, "Previous Diagnostic")
+
+		map("n", "<leader>ch", function()
+			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
+			vim.lsp.inlay_hint.enable(not enabled, { bufnr = event.buf })
+		end, "Toggle Inlay Hints")
 	end,
 })
 
-autocmd({ "CursorHold", "CursorHoldI" }, {
-	group = augroup("lsp_document_highlight"),
+-- autocmd({ "CursorHold", "CursorHoldI" }, {
+-- 	group = augroup("lsp_document_highlight"),
+-- 	callback = function(event)
+-- 		for _, client in ipairs(vim.lsp.get_clients({ bufnr = event.buf })) do
+-- 			if client:supports_method("textDocument/documentHighlight") then
+-- 				vim.lsp.buf.document_highlight()
+-- 				return
+-- 			end
+-- 		end
+-- 	end,
+-- })
+--
+-- autocmd({ "CursorMoved", "CursorMovedI" }, {
+-- 	group = augroup("lsp_document_highlight_clear"),
+-- 	callback = function()
+-- 		vim.lsp.buf.clear_references()
+-- 	end,
+-- })
+
+---@type table<number, {token: lsp.ProgressToken, msg: string, done: boolean}[]>
+local lsp_progress = vim.defaulttable()
+
+autocmd("LspProgress", {
+	group = augroup("lsp_progress"),
 	callback = function(event)
-		for _, client in ipairs(vim.lsp.get_clients({ bufnr = event.buf })) do
-			if client:supports_method("textDocument/documentHighlight") then
-				vim.lsp.buf.document_highlight()
-				return
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		local value = event.data.params.value
+
+		if not client or type(value) ~= "table" then
+			return
+		end
+
+		local progress = lsp_progress[client.id]
+
+		for i = 1, #progress + 1 do
+			if i == #progress + 1 or progress[i].token == event.data.params.token then
+				progress[i] = {
+					token = event.data.params.token,
+					msg = ("[%3d%%] %s%s"):format(
+						value.kind == "end" and 100 or value.percentage or 100,
+						value.title or "",
+						value.message and (" **%s**"):format(value.message) or ""
+					),
+					done = value.kind == "end",
+				}
+
+				break
 			end
 		end
-	end,
-})
 
-autocmd({ "CursorMoved", "CursorMovedI" }, {
-	group = augroup("lsp_document_highlight_clear"),
-	callback = function()
-		vim.lsp.buf.clear_references()
+		local messages = {}
+
+		lsp_progress[client.id] = vim.tbl_filter(function(item)
+			table.insert(messages, item.msg)
+			return not item.done
+		end, progress)
+
+		local spinner = {
+			"⠋",
+			"⠙",
+			"⠹",
+			"⠸",
+			"⠼",
+			"⠴",
+			"⠦",
+			"⠧",
+			"⠇",
+			"⠏",
+		}
+
+		vim.notify(table.concat(messages, "\n"), "info", {
+			id = "lsp_progress_" .. client.id,
+			title = client.name,
+			opts = function(notification)
+				notification.icon = #lsp_progress[client.id] == 0 and " "
+					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+			end,
+		})
 	end,
 })
