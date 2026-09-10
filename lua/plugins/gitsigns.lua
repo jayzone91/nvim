@@ -9,14 +9,14 @@ return {
 
 		keys = {
 			{
-				"]h",
+				"<leader>gh",
 				function()
 					require("gitsigns").nav_hunk("next")
 				end,
 				desc = "Next Git Change",
 			},
 			{
-				"[h",
+				"<leader>gk",
 				function()
 					require("gitsigns").nav_hunk("prev")
 				end,
@@ -51,6 +51,42 @@ return {
 					})
 				end,
 				desc = "Git Blame",
+			},
+			{
+				"<leader>gB",
+				function()
+					require("gitsigns").toggle_current_line_blame()
+				end,
+				desc = "Toggle Line Blame",
+			},
+			{
+				"<leader>gd",
+				function()
+					require("gitsigns").diffthis()
+				end,
+				desc = "Diff File",
+			},
+			{
+				"<leader>gs",
+				function()
+					require("gitsigns").stage_hunk({
+						vim.fn.line("."),
+						vim.fn.line("v"),
+					})
+				end,
+				mode = "x",
+				desc = "Stage / Unstage Hunk",
+			},
+			{
+				"<leader>gr",
+				function()
+					require("gitsigns").reset_hunk({
+						vim.fn.line("."),
+						vim.fn.line("v"),
+					})
+				end,
+				mode = "x",
+				desc = "Reset Hunk",
 			},
 		},
 	},

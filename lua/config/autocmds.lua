@@ -108,6 +108,30 @@ autocmd("LspAttach", {
 	end,
 })
 
+autocmd("CursorHold", {
+	group = augroup("diagnostic_float"),
+	callback = function()
+		local diagnostics = vim.diagnostic.get(0, {
+			lnum = vim.api.nvim_win_get_cursor(0)[1] - 1,
+		})
+
+		if #diagnostics == 0 then
+			return
+		end
+
+		vim.diagnostic.open_float({
+			scope = "cursor",
+			focusable = false,
+			close_events = {
+				"BufLeave",
+				"CursorMoved",
+				"InsertEnter",
+				"FocusLost",
+			},
+		})
+	end,
+})
+
 -- autocmd({ "CursorHold", "CursorHoldI" }, {
 -- 	group = augroup("lsp_document_highlight"),
 -- 	callback = function(event)
