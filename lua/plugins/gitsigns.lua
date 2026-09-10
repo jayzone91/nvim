@@ -53,7 +53,7 @@ return {
 				desc = "Git Blame",
 			},
 			{
-				"<leader>gB",
+				"<leader>gt",
 				function()
 					require("gitsigns").toggle_current_line_blame()
 				end,
