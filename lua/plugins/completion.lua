@@ -31,9 +31,9 @@ return {
 			ghost_text = {
 				enabled = true,
 			},
-			signature = {
-				enabled = true,
-			},
+		},
+		signature = {
+			enabled = true,
 		},
 		sources = {
 			providers = {

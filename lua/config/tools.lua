@@ -75,10 +75,15 @@ M.lsp = {
 	cssls = {},
 	jsonls = {},
 	yamlls = {},
-	marksman = {
-		filetypes = {
-			"markdown",
-			"mdx",
+	marksman = {},
+	mdx_analyzer = {
+		cmd = { "mdx-language-server", "--stdio" },
+		filetypes = { "mdx" },
+		root_markers = {
+			"package.json",
+			"tsconfig.json",
+			"jsconfig.json",
+			".git",
 		},
 	},
 	gopls = {
