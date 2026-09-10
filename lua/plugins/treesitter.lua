@@ -18,6 +18,7 @@ local parser = {
 	yaml = { install = true, autocmd = true },
 	toml = { install = true, autocmd = true },
 	powershell = { install = true, autocmd = true },
+	blade = { install = true, autocmd = true },
 }
 
 return {
