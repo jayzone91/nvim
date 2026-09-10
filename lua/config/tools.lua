@@ -1,6 +1,16 @@
 local M = {}
 
 M.lsp = {
+	emmet_language_server = {
+		filetypes = {
+			"html",
+			"css",
+			"scss",
+			"javascriptreact",
+			"typescriptreact",
+			"blade",
+		},
+	},
 	powershell_es = {
 		bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
 	},

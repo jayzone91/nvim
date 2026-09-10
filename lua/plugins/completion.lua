@@ -4,6 +4,7 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
+		"dsznajder/vscode-es7-javascript-react-snippets",
 	},
 	opts = {
 		keymap = {
@@ -40,6 +41,13 @@ return {
 				lsp = {
 					opts = {
 						tailwind_color_icon = "██",
+					},
+				},
+			},
+			snippets = {
+				opts = {
+					search_paths = {
+						vim.fn.stdpath("data") .. "/lazy/vscode-es7-javascript-react-snippets",
 					},
 				},
 			},

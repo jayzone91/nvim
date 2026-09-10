@@ -25,5 +25,6 @@
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "ts-autotag.nvim": { "branch": "master", "commit": "6178353d9003e91eb053d69cf9a4d72e28137daa" },
+  "vscode-es7-javascript-react-snippets": { "branch": "develop", "commit": "07f8c60079172f56b81df328e6a1f651063304ec" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
