@@ -75,7 +75,15 @@ M.lsp = {
 	html = {},
 	cssls = {},
 	jsonls = {},
-	yamlls = {},
+	yamlls = {
+		settings = {
+			yaml = {
+				schemas = {
+					["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+				},
+			},
+		},
+	},
 	marksman = {},
 	mdx_analyzer = {
 		cmd = { "mdx-language-server", "--stdio" },
