@@ -159,17 +159,6 @@ autocmd("LspAttach", {
 			return
 		end
 
-		if client:supports_method("textDocument/inlayHint") then
-			vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
-		end
-
-		if client:supports_method("textDocument/codeLens") then
-			vim.lsp.codelens.enable(true, {
-				bufnr = event.buf,
-				client_id = client.id,
-			})
-		end
-
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = event.buf })
 		end
@@ -191,11 +180,6 @@ autocmd("LspAttach", {
 			})
 		end, "Previous Diagnostic")
 
-		map("n", "<leader>ch", function()
-			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
-			vim.lsp.inlay_hint.enable(not enabled, { bufnr = event.buf })
-		end, "Toggle Inlay Hints")
-
 		map("n", "<C-LeftMouse>", function()
 			local mouse = vim.fn.getmousepos()
 
@@ -211,8 +195,6 @@ autocmd("LspAttach", {
 
 			vim.lsp.buf.definition()
 		end, "Go To Definition")
-
-		map("n", "<MouseMove>", Map_mouse_hover, "Hover")
 
 		map("n", "<leader>cl", vim.lsp.codelens.run, "Run CodeLens")
 	end,

@@ -458,4 +458,30 @@ return {
 			desc = "Git Stash",
 		},
 	},
+	init = function()
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "VeryLazy",
+			callback = function()
+				Snacks.toggle.inlay_hints():map("<leader>ch")
+				Snacks.toggle({
+					name = "Toggle Codelens",
+					get = function()
+						return vim.lsp.codelens.is_enabled({ bufnr = 0 })
+					end,
+					set = function(enabled)
+						vim.lsp.codelens.enable(enabled, { bufnr = 0 })
+					end,
+				}):map("<leader>cc")
+				Snacks.toggle({
+					name = "Toggle Linked Editing",
+					get = function()
+						return vim.lsp.linked_editing_range.is_enabled({ bufnr = 0 })
+					end,
+					set = function(enabled)
+						vim.lsp.linked_editing_range.enable(enabled, { bufnr = 0 })
+					end,
+				}):map("<leader>ce")
+			end,
+		})
+	end,
 }
