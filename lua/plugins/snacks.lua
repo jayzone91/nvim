@@ -1,46 +1,34 @@
-local function explorer_action(action)
-	return function()
-		local picker = _G.SnacksExplorerPicker
-
-		if picker then
-			picker:action(action)
-		end
-	end
-end
-
-_G.SnacksExplorerPicker = explorer_action
-
 local function setup_explorer_context_menu()
 	---@diagnostic disable-next-line: param-type-mismatch
 	pcall(vim.cmd, [[aunmenu ]SnacksExplorer]])
 
 	vim.cmd([[
     anoremenu ]SnacksExplorer.New
-      \ <Cmd>lua _G.SnacksExplorerAction("explorer_add")()<CR>
+      \ <Cmd>lua _G.SnacksExplorerPicker:action("explorer_add")<CR>
   ]])
 
 	vim.cmd([[
     anoremenu ]SnacksExplorer.Rename
-      \ <Cmd>lua _G.SnacksExplorerAction("explorer_rename")()<CR>
+      \ <Cmd>lua _G.SnacksExplorerPicker:action("explorer_rename")<CR>
   ]])
 
 	vim.cmd([[anoremenu ]SnacksExplorer.-1- <Nop>]])
 
 	vim.cmd([[
     anoremenu ]SnacksExplorer.Copy
-      \ <Cmd>lua _G.SnacksExplorerAction("explorer_yank")()<CR>
+      \ <Cmd>lua _G.SnacksExplorerPicker:action("explorer_yank")<CR>
   ]])
 
 	vim.cmd([[
     anoremenu ]SnacksExplorer.Paste
-      \ <Cmd>lua _G.SnacksExplorerAction("explorer_paste")()<CR>
+      \ <Cmd>lua _G.SnacksExplorerPicker:action("explorer_paste")<CR>
   ]])
 
 	vim.cmd([[anoremenu ]SnacksExplorer.-2- <Nop>]])
 
 	vim.cmd([[
     anoremenu ]SnacksExplorer.Delete
-      \ <Cmd>lua _G.SnacksExplorerAction("explorer_del")()<CR>
+      \ <Cmd>lua _G.SnacksExplorerPicker:action("explorer_del")<CR>
   ]])
 end
 
