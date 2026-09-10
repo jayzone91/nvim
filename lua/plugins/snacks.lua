@@ -175,5 +175,19 @@ return {
 			end,
 			desc = "Previous Reference",
 		},
+		{
+			"<leader>xd",
+			function()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "Diagnostics",
+		},
+		{
+			"<leader>xD",
+			function()
+				Snacks.picker.diagnostics_buffer()
+			end,
+			desc = "Buffer Diagnostics",
+		},
 	},
 }

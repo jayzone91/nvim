@@ -17,20 +17,6 @@ return {
 			desc = "Buffer Problems",
 		},
 		{
-			"<leader>cs",
-			function()
-				require("trouble").toggle("symbols")
-			end,
-			desc = "Symbols",
-		},
-		{
-			"<leader>cl",
-			function()
-				require("trouble").toggle("lsp")
-			end,
-			desc = "LSP",
-		},
-		{
 			"<leader>xq",
 			function()
 				require("trouble").toggle("qflist")
