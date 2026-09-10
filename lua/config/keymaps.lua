@@ -23,6 +23,9 @@ map("n", "<A-S-Down>", "<cmd>copy .<cr>", "Duplicate Line Down")
 map("x", "<A-S-Down>", ":copy '><cr>gv", "Duplicate Selection Down")
 map("x", "<A-S-Up>", ":copy '<-1<cr>gv", "Duplicate Selection Up")
 
+map("n", "<A-Left>", "<C-o>", "Navigate Back")
+map("n", "<A-Right>", "<C-i>", "Navigate Forward")
+
 -- Keep cursor centered
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")

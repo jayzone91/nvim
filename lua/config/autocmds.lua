@@ -4,10 +4,82 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup("UserConfig_" .. name, { clear = true })
 end
 
+local hover_timer = vim.uv.new_timer()
+
+Map_mouse_hover = function()
+	local mouse = vim.fn.getmousepos()
+
+	if mouse.winid == 0 or mouse.line == 0 then
+		return
+	end
+
+	if hover_timer then
+		hover_timer:stop()
+	end
+
+	if hover_timer == nil then
+		return
+	end
+
+	hover_timer:start(
+		500,
+		0,
+		vim.schedule_wrap(function()
+			local current = vim.fn.getmousepos()
+
+			if current.winid ~= mouse.winid or current.line ~= mouse.line or current.column ~= mouse.column then
+				return
+			end
+
+			vim.api.nvim_set_current_win(mouse.winid)
+			vim.api.nvim_win_set_cursor(mouse.winid, {
+				mouse.line,
+				math.max(mouse.column - 1, 0),
+			})
+
+			local diagnostics = vim.diagnostic.get(0, {
+				lnum = mouse.line - 1,
+			})
+
+			if #diagnostics > 0 then
+				vim.diagnostic.open_float({
+					scope = "cursor",
+					focusable = false,
+				})
+				return
+			end
+
+			vim.lsp.buf.hover({
+				focusable = false,
+				border = "rounded",
+			})
+		end)
+	)
+end
+
 -- Diagnostic config
 vim.diagnostic.config({
 	virtual_text = {
 		current_line = true,
+		spacing = 2,
+		prefix = function(diagnostic)
+			local icons = {
+				[vim.diagnostic.severity.ERROR] = " ",
+				[vim.diagnostic.severity.WARN] = " ",
+				[vim.diagnostic.severity.INFO] = " ",
+				[vim.diagnostic.severity.HINT] = "󰌵 ",
+			}
+
+			return icons[diagnostic.severity]
+		end,
+	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+			[vim.diagnostic.severity.HINT] = "󰌵 ",
+		},
 	},
 	severity_sort = true,
 	float = {
@@ -31,7 +103,9 @@ autocmd("TextYankPost", {
 				higroup = "IncSearch",
 				timeout = 150,
 			})
+		---@diagnostic disable-next-line: deprecated
 		elseif vim.hl and vim.hl.on_yank then
+			---@diagnostic disable-next-line: deprecated
 			vim.hl.on_yank()
 		else
 			vim.highlight.on_yank({ timeout = 150 })
@@ -113,6 +187,24 @@ autocmd("LspAttach", {
 			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
 			vim.lsp.inlay_hint.enable(not enabled, { bufnr = event.buf })
 		end, "Toggle Inlay Hints")
+
+		map("n", "<C-LeftMouse>", function()
+			local mouse = vim.fn.getmousepos()
+
+			if mouse.winid == 0 or mouse.line == 0 then
+				return
+			end
+
+			vim.api.nvim_set_current_win(mouse.winid)
+			vim.api.nvim_win_set_cursor(mouse.winid, {
+				mouse.line,
+				math.max(mouse.column - 1, 0),
+			})
+
+			vim.lsp.buf.definition()
+		end, "Go To Definition")
+
+		map("n", "<MouseMove>", Map_mouse_hover, "Hover")
 	end,
 })
 

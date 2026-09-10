@@ -37,6 +37,7 @@ opt.wrap = false
 -- Mouse / Clipboard
 opt.mouse = "a"
 opt.clipboard = "unnamedplus"
+opt.mousemoveevent = true
 
 -- Files
 opt.swapfile = false
