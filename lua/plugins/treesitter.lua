@@ -16,6 +16,8 @@ local parser = {
 	vim = { install = true, autocmd = false },
 	vimdoc = { install = true, autocmd = false },
 	yaml = { install = true, autocmd = true },
+	toml = { install = true, autocmd = true },
+	powershell = { install = true, autocmd = true },
 }
 
 return {

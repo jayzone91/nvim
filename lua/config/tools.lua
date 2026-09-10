@@ -1,6 +1,10 @@
 local M = {}
 
 M.lsp = {
+	powershell_es = {
+		bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+	},
+	taplo = {},
 	eslint = {},
 	lua_ls = {
 		settings = {
