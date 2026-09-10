@@ -4,6 +4,7 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup("UserConfig_" .. name, { clear = true })
 end
 
+-- Diagnostic config
 vim.diagnostic.config({
 	virtual_text = {
 		current_line = true,
@@ -12,6 +13,13 @@ vim.diagnostic.config({
 	float = {
 		border = "rounded",
 		source = true,
+	},
+})
+
+-- custom filetypes
+vim.filetype.add({
+	extension = {
+		mdx = "mdx",
 	},
 })
 

@@ -75,7 +75,12 @@ M.lsp = {
 	cssls = {},
 	jsonls = {},
 	yamlls = {},
-	marksman = {},
+	marksman = {
+		filetypes = {
+			"markdown",
+			"mdx",
+		},
+	},
 	gopls = {
 		settings = {
 			gopls = {
@@ -131,7 +136,7 @@ M.formatter = {
 	astro = { "prettier" },
 	go = { "goimports", "gofumpt" },
 	markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
-	["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+	mdx = { "prettier" },
 }
 
 return M
