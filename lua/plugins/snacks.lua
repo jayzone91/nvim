@@ -189,5 +189,47 @@ return {
 			end,
 			desc = "Buffer Diagnostics",
 		},
+		{
+			"<leader>gB",
+			function()
+				Snacks.picker.git_branches()
+			end,
+			desc = "Git Branches",
+		},
+		{
+			"<leader>gL",
+			function()
+				Snacks.picker.git_log()
+			end,
+			desc = "Git Log",
+		},
+		{
+			"<leader>gF",
+			function()
+				Snacks.picker.git_log_file()
+			end,
+			desc = "Git File History",
+		},
+		{
+			"<leader>gS",
+			function()
+				Snacks.picker.git_status()
+			end,
+			desc = "Git Status",
+		},
+		{
+			"<leader>gD",
+			function()
+				Snacks.picker.git_diff()
+			end,
+			desc = "Git Diff",
+		},
+		{
+			"<leader>gT",
+			function()
+				Snacks.picker.git_stash()
+			end,
+			desc = "Git Stash",
+		},
 	},
 }
