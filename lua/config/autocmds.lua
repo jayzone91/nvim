@@ -201,3 +201,26 @@ autocmd("LspProgress", {
 		})
 	end,
 })
+
+autocmd("BufWritePre", {
+	group = augroup("cleanup_on_save"),
+	callback = function(event)
+		if vim.bo[event.buf].buftype ~= "" then
+			return
+		end
+
+		local view = vim.fn.winsaveview()
+
+		vim.api.nvim_buf_call(event.buf, function()
+			vim.cmd([[silent! keeppatterns %s/\s\+$//e]])
+		end)
+
+		local lines = vim.api.nvim_buf_get_lines(event.buf, 0, -1, false)
+
+		if #lines > 0 and lines[#lines] ~= "" then
+			vim.api.nvim_buf_set_lines(event.buf, -1, -1, false, { "" })
+		end
+
+		vim.fn.winrestview(view)
+	end,
+})
