@@ -6,6 +6,14 @@ end
 
 local hover_timer = vim.uv.new_timer()
 
+local function supports_method(client, method, bufnr)
+	if vim.fn.has("nvim-0.13") == 1 then
+		return client:supports_method(method, bufnr)
+	end
+
+	return client:supports_method(method)
+end
+
 Map_mouse_hover = function()
 	local mouse = vim.fn.getmousepos()
 
@@ -161,6 +169,20 @@ autocmd("LspAttach", {
 
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = event.buf })
+		end
+
+		if supports_method(client, "textDocument/signatureHelp", event.buf) then
+			vim.api.nvim_create_autocmd("CursorHoldI", {
+				group = augroup("signature_" .. event.buf),
+				buffer = event.buf,
+				callback = function()
+					vim.lsp.buf.signature_help({
+						border = "rounded",
+						focusable = false,
+						silent = true,
+					})
+				end,
+			})
 		end
 
 		map("n", "<F12>", vim.lsp.buf.definition, "Go to Definition")

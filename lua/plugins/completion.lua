@@ -32,6 +32,33 @@ return {
 			ghost_text = {
 				enabled = true,
 			},
+			menu = {
+				border = "rounded",
+				draw = {
+					padding = { 0, 1 },
+					columns = {
+						{ "kind_icon" },
+						{ "label", "label_description", gap = 1 },
+						{ "kind", gap = 1 },
+					},
+					compoments = {
+						kind_icon = {
+							text = function(ctx)
+								return " " .. ctx.kind_icon .. ctx.icon_gap .. " "
+							end,
+							highlight = function(ctx)
+								return {
+									{
+										group = ctx.kind_hl,
+										priority = 20000,
+									},
+								}
+							end,
+						},
+					},
+					treesitter = { "lsp" },
+				},
+			},
 		},
 		signature = {
 			enabled = true,
