@@ -1,6 +1,50 @@
-local function git_root()
-	return vim.fs.root(0, ".git")
+local function explorer_action(action)
+	return function()
+		local picker = _G.SnacksExplorerPicker
+
+		if picker then
+			picker:action(action)
+		end
+	end
 end
+
+_G.SnacksExplorerPicker = explorer_action
+
+local function setup_explorer_context_menu()
+	---@diagnostic disable-next-line: param-type-mismatch
+	pcall(vim.cmd, [[aunmenu ]SnacksExplorer]])
+
+	vim.cmd([[
+    anoremenu ]SnacksExplorer.New
+      \ <Cmd>lua _G.SnacksExplorerAction("explorer_add")()<CR>
+  ]])
+
+	vim.cmd([[
+    anoremenu ]SnacksExplorer.Rename
+      \ <Cmd>lua _G.SnacksExplorerAction("explorer_rename")()<CR>
+  ]])
+
+	vim.cmd([[anoremenu ]SnacksExplorer.-1- <Nop>]])
+
+	vim.cmd([[
+    anoremenu ]SnacksExplorer.Copy
+      \ <Cmd>lua _G.SnacksExplorerAction("explorer_yank")()<CR>
+  ]])
+
+	vim.cmd([[
+    anoremenu ]SnacksExplorer.Paste
+      \ <Cmd>lua _G.SnacksExplorerAction("explorer_paste")()<CR>
+  ]])
+
+	vim.cmd([[anoremenu ]SnacksExplorer.-2- <Nop>]])
+
+	vim.cmd([[
+    anoremenu ]SnacksExplorer.Delete
+      \ <Cmd>lua _G.SnacksExplorerAction("explorer_del")()<CR>
+  ]])
+end
+
+setup_explorer_context_menu()
 
 return {
 	"folke/snacks.nvim",
@@ -174,6 +218,22 @@ return {
 		picker = {
 			enabled = true,
 			ui_select = true,
+			actions = {
+				explorer_context = function(picker)
+					local mouse = vim.fn.getmousepos()
+
+					if mouse.winid == picker.list.win.win then
+						vim.api.nvim_win_set_cursor(mouse.winid, {
+							mouse.line,
+							math.max(mouse.column - 1, 0),
+						})
+					end
+
+					_G.SnacksExplorerPicker = picker
+
+					vim.cmd("popup! ]SnacksExplorer")
+				end,
+			},
 			sources = {
 				explorer = {
 					layout = {
@@ -194,6 +254,7 @@ return {
 								["<CR>"] = "confirm",
 								["<leader>h"] = "edit_split",
 								["<leader>v"] = "edit_vsplit",
+								["<RightMouse>"] = "explorer_context",
 							},
 						},
 					},
