@@ -1,3 +1,38 @@
+local context_buf
+
+local function open_context_menu(bufnr)
+	context_buf = bufnr
+
+	vim.cmd("buffer " .. bufnr)
+	vim.cmd("popup! ]BufferLine")
+end
+
+local function setup_context_menu()
+	pcall(vim.cmd, [[aunmenu ]BufferLine]])
+
+	vim.cmd([[
+    anoremenu ]BufferLine.Close
+      \ <Cmd>lua Snacks.bufdelete(vim.api.nvim_get_current_buf())<CR>
+  ]])
+
+	vim.cmd([[
+    anoremenu ]BufferLine.Close\ Others
+      \ <Cmd>BufferLineCloseOthers<CR>
+  ]])
+
+	vim.cmd([[
+    anoremenu ]BufferLine.Close\ Left
+      \ <Cmd>BufferLineCloseLeft<CR>
+  ]])
+
+	vim.cmd([[
+    anoremenu ]BufferLine.Close\ Right
+      \ <Cmd>BufferLineCloseRight<CR>
+  ]])
+end
+
+setup_context_menu()
+
 return {
 	"akinsho/bufferline.nvim",
 	version = "*",
@@ -9,9 +44,9 @@ return {
 			numbers = "none",
 			diagnostics = "nvim_lsp",
 			diagnostic_update_in_insert = false,
-			seperator_style = "thin",
+			separator_style = "thin",
 			show_buffer_icons = true,
-			show_biffer_clone_icons = true,
+			show_buffer_close_icons = true,
 			show_close_icon = false,
 			always_show_bufferline = true,
 			modified_icon = "●",
@@ -19,7 +54,7 @@ return {
 				Snacks.bufdelete(bufnr)
 			end,
 			right_mouse_command = function(bufnr)
-				Snacks.bufdelete(bufnr)
+				open_context_menu(bufnr)
 			end,
 			offsets = {
 				{
