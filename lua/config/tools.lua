@@ -1,6 +1,7 @@
 local M = {}
 
 M.lsp = {
+	eslint = {},
 	lua_ls = {
 		settings = {
 			Lua = {
