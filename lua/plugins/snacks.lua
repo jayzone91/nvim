@@ -1,8 +1,141 @@
+local function git_root()
+	return vim.fs.root(0, ".git")
+end
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
 	opts = {
+		dashboard = {
+			enabled = true,
+
+			preset = {
+				header = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+]],
+
+				keys = {
+					{
+						icon = "󰒲 ",
+						key = "s",
+						desc = "Restore Session",
+						section = "session",
+					},
+					{
+						icon = " ",
+						key = "f",
+						desc = "Find File",
+						action = function()
+							Snacks.picker.files()
+						end,
+					},
+					{
+						icon = " ",
+						key = "r",
+						desc = "Recent Files",
+						action = function()
+							Snacks.picker.recent()
+						end,
+					},
+					{
+						icon = "󰱼 ",
+						key = "g",
+						desc = "Grep Project",
+						action = function()
+							Snacks.picker.grep()
+						end,
+					},
+					{
+						icon = " ",
+						key = "e",
+						desc = "Explorer",
+						action = function()
+							Snacks.explorer()
+						end,
+					},
+					{
+						icon = " ",
+						key = "n",
+						desc = "New File",
+						action = ":ene | startinsert",
+					},
+					{
+						icon = " ",
+						key = "q",
+						desc = "Quit",
+						action = ":qa",
+					},
+				},
+			},
+
+			sections = {
+				{
+					section = "header",
+					padding = 1,
+				},
+
+				function()
+					local cwd = vim.fn.getcwd()
+					local project = vim.fn.fnamemodify(cwd, ":t")
+
+					return {
+						{
+							text = {
+								{
+									"󰉋 " .. project,
+									hl = "SnacksDashboardTitle",
+								},
+							},
+							align = "center",
+						},
+						{
+							text = {
+								{
+									cwd,
+									hl = "SnacksDashboardDesc",
+								},
+							},
+							align = "center",
+							padding = 1,
+						},
+					}
+				end,
+
+				{
+					icon = " ",
+					title = "Git Status",
+					section = "terminal",
+
+					enabled = function()
+						return Snacks.git.get_root() ~= nil
+					end,
+
+					cmd = "git status --short --branch --renames",
+					height = 6,
+					padding = 1,
+					ttl = 5,
+					indent = 3,
+				},
+
+				{
+					icon = " ",
+					title = "Actions",
+					section = "keys",
+					gap = 1,
+					padding = 1,
+				},
+
+				{
+					section = "startup",
+				},
+			},
+		},
 		bigfile = { enabled = true },
 		explorer = { enabled = true, replace_netrw = true },
 		input = { enabled = true },

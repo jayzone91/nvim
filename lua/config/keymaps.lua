@@ -37,3 +37,6 @@ map("n", "<leader>wh", "<cmd>split<cr>", "Split Horizontal")
 map("n", "<leader>wc", "<cmd>close<cr>", "Close Window")
 map("n", "<leader>wo", "<cmd>only<cr>", "Close Other Windows")
 map("n", "<leader>we", "<C-w>=", "Equal Window Size")
+
+-- Enter Normal mode
+map({ "n", "i", "v", "x", "s", "o", "c", "t" }, "<C-c>", "<Esc>", "Enter Normal Mode")

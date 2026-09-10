@@ -9,6 +9,7 @@ return {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>w", group = "Window" },
 			{ "<leader>x", group = "Problems" },
+			{ "<leader>q", group = "Session / Quit" },
 		},
 	},
 	keys = {
