@@ -132,25 +132,6 @@ autocmd("CursorHold", {
 	end,
 })
 
--- autocmd({ "CursorHold", "CursorHoldI" }, {
--- 	group = augroup("lsp_document_highlight"),
--- 	callback = function(event)
--- 		for _, client in ipairs(vim.lsp.get_clients({ bufnr = event.buf })) do
--- 			if client:supports_method("textDocument/documentHighlight") then
--- 				vim.lsp.buf.document_highlight()
--- 				return
--- 			end
--- 		end
--- 	end,
--- })
---
--- autocmd({ "CursorMoved", "CursorMovedI" }, {
--- 	group = augroup("lsp_document_highlight_clear"),
--- 	callback = function()
--- 		vim.lsp.buf.clear_references()
--- 	end,
--- })
-
 ---@type table<number, {token: lsp.ProgressToken, msg: string, done: boolean}[]>
 local lsp_progress = vim.defaulttable()
 
@@ -202,7 +183,7 @@ autocmd("LspProgress", {
 			"⠏",
 		}
 
-		vim.notify(table.concat(messages, "\n"), "info", {
+		vim.notify(table.concat(messages, "\n"), vim.log.levels.INFO, {
 			id = "lsp_progress_" .. client.id,
 			title = client.name,
 			opts = function(notification)
