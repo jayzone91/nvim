@@ -189,22 +189,23 @@ return {
 			end,
 			desc = "Buffer Diagnostics",
 		},
+		-- Git
 		{
-			"<leader>gB",
+			"<leader>gb",
 			function()
 				Snacks.picker.git_branches()
 			end,
 			desc = "Git Branches",
 		},
 		{
-			"<leader>gL",
+			"<leader>gl",
 			function()
 				Snacks.picker.git_log()
 			end,
 			desc = "Git Log",
 		},
 		{
-			"<leader>gF",
+			"<leader>gf",
 			function()
 				Snacks.picker.git_log_file()
 			end,
@@ -218,7 +219,7 @@ return {
 			desc = "Git Status",
 		},
 		{
-			"<leader>gD",
+			"<leader>gd",
 			function()
 				Snacks.picker.git_diff()
 			end,

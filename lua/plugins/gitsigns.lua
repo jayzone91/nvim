@@ -9,7 +9,7 @@ return {
 
 		keys = {
 			{
-				"<leader>gh",
+				"<leader>gj",
 				function()
 					require("gitsigns").nav_hunk("next")
 				end,
@@ -34,7 +34,7 @@ return {
 				function()
 					require("gitsigns").stage_hunk()
 				end,
-				desc = "Stage Git Change",
+				desc = "Stage / Unstage Git Change",
 			},
 			{
 				"<leader>gr",
@@ -60,12 +60,13 @@ return {
 				desc = "Toggle Line Blame",
 			},
 			{
-				"<leader>gd",
+				"<leader>gP",
 				function()
 					require("gitsigns").diffthis()
 				end,
-				desc = "Diff File",
+				desc = "Preview File Diff",
 			},
+
 			{
 				"<leader>gs",
 				function()
@@ -75,7 +76,7 @@ return {
 					})
 				end,
 				mode = "x",
-				desc = "Stage / Unstage Hunk",
+				desc = "Stage / Unstage Git Change",
 			},
 			{
 				"<leader>gr",
@@ -86,7 +87,7 @@ return {
 					})
 				end,
 				mode = "x",
-				desc = "Reset Hunk",
+				desc = "Reset Git Change",
 			},
 		},
 	},
