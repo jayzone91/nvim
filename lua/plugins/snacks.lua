@@ -60,6 +60,14 @@ return {
 						end,
 					},
 					{
+						icon = " ",
+						key = "t",
+						desc = "Terminal",
+						action = function()
+							Snacks.terminal()
+						end,
+					},
+					{
 						icon = " ",
 						key = "n",
 						desc = "New File",
@@ -84,6 +92,20 @@ return {
 					local cwd = vim.fn.getcwd()
 					local project = vim.fn.fnamemodify(cwd, ":t")
 
+					local branch = vim.fn.systemlist("git branch --show-current")[1] or ""
+					local changes = vim.fn.systemlist("git status --porcelain")
+					local changed = #changes
+
+					local git = ""
+
+					if vim.v.shell_error == 0 and branch ~= "" then
+						git = ("   %s"):format(branch)
+
+						if changed > 0 then
+							git = git .. ("  •  %d changed"):format(changed)
+						end
+					end
+
 					return {
 						{
 							text = {
@@ -98,6 +120,15 @@ return {
 							text = {
 								{
 									cwd,
+									hl = "SnacksDashboardDesc",
+								},
+							},
+							align = "center",
+						},
+						{
+							text = {
+								{
+									git,
 									hl = "SnacksDashboardDesc",
 								},
 							},
