@@ -2,7 +2,6 @@ local opt = vim.o
 
 -- UI
 opt.number = true
-opt.relativenumber = false
 opt.cursorline = true
 opt.signcolumn = "yes"
 opt.termguicolors = true
@@ -18,13 +17,10 @@ opt.tabstop = tab
 opt.softtabstop = tab
 opt.smartindent = true
 opt.breakindent = true
-opt.backspace = "indent,eol,start"
 
 -- Search
 opt.ignorecase = true
 opt.smartcase = true
-opt.hlsearch = true
-opt.incsearch = true
 
 -- Navigation
 opt.scrolloff = 6
@@ -39,7 +35,6 @@ opt.clipboard = "unnamedplus"
 
 -- Files
 opt.swapfile = false
-opt.backup = false
 opt.undofile = true
 opt.confirm = true
 

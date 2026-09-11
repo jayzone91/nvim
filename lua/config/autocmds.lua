@@ -132,7 +132,7 @@ autocmd("LspAttach", {
 			})
 		end
 
-		if supports_method(client, "textDocument/prepareCallHirarchy", event.buf) then
+		if supports_method(client, "textDocument/prepareCallHierarchy", event.buf) then
 			map("n", "<leader>cI", vim.lsp.buf.incoming_calls, "Incoming Calls")
 			map("n", "<leader>cO", vim.lsp.buf.outgoing_calls, "Outgoing Calls")
 		end
