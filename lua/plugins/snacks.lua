@@ -219,6 +219,9 @@ return {
 			enabled = true,
 			ui_select = true,
 			actions = {
+				sidekick_send = function(...)
+					return require("sidekick.cli.picker.snacks").send(...)
+				end,
 				explorer_context = function(picker)
 					local mouse = vim.fn.getmousepos()
 
@@ -233,6 +236,16 @@ return {
 
 					vim.cmd("popup! ]SnacksExplorer")
 				end,
+			},
+			win = {
+				input = {
+					keys = {
+						["<A-a>"] = {
+							"sidekick_send",
+							mode = { "n", "i" },
+						},
+					},
+				},
 			},
 			sources = {
 				explorer = {
@@ -456,6 +469,20 @@ return {
 				Snacks.picker.git_stash()
 			end,
 			desc = "Git Stash",
+		},
+		{
+			"<leader>.",
+			function()
+				Snacks.scratch()
+			end,
+			desc = "scratch buffer",
+		},
+		{
+			"<leader>wm",
+			function()
+				Snacks.zen.zoom()
+			end,
+			desc = "Zoom Window",
 		},
 	},
 	init = function()

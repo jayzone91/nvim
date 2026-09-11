@@ -185,6 +185,12 @@ autocmd("LspAttach", {
 			})
 		end
 
+		map("n", "<leader>cI", function()
+			vim.lsp.buf.incoming_calls()
+		end, "Incomming Calls")
+		map("n", "<leader>cO", function()
+			vim.lsp.buf.outgoing_calls()
+		end, "Outgoing Calls")
 		map("n", "<F12>", vim.lsp.buf.definition, "Go to Definition")
 		map("n", "<F2>", vim.lsp.buf.rename, "Rename Symbol")
 		map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
