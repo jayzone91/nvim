@@ -132,12 +132,11 @@ autocmd("LspAttach", {
 			})
 		end
 
-		map("n", "<leader>cI", function()
-			vim.lsp.buf.incoming_calls()
-		end, "Incomming Calls")
-		map("n", "<leader>cO", function()
-			vim.lsp.buf.outgoing_calls()
-		end, "Outgoing Calls")
+		if supports_method(client, "textDocument/prepareCallHirarchy", event.buf) then
+			map("n", "<leader>cI", vim.lsp.buf.incoming_calls, "Incoming Calls")
+			map("n", "<leader>cO", vim.lsp.buf.outgoing_calls, "Outgoing Calls")
+		end
+
 		map("n", "<F12>", vim.lsp.buf.definition, "Go to Definition")
 		map("n", "<F2>", vim.lsp.buf.rename, "Rename Symbol")
 		map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
