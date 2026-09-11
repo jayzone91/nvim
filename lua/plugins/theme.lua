@@ -1,28 +1,18 @@
 return {
-	"scottmckendry/cyberdream.nvim",
+	"rose-pine/neovim",
+	name = "rose-pine",
 	lazy = false,
 	priority = 1000,
 	opts = {
-		transparent = false,
-		italic_comments = true,
-		hide_fillchars = true,
-		terminal_colors = true,
-		cache = true,
+		dim_inactive_windows = false,
+		extend_background_behind_borders = true,
+		styles = {
+			transparency = true,
+		},
 	},
 	config = function(_, opts)
-		require("cyberdream").setup(opts)
-		vim.cmd.colorscheme("cyberdream")
+		require("rose-pine").setup(opts)
 
-		vim.api.nvim_set_hl(0, "LspReferenceText", {
-			underline = true,
-		})
-
-		vim.api.nvim_set_hl(0, "LspReferenceRead", {
-			underline = true,
-		})
-
-		vim.api.nvim_set_hl(0, "LspReferenceWrite", {
-			underline = true,
-		})
+		vim.cmd.colorscheme("rose-pine")
 	end,
 }
