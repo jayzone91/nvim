@@ -55,7 +55,7 @@ return {
 				ensure_installed = ensure_installed,
 				auto_update = true,
 				start_delay = 3000,
-				debounce_hour = 3,
+				debounce_hours = 3,
 			}
 		end,
 	},
