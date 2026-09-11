@@ -212,12 +212,11 @@ return {
 			},
 		},
 		bigfile = { enabled = true },
-		explorer = { enabled = true, replace_netrw = true },
+		explorer = { enabled = true },
 		input = { enabled = true },
 		notifier = { enabled = true, timeout = 3000 },
 		picker = {
 			enabled = true,
-			ui_select = true,
 			actions = {
 				sidekick_send = function(...)
 					return require("sidekick.cli.picker.snacks").send(...)
