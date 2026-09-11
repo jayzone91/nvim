@@ -1,3 +1,19 @@
+local function tabout()
+	local keys = vim.api.nvim_replace_termcodes("<Plug>(Tabout)", true, true, true)
+
+	vim.api.nvim_feedkeys(keys, "", false)
+
+	return true
+end
+
+local function tabout_back()
+	local keys = vim.api.nvim_replace_termcodes("<Plug>(TaboutBack)", true, true, true)
+
+	vim.api.nvim_feedkeys(keys, "", false)
+
+	return true
+end
+
 return {
 	"saghen/blink.cmp",
 	version = "1.*",
@@ -12,11 +28,13 @@ return {
 			["<Tab>"] = {
 				"select_next",
 				"snippet_forward",
+				tabout,
 				"fallback",
 			},
 			["<S-Tab>"] = {
 				"select_prev",
 				"snippet_backward",
+				tabout_back,
 				"fallback",
 			},
 			["<Esc>"] = {
@@ -81,3 +99,4 @@ return {
 		},
 	},
 }
+
