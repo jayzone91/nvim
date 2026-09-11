@@ -11,7 +11,7 @@ return {
 				grug.open({
 					transient = true,
 					prefills = {
-						filesFilter = ext and ext ~= "" and "*." .. ext or nvim_health_bugreport_openl,
+						filesFilter = ext and ext ~= "" and "*." .. ext or nil,
 					},
 				})
 			end,

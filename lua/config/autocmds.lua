@@ -4,65 +4,12 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup("UserConfig_" .. name, { clear = true })
 end
 
-local hover_timer = vim.uv.new_timer()
-
 local function supports_method(client, method, bufnr)
 	if vim.fn.has("nvim-0.13") == 1 then
 		return client:supports_method(method, bufnr)
 	end
 
 	return client:supports_method(method)
-end
-
-Map_mouse_hover = function()
-	local mouse = vim.fn.getmousepos()
-
-	if mouse.winid == 0 or mouse.line == 0 then
-		return
-	end
-
-	if hover_timer then
-		hover_timer:stop()
-	end
-
-	if hover_timer == nil then
-		return
-	end
-
-	hover_timer:start(
-		500,
-		0,
-		vim.schedule_wrap(function()
-			local current = vim.fn.getmousepos()
-
-			if current.winid ~= mouse.winid or current.line ~= mouse.line or current.column ~= mouse.column then
-				return
-			end
-
-			vim.api.nvim_set_current_win(mouse.winid)
-			vim.api.nvim_win_set_cursor(mouse.winid, {
-				mouse.line,
-				math.max(mouse.column - 1, 0),
-			})
-
-			local diagnostics = vim.diagnostic.get(0, {
-				lnum = mouse.line - 1,
-			})
-
-			if #diagnostics > 0 then
-				vim.diagnostic.open_float({
-					scope = "cursor",
-					focusable = false,
-				})
-				return
-			end
-
-			vim.lsp.buf.hover({
-				focusable = false,
-				border = "rounded",
-			})
-		end)
-	)
 end
 
 -- Diagnostic config

@@ -4,8 +4,7 @@ return {
 	lazy = false,
 	priority = 1000,
 	opts = {
-		dim_inactive_windows = false,
-		extend_background_behind_borders = true,
+		dim_inactive_windows = true,
 		styles = {
 			transparency = true,
 		},

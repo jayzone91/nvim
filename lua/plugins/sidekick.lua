@@ -56,13 +56,5 @@ return {
 			mode = { "n", "x" },
 			desc = "AI Prompt",
 		},
-		{
-			"<Tab>",
-			function()
-				if not require("sidekick").nes_jump_or_apply() then
-					return "<Tab>"
-				end
-			end,
-		},
 	},
 }

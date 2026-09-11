@@ -71,7 +71,6 @@ return {
 			}):map("<leader>ut")
 
 			return {
-				mode = "cursor",
 				max_lines = 3,
 			}
 		end,

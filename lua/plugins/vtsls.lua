@@ -13,7 +13,7 @@ return {
 			desc = "Organize Imports",
 		},
 		{
-			"<leader>ci",
+			"<leader>cm",
 			"<cmd>VtsExec add_missing_imports<CR>",
 			desc = "Add Missing Imports",
 		},

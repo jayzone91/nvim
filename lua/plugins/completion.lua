@@ -59,7 +59,7 @@ return {
 						{ "label", "label_description", gap = 1 },
 						{ "kind", gap = 1 },
 					},
-					compoments = {
+					components = {
 						kind_icon = {
 							text = function(ctx)
 								return " " .. ctx.kind_icon .. ctx.icon_gap .. " "
@@ -88,15 +88,14 @@ return {
 						tailwind_color_icon = "██",
 					},
 				},
-			},
-			snippets = {
-				opts = {
-					search_paths = {
-						vim.fn.stdpath("data") .. "/lazy/vscode-es7-javascript-react-snippets",
+				snippets = {
+					opts = {
+						search_paths = {
+							vim.fn.stdpath("data") .. "/lazy/vscode-es7-javascript-react-snippets",
+						},
 					},
 				},
 			},
 		},
 	},
 }
-

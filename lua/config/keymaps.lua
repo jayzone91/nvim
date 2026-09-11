@@ -29,8 +29,8 @@ map("n", "<A-Right>", "<C-i>", "Navigate Forward")
 -- Keep cursor centered
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
-map("n", "n", "nzzv")
-map("n", "N", "Nzzv")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- Paste without replacing clipboard
 map("x", "p", '"_dP')
@@ -42,4 +42,5 @@ map("n", "<leader>wo", "<cmd>only<cr>", "Close Other Windows")
 map("n", "<leader>we", "<C-w>=", "Equal Window Size")
 
 -- Enter Normal mode
-map({ "n", "i", "v", "x", "s", "o", "c", "t" }, "<C-c>", "<Esc>", "Enter Normal Mode")
+map({ "n", "i", "v", "x", "s", "o", "c" }, "<C-c>", "<Esc>", "Enter Normal Mode")
+map("t", "<Esc>", "<C-\\><C-n>", "Enter Normal Mode")

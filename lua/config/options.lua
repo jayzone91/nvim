@@ -8,7 +8,6 @@ opt.signcolumn = "yes"
 opt.termguicolors = true
 opt.showmode = false
 opt.laststatus = 3
-opt.cmdheight = 1
 
 -- Editor
 local tab = 2
@@ -37,7 +36,6 @@ opt.wrap = false
 -- Mouse / Clipboard
 opt.mouse = "a"
 opt.clipboard = "unnamedplus"
-opt.mousemoveevent = true
 
 -- Files
 opt.swapfile = false
