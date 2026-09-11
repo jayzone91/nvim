@@ -1,8 +1,4 @@
-local context_buf
-
 local function open_context_menu(bufnr)
-	context_buf = bufnr
-
 	vim.cmd("buffer " .. bufnr)
 	vim.cmd("popup! ]BufferLine")
 end
@@ -40,16 +36,9 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		options = {
-			mode = "buffers",
-			numbers = "none",
 			diagnostics = "nvim_lsp",
 			diagnostic_update_in_insert = false,
-			separator_style = "thin",
-			show_buffer_icons = true,
-			show_buffer_close_icons = true,
 			show_close_icon = false,
-			always_show_bufferline = true,
-			modified_icon = "●",
 			close_command = function(bufnr)
 				Snacks.bufdelete(bufnr)
 			end,
