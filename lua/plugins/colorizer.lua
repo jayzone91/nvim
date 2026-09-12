@@ -1,13 +1,11 @@
 return {
-  "NvChad/nvim-colorizer.lua",
-  event = "VeryLazy",
+  "catgoose/nvim-colorizer.lua",
+  event = "BufReadPre",
   opts = {
-    user_default_options = {
-      tailwind = true,
+    options = {
+      parsers = {
+        tailwind = { enabled = true },
+      },
     },
   },
-  config = function(_, opts)
-    require("colorizer").setup(opts)
-    require("colorizer").attach_to_buffer(0)
-  end,
 }

@@ -79,10 +79,7 @@ return {
 
         { path = "hlchunk.nvim", words = { "HlChunk" } },
         { path = "noice.nvim", words = { "NoiceConfig" } },
-        { path = "sidekick.nvim", words = { "Sidekick%." } },
         { path = "snacks.nvim", words = { "Snacks" } },
-        { path = "trouble.nvim", words = { "trouble%." } },
-        { path = "which-key.nvim", words = { "wk%." } },
 
         { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         { path = "mason-lspconfig.nvim", words = { "MasonLspconfigSettings" } },
