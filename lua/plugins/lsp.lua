@@ -1,6 +1,7 @@
 local tools = require("config.tools")
 local servers = tools.lsp
 local formatter = tools.formatter
+local linter = tools.linter
 local server_names = vim.tbl_keys(servers)
 
 return {
@@ -62,6 +63,13 @@ return {
           add(name)
         end
       end
+
+      for _, tool in pairs(linter) do
+        for _, name in ipairs(tool) do
+          add(name)
+        end
+      end
+
       return {
         ensure_installed = ensure_installed,
         auto_update = true,
