@@ -18,6 +18,7 @@ M.lsp = {
   taplo = {},
   eslint = {},
   lua_ls = {
+    ---@type lspconfig.settings.lua_ls
     settings = {
       Lua = {
         runtime = { version = "LuaJIT" },
@@ -25,6 +26,7 @@ M.lsp = {
     },
   },
   tailwindcss = {
+    ---@type lspconfig.settings.tailwindcss
     settings = {
       tailwindCSS = {
         classAttributes = {
@@ -68,6 +70,7 @@ M.lsp = {
       "typescript",
       "typescriptreact",
     },
+    ---@type lspconfig.settings.vtsls
     settings = {
       complete_function_calls = true,
       vtsls = {
@@ -100,6 +103,7 @@ M.lsp = {
   cssls = {},
   jsonls = {},
   yamlls = {
+    ---@type lspconfig.settings.yamlls
     settings = {
       yaml = {
         schemas = {
@@ -120,6 +124,7 @@ M.lsp = {
     },
   },
   gopls = {
+    ---@type lspconfig.settings.gopls
     settings = {
       gopls = {
         gofumpt = true,
