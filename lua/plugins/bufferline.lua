@@ -44,7 +44,18 @@ return {
       indicator = {
         style = "underline",
       },
+      diagnostics_indicator = function(count, level)
+        local icon = level:match("error") and " " or " "
+        return " " .. icon .. count
+      end,
+      hover = {
+        enabled = true,
+        reveal = { "close" },
+      },
       close_command = function(bufnr)
+        Snacks.bufdelete(bufnr)
+      end,
+      middle_mouse_command = function(bufnr)
         Snacks.bufdelete(bufnr)
       end,
       right_mouse_command = function(bufnr)
