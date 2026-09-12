@@ -1,5 +1,6 @@
 local parser = {
   bash = { install = true, autocmd = false },
+  sh = { install = false, autocmd = true },
   css = { install = true, autocmd = true },
   go = { install = true, autocmd = true },
   html = { install = true, autocmd = true },
