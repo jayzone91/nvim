@@ -35,11 +35,15 @@ return {
   version = "*",
   event = "VeryLazy",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  ---@type bufferline.UserConfig
   opts = {
     options = {
       diagnostics = "nvim_lsp",
       diagnostic_update_in_insert = false,
       show_close_icon = false,
+      indicator = {
+        style = "underline",
+      },
       close_command = function(bufnr)
         Snacks.bufdelete(bufnr)
       end,
