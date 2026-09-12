@@ -4,6 +4,7 @@ local function open_context_menu(bufnr)
 end
 
 local function setup_context_menu()
+  ---@diagnostic disable-next-line: param-type-mismatch
   pcall(vim.cmd, [[aunmenu ]BufferLine]])
 
   vim.cmd([[
