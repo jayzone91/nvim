@@ -87,8 +87,15 @@ return {
 
         lualine_c = {
           {
+            "filetype",
+            icon_only = true,
+            separator = "",
+            padding = { right = 0 },
+          },
+          {
             "filename",
             path = 1,
+            padding = { left = 0 },
             fmt = function(filename)
               return filename:gsub("\\", "/")
             end,
@@ -113,6 +120,7 @@ return {
               fg = colors.gold,
               gui = "bold",
             },
+            separator = "",
           },
           {
             "diagnostics",
