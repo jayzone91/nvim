@@ -6,13 +6,12 @@ return {
     "MarkdownPreviewToggle",
   },
   build = "cd app && npm install",
-  ft = { "markdown" },
-  init = function()
-    vim.g.mkdp_filetypes = { "markdown" }
-  end,
   keys = {
-    "<leader>p",
+    "<leader>cp",
     "<cmd>MarkdownPreviewToggle<CR>",
     desc = "Markdown Preview",
   },
+  config = function()
+    vim.cmd([[do FileType]])
+  end,
 }
