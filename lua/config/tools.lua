@@ -17,40 +17,11 @@ M.lsp = {
   },
   taplo = {},
   eslint = {},
-  lua_ls = {
-    ---@type lspconfig.settings.lua_ls
-    settings = {
-      Lua = {
-        runtime = { version = "LuaJIT" },
-      },
-    },
-  },
+  lua_ls = {},
   tailwindcss = {
     ---@type lspconfig.settings.tailwindcss
     settings = {
       tailwindCSS = {
-        classAttributes = {
-          "class",
-          "className",
-          "class:list",
-          "classList",
-          "ngClass",
-        },
-        includeLanguages = {
-          elixir = "html-eex",
-          eelixir = "html-eex",
-          heex = "html-eex",
-        },
-        lint = {
-          cssConflict = "warning",
-          invalidApply = "error",
-          invalidConfigPath = "error",
-          invalidScreen = "error",
-          invalidTailwindDirective = "error",
-          invalidVariant = "error",
-          recommendedVariantOrder = "warning",
-        },
-        validate = true,
         experimental = {
           classRegex = {
             {
@@ -58,6 +29,7 @@ M.lsp = {
               "[\"'`]([^\"'`]*?)[\"'`]",
             },
             "tw`([^`]*)`",
+            "cn`([^`]*)`",
           },
         },
       },
@@ -163,7 +135,6 @@ M.lsp = {
           "-.vscode-test",
           "-node_modules",
         },
-        semanticTokens = true,
       },
     },
   },
