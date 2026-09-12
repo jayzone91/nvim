@@ -69,3 +69,4 @@ vim.opt.fillchars:append({
 	foldsep = " ",
 	foldinner = " ",
 })
+

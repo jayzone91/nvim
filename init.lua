@@ -7,3 +7,4 @@ require("config.autocmds")
 require("config.contextmenu")
 
 require("core.lazy")
+

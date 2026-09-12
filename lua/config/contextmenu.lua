@@ -50,3 +50,4 @@ menu([[anoremenu PopUp.Git:\ Status <Cmd>lua Snacks.picker.git_status()<CR>]])
 menu([[anoremenu PopUp.Git:\ Diff <Cmd>lua Snacks.picker.git_diff()<CR>]])
 menu([[anoremenu PopUp.Git:\ Branches <Cmd>lua Snacks.picker.git_branches()<CR>]])
 menu([[anoremenu PopUp.Git:\ Stash <Cmd>lua Snacks.picker.git_stash()<CR>]])
+

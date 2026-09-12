@@ -4,7 +4,7 @@ return {
 	lazy = false,
 	priority = 1000,
 	opts = {
-		dim_inactive_windows = true,
+		dim_inactive_windows = false,
 		styles = {
 			transparency = true,
 		},
@@ -21,3 +21,4 @@ return {
 		vim.cmd.colorscheme("rose-pine")
 	end,
 }
+

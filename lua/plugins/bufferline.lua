@@ -70,3 +70,4 @@ return {
 		{ "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", desc = "Close Buffers Left" },
 	},
 }
+

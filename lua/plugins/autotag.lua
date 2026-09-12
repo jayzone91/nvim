@@ -5,3 +5,4 @@ return {
 		auto_rename = { enabled = true },
 	},
 }
+

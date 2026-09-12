@@ -345,3 +345,4 @@ autocmd("FileType", {
 	pattern = "help",
 	command = "windcmd L",
 })
+
