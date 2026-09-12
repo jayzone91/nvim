@@ -2,8 +2,6 @@ local map = function(mode, key, func, desc)
   return vim.keymap.set(mode, key, func, { desc = desc or "" })
 end
 
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", "Save File")
-
 map("n", "<leader>qq", "<cmd>qa<cr>", "Quit Neovim")
 
 vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
