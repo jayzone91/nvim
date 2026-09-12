@@ -55,6 +55,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufNewFile" },
+    ---@return TSContext.UserConfig
     opts = function()
       local context = require("treesitter-context")
 

@@ -93,6 +93,8 @@ return {
         { path = "nvim-lightbulb", mods = { "nvim-lightbulb" } },
         { path = "persistence.nvim", mods = { "persistence" } },
         { path = "grug-far.nvim", mods = { "grug-far" } },
+        { path = "modicator.nvim", mods = { "modicator" } },
+        { path = "nvim-treesitter-context", mods = { "treesitter-context" } },
 
         { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         { path = "mason-lspconfig.nvim", words = { "MasonLspconfigSettings" } },
