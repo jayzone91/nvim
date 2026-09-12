@@ -6,6 +6,10 @@ return {
     "typescript",
     "typescriptreact",
   },
+  cmd = {
+    "VtsExec",
+    "VtsRename",
+  },
   config = function()
     require("vtsls").config({
       refactor_auto_rename = true,
@@ -49,11 +53,6 @@ return {
       "<leader>cF",
       "<cmd>VtsExec file_references<CR>",
       desc = "File References",
-    },
-    {
-      "<leader>cR",
-      "<cmd>VtsExec rename_file<CR>",
-      desc = "Rename File",
     },
     {
       "<leader>cT",
