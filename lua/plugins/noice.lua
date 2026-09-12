@@ -6,17 +6,6 @@ return {
   },
   ---@type NoiceConfig
   opts = {
-    cmdline = {
-      enabled = true,
-      view = "cmdline_popup",
-    },
-    messages = {
-      enabled = true,
-    },
-    popupmenu = {
-      enabled = true,
-      backend = "nui",
-    },
     routes = {
       {
         filter = {
@@ -39,21 +28,9 @@ return {
       lsp_doc_border = true,
     },
     lsp = {
-      hover = {
-        enabled = true,
-      },
-      signature = {
-        enabled = true,
-        auto_open = {
-          enabled = true,
-          trigger = true,
-          luasnip = true,
-          throttle = 50,
-        },
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-        },
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
       },
     },
   },
