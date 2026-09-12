@@ -334,3 +334,11 @@ autocmd("FileType", {
   pattern = "help",
   command = "windcmd L",
 })
+
+autocmd("FileType", {
+  group = augroup("markdown_wrap"),
+  pattern = { "markdown", "mdx" },
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})

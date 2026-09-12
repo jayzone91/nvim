@@ -2,11 +2,22 @@ local map = function(mode, key, func, desc)
   return vim.keymap.set(mode, key, func, { desc = desc or "" })
 end
 
-map({ "n", "i", "x" }, "<C-s>", "<cmd>write<cr>", "Save File")
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", "Save File")
 
 map("n", "<leader>qq", "<cmd>qa<cr>", "Quit Neovim")
 
-map("n", "<Esc>", "<cmd>nohlsearch<cr>", "Clear Search")
+vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
+  vim.schedule(function()
+    vim.cmd.nohlsearch()
+
+    if vim.fn.has("nvim-0.13") == 1 then
+      local ns = vim.api.nvim_create_namespace("nvim.multicursor")
+      vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+    end
+  end)
+
+  return vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+end, { desc = "Escape and Clear hlsearch", silent = true, expr = true })
 
 map("n", "<C-Left>", "<C-w>h", "Windows Left")
 map("n", "<C-Down>", "<C-w>j", "Window Down")
@@ -25,6 +36,35 @@ map("x", "<A-S-Up>", ":copy '<-1<cr>gv", "Duplicate Selection Up")
 
 map("n", "<A-Left>", "<C-o>", "Navigate Back")
 map("n", "<A-Right>", "<C-i>", "Navigate Forward")
+
+-- better up and Down
+vim.keymap.set(
+  { "n", "x" },
+  "j",
+  "v:count == 0 ? 'gj' : 'j'",
+  { desc = "Down", expr = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "x" },
+  "<Down>",
+  "v:count == 0 ? 'gj' : 'j'",
+  { desc = "Down", expr = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "x" },
+  "k",
+  "v:count == 0 ? 'gk' : 'k'",
+  { desc = "Up", expr = true, silent = true }
+)
+vim.keymap.set(
+  { "n", "x" },
+  "<Up>",
+  "v:count == 0 ? 'gk' : 'k'",
+  { desc = "Up", expr = true, silent = true }
+)
+
+map("i", "<Down>", "<C-o>gj")
+map("i", "<Up>", "<C-o>gk")
 
 -- Keep cursor centered
 map("n", "<C-d>", "<C-d>zz")
@@ -49,3 +89,47 @@ map(
   "Enter Normal Mode"
 )
 map("t", "<Esc>", "<C-\\><C-n>", "Enter Normal Mode")
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set(
+  "n",
+  "n",
+  "'Nn'[v:searchforward].'zv'",
+  { expr = true, desc = "Next Search Result" }
+)
+vim.keymap.set(
+  "x",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next Search Result" }
+)
+vim.keymap.set(
+  "o",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next Search Result" }
+)
+vim.keymap.set(
+  "n",
+  "N",
+  "'nN'[v:searchforward].'zv'",
+  { expr = true, desc = "Prev Search Result" }
+)
+vim.keymap.set(
+  "x",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev Search Result" }
+)
+vim.keymap.set(
+  "o",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev Search Result" }
+)
+vim.keymap.set(
+  { "i", "x", "n", "s" },
+  "<C-s>",
+  "<cmd>w<cr><esc>",
+  { desc = "Save File" }
+)
