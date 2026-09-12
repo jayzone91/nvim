@@ -7,6 +7,7 @@ opt.signcolumn = "yes"
 opt.termguicolors = true
 opt.showmode = false
 opt.laststatus = 3
+opt.winborder = "rounded"
 
 -- Editor
 local tab = 2

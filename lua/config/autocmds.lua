@@ -48,6 +48,12 @@ vim.filetype.add({
 	extension = {
 		mdx = "mdx",
 	},
+	filename = {
+		[".env"] = "dosini",
+	},
+	pattern = {
+		["%.env%..+"] = "dosini",
+	},
 })
 
 autocmd("TextYankPost", {
@@ -325,4 +331,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 	end,
+})
+
+autocmd("FileType", {
+	group = augroup("no_auto_comment"),
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+	end,
+})
+
+autocmd("FileType", {
+	group = augroup("help_right"),
+	pattern = "help",
+	command = "windcmd L",
 })

@@ -2,11 +2,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-
-		opts = {
-			current_line_blame = false,
-		},
-
+		opts = {},
 		keys = {
 			{
 				"<leader>gj",

@@ -10,6 +10,7 @@ return {
 
 		return {
 			on_reposition = cmdline.adapters.blink,
+			width = { value = "70%" },
 		}
 	end,
 }
