@@ -16,10 +16,10 @@ local function lsp_clients()
   table.sort(names)
 
   if #names == 1 then
-    return "󰒋 " .. names[1]
+    return names[1]
   end
 
-  return string.format("󰒋 %d LSPs", #names)
+  return string.format("%d LSPs", #names)
 end
 
 return {
@@ -109,6 +109,15 @@ return {
         },
 
         lualine_x = {
+          { "filesize" },
+          {
+            "searchcount",
+            maxcount = 9999,
+            timeout = 500,
+          },
+          {
+            "selectioncount",
+          },
           {
             function()
               return require("nvim-lightbulb").get_status_text()
@@ -132,13 +141,41 @@ return {
             },
           },
           {
-            lsp_clients,
+            "lsp_status",
+            icon = "󰒋",
+            symobols = {
+              spinner = {
+                "⠋",
+                "⠙",
+                "⠹",
+                "⠸",
+                "⠼",
+                "⠴",
+                "⠦",
+                "⠧",
+                "⠇",
+                "⠏",
+              },
+              done = "",
+              separator = " ",
+            },
+            show_name = false,
             color = {
               fg = colors.foam,
               bg = colors.surface,
             },
             separator = {
               left = "",
+              right = " ",
+            },
+            padding = { right = 1 },
+          },
+          {
+            lsp_clients,
+            padding = { left = 0 },
+            color = {
+              fg = colors.foam,
+              bg = colors.surface,
             },
           },
         },
