@@ -88,7 +88,7 @@ return {
         { path = "rose-pine", mods = { "rose-pine" } },
         { path = "sidekick.nvim", words = { "Sidekick%." } },
         { path = "snacks.nvim", words = { "Snacks" } },
-        { path = "trouble.nvim", words = { "touble%." } },
+        { path = "trouble.nvim", words = { "trouble%." } },
         { path = "which-key.nvim", words = { "wk%." } },
 
         { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
