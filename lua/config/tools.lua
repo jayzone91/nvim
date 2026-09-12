@@ -183,7 +183,7 @@ M.linter = {
   make = { "checkmake" },
 }
 
-M.mason_excluse = {
+M.mason_exclude = {
   fish_indent = true,
   nufmt = true,
   just = true,

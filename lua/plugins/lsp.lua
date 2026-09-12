@@ -2,7 +2,7 @@ local tools = require("config.tools")
 local servers = tools.lsp
 local formatter = tools.formatter
 local linter = tools.linter
-local mason_exclude = tools.mason_excluse
+local mason_exclude = tools.mason_exclude
 local server_names = vim.tbl_keys(servers)
 
 return {
