@@ -1,5 +1,3 @@
-local colors = require("rose-pine.palette")
-
 local function lsp_clients()
   local clients = vim.lsp.get_clients({
     bufnr = vim.api.nvim_get_current_buf(),
@@ -26,137 +24,148 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  opts = {
-    options = {
-      globalstatus = true,
+  opts = function()
+    local colors = require("rose-pine.palette")
 
-      component_separators = {
-        left = "│",
-        right = "│",
-      },
+    return {
+      options = {
+        globalstatus = true,
 
-      section_separators = {
-        left = "",
-        right = "",
-      },
-
-      disabled_filetypes = {
-        statusline = {
-          "snacks_dashboard",
+        component_separators = {
+          left = "│",
+          right = "│",
         },
-      },
-    },
 
-    sections = {
-      lualine_a = {
-        {
-          "mode",
-          fmt = function(mode)
-            return "  " .. mode
-          end,
-          separator = {
-            right = "",
+        section_separators = {
+          left = "",
+          right = "",
+        },
+
+        disabled_filetypes = {
+          statusline = {
+            "snacks_dashboard",
           },
         },
       },
 
-      lualine_b = {
-        {
-          "branch",
-          icon = "",
-          separator = { right = "" },
-          color = {
-            fg = colors.iris,
-            bg = colors.surface,
-            gui = "bold",
+      sections = {
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(mode)
+              return "  " .. mode
+            end,
+            separator = {
+              right = "",
+            },
           },
         },
-        {
-          "diff",
-          symbols = {
-            added = " ",
-            modified = " ",
-            removed = " ",
+
+        lualine_b = {
+          {
+            "branch",
+            icon = "",
+            separator = { right = "" },
+            color = {
+              fg = colors.iris,
+              bg = colors.surface,
+              gui = "bold",
+            },
+          },
+          {
+            "diff",
+            separator = { right = "" },
+            symbols = {
+              added = " ",
+              modified = " ",
+              removed = " ",
+            },
+          },
+        },
+
+        lualine_c = {
+          {
+            "filename",
+            path = 1,
+            symbols = {
+              modified = " ●",
+              readonly = " ",
+              unnamed = " [No Name]",
+              newfile = " ",
+            },
+          },
+        },
+
+        lualine_x = {
+          {
+            function()
+              return require("nvim-lightbulb").get_status_text()
+            end,
+            cond = function()
+              return require("nvim-lightbulb").get_status_text() ~= ""
+            end,
+          },
+          {
+            "diagnostics",
+            symbols = {
+              error = " ",
+              warn = " ",
+              info = " ",
+              hint = "󰌵 ",
+            },
+          },
+          {
+            lsp_clients,
+            color = {
+              fg = colors.foam,
+              bg = colors.surface,
+            },
+            separator = {
+              left = "",
+            },
+          },
+        },
+
+        lualine_y = {
+          {
+            "filetype",
+            icon_only = false,
+            color = { fg = colors.rose, bg = colors.surface },
+            separator = {
+              left = "",
+            },
+          },
+          "progress",
+        },
+
+        lualine_z = {
+          {
+            "location",
+            fmt = function(location)
+              return "󰍎 " .. location
+            end,
+            separator = {
+              left = "",
+            },
           },
         },
       },
 
-      lualine_c = {
-        {
-          "filename",
-          path = 1,
-          symbols = {
-            modified = " ●",
-            readonly = " ",
-            unnamed = " [No Name]",
-            newfile = " ",
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            "filename",
+            path = 1,
           },
         },
-      },
-
-      lualine_x = {
-        {
-          function()
-            return require("nvim-lightbulb").get_status_text()
-          end,
-          cond = function()
-            return require("nvim-lightbulb").get_status_text() ~= ""
-          end,
-        },
-        {
-          "diagnostics",
-          symbols = {
-            error = " ",
-            warn = " ",
-            info = " ",
-            hint = "󰌵 ",
-          },
-        },
-        {
-          lsp_clients,
-          colors = {
-            fg = colors.foam,
-            bg = colors.surface,
-          },
-        },
-      },
-
-      lualine_y = {
-        {
-          "filetype",
-          icon_only = false,
-          colors = { fg = colors.rose, bg = colors.surface },
-        },
-        "progress",
-      },
-
-      lualine_z = {
-        {
+        lualine_x = {
           "location",
-          fmt = function(location)
-            return "󰍎 " .. location
-          end,
-          separator = {
-            left = "",
-          },
         },
+        lualine_y = {},
+        lualine_z = {},
       },
-    },
-
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {
-        {
-          "filename",
-          path = 1,
-        },
-      },
-      lualine_x = {
-        "location",
-      },
-      lualine_y = {},
-      lualine_z = {},
-    },
-  },
+    }
+  end,
 }
