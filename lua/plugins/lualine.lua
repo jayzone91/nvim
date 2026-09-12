@@ -65,7 +65,6 @@ return {
           {
             "branch",
             icon = "",
-            separator = { right = "" },
             color = {
               fg = colors.iris,
               bg = colors.surface,
@@ -74,7 +73,6 @@ return {
           },
           {
             "diff",
-            separator = { right = "" },
             symbols = {
               added = " ",
               modified = " ",
@@ -104,6 +102,10 @@ return {
             cond = function()
               return require("nvim-lightbulb").get_status_text() ~= ""
             end,
+            color = {
+              fg = colors.gold,
+              gui = "bold",
+            },
           },
           {
             "diagnostics",
@@ -111,7 +113,7 @@ return {
               error = " ",
               warn = " ",
               info = " ",
-              hint = "󰌵 ",
+              hint = "󰛩 ",
             },
           },
           {
