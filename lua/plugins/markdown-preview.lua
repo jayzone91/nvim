@@ -8,9 +8,11 @@ return {
   },
   build = "cd app && npm install",
   keys = {
-    "<leader>cp",
-    "<cmd>MarkdownPreviewToggle<CR>",
-    desc = "Markdown Preview",
+    {
+      "<leader>p",
+      "<cmd>MarkdownPreviewToggle<CR>",
+      desc = "Markdown Preview",
+    },
   },
   config = function()
     vim.cmd([[do FileType]])
