@@ -1,6 +1,7 @@
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
+  ---@type wk.Opts
   opts = {
     spec = {
       { "<leader>b", group = "Buffer" },

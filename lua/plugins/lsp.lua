@@ -78,12 +78,20 @@ return {
     opts = {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
-        { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
-        { path = "bufferline.nvim", words = { "bufferline" } },
+
         { path = "blink.cmp", words = { "blink.cmp" } },
+        { path = "bufferline.nvim", words = { "bufferline" } },
         { path = "conform.nvim", words = { "conform" } },
+        { path = "gitsigns.nvim", mods = { "gitsigns" } },
         { path = "hlchunk.nvim", words = { "HlChunk" } },
+        { path = "noice.nvim", words = { "NoiceConfig" } },
+        { path = "rose-pine", mods = { "rose-pine" } },
+        { path = "sidekick.nvim", words = { "Sidekick%." } },
+        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "trouble.nvim", words = { "touble%." } },
+        { path = "which-key.nvim", words = { "wk%." } },
+
+        { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         { path = "mason-lspconfig.nvim", words = { "MasonLspconfigSettings" } },
         { path = "mason.nvim", words = { "MasonSettings" } },
         {

@@ -4,6 +4,7 @@ return {
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
+  ---@type NoiceConfig
   opts = {
     cmdline = {
       enabled = true,

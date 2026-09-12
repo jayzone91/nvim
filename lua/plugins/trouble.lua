@@ -1,6 +1,7 @@
 return {
   "folke/trouble.nvim",
   cmd = "Trouble",
+  ---@type trouble.Config
   opts = {
     modes = {
       diagnostics_buffer = {

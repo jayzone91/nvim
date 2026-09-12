@@ -24,6 +24,7 @@ return {
     "rafamadriz/friendly-snippets",
     "dsznajder/vscode-es7-javascript-react-snippets",
   },
+  ---@module "blink.cmp"
   ---@type blink.cmp.Config
   opts = {
     keymap = {

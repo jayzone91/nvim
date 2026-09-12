@@ -3,6 +3,7 @@ return {
   name = "rose-pine",
   lazy = false,
   priority = 1000,
+  ---@type Options
   opts = {
     dim_inactive_windows = false,
     styles = {
