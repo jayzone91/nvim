@@ -15,7 +15,11 @@ local function lsp_clients()
 
   table.sort(names)
 
-  return "󰒋 " .. table.concat(names, " + ")
+  if #names == 1 then
+    return "󰒋 " .. names[1]
+  end
+
+  return string.format("󰒋 %d LSPs", #names)
 end
 
 return {
@@ -85,6 +89,9 @@ return {
           {
             "filename",
             path = 1,
+            fmt = function(filename)
+              return filename:gsub("\\", "/")
+            end,
             symbols = {
               modified = " ●",
               readonly = " ",
@@ -133,6 +140,16 @@ return {
             "filetype",
             icon_only = false,
             color = { fg = colors.rose, bg = colors.surface },
+            fmt = function(filetype)
+              local names = {
+                javascript = "JS",
+                javascriptreact = "JSX",
+                typescript = "TS",
+                typescriptreact = "TSX",
+              }
+
+              return names[filetype] or filetype
+            end,
             separator = {
               left = "",
             },
