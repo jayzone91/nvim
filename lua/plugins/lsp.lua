@@ -1,3 +1,8 @@
+local tools = require("config.tools")
+local servers = tools.lsp
+local formatter = tools.formatter
+local server_names = vim.tbl_keys(servers)
+
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -5,21 +10,11 @@ return {
     dependencies = {
       {
         "mason-org/mason-lspconfig.nvim",
-        opts = function()
-          local servers = require("config.tools").lsp
-
-          local ensure_installed = {}
-
-          for name in pairs(servers) do
-            table.insert(ensure_installed, name)
-          end
-
-          ---@type MasonLspconfigSettings
-          return {
-            ensure_installed = ensure_installed,
-            automatic_enable = ensure_installed,
-          }
-        end,
+        ---@type MasonLspconfigSettings
+        opts = {
+          ensure_installed = server_names,
+          automatic_enable = server_names,
+        },
       },
       {
         "mason-org/mason.nvim",
@@ -39,8 +34,6 @@ return {
     },
     ---@return MasonToolInstallerSettings
     opts = function()
-      local servers = require("config.tools").lsp
-      local formatter = require("config.tools").formatter
       local SchemaStore = require("schemastore")
 
       servers.jsonls.settings.json.schemas = SchemaStore.json.schemas()
@@ -64,8 +57,8 @@ return {
         end
       end
 
-      for _, tools in pairs(formatter) do
-        for _, name in ipairs(tools) do
+      for _, tool in pairs(formatter) do
+        for _, name in ipairs(tool) do
           add(name)
         end
       end
