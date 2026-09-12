@@ -24,6 +24,7 @@ return {
     "rafamadriz/friendly-snippets",
     "dsznajder/vscode-es7-javascript-react-snippets",
   },
+  ---@type blink.cmp.Config
   opts = {
     keymap = {
       preset = "enter",

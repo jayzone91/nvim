@@ -2,6 +2,7 @@ return {
   "stevearc/conform.nvim",
   event = "BufWritePre",
   cmd = "ConformInfo",
+  ---@type conform.setupOpts
   opts = {
     formatters_by_ft = require("config.tools").formatter,
     formatters = {
@@ -14,6 +15,7 @@ return {
               return true
             end
           end
+          return false
         end,
       },
       ["markdownlint-cli2"] = {

@@ -1,5 +1,6 @@
 return {
   "MagicDuck/grug-far.nvim",
+  ---@type grug.far.OptionsOverride
   opts = { headerMaxWidth = 80 },
   cmd = { "GrugFar", "GrugFarWithin" },
   keys = {

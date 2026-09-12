@@ -14,15 +14,29 @@ return {
             table.insert(ensure_installed, name)
           end
 
+          ---@type MasonLspconfigSettings
           return {
             ensure_installed = ensure_installed,
             automatic_enable = ensure_installed,
           }
         end,
       },
-      { "mason-org/mason.nvim", opts = {} },
+      {
+        "mason-org/mason.nvim",
+        ---@type MasonSettings
+        opts = {
+          ui = {
+            icons = {
+              package_installed = "✓",
+              package_pending = "➜",
+              package_uninstalled = "✗",
+            },
+          },
+        },
+      },
       "neovim/nvim-lspconfig",
     },
+    ---@return MasonToolInstallerSettings
     opts = function()
       local servers = require("config.tools").lsp
       local formatter = require("config.tools").formatter
@@ -50,7 +64,6 @@ return {
           add(name)
         end
       end
-
       return {
         ensure_installed = ensure_installed,
         auto_update = true,
@@ -66,7 +79,17 @@ return {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         { path = "bufferline.nvim", words = { "bufferline" } },
+        { path = "blink.cmp", words = { "blink.cmp" } },
+        { path = "conform.nvim", words = { "conform" } },
+        { path = "hlchunk.nvim", words = { "HlChunk" } },
+        { path = "mason-lspconfig.nvim", words = { "MasonLspconfigSettings" } },
+        { path = "mason.nvim", words = { "MasonSettings" } },
+        {
+          path = "mason-tool-installer.nvim",
+          words = { "MasonToolInstallerSettings" },
+        },
       },
     },
   },
