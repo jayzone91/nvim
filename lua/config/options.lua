@@ -59,9 +59,6 @@ vim.opt.listchars = {
 opt.title = true
 
 -- Folds
-opt.foldcolumn = "auto:1"
-opt.foldlevel = 99
-opt.foldlevelstart = 99
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.fillchars:append({
