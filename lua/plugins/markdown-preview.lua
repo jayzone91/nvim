@@ -6,7 +6,7 @@ return {
     "MarkdownPreviewStop",
     "MarkdownPreviewToggle",
   },
-  build = "cd app && npm install",
+  build = "cd app && yarn install",
   keys = {
     {
       "<leader>p",

@@ -1,6 +1,9 @@
 local M = {}
 
 M.lsp = {
+  bashls = {},
+  fish_lsp = {},
+  just = {},
   emmet_language_server = {
     filetypes = {
       "html",
@@ -166,10 +169,24 @@ M.formatter = {
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   mdx = { "prettier" },
   yaml = { "prettier" },
+  sh = { "shfmt" },
+  bash = { "shfmt" },
+  fish = { "fish_indent" },
+  nu = { "nufmt" },
+  just = { "just" },
 }
 
 M.linter = {
   php = { "phpstan" },
+  sh = { "shellcheck" },
+  bash = { "shellcheck" },
+  make = { "checkmake" },
+}
+
+M.mason_excluse = {
+  fish_indent = true,
+  nufmt = true,
+  just = true,
 }
 
 return M

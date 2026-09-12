@@ -2,6 +2,7 @@ local tools = require("config.tools")
 local servers = tools.lsp
 local formatter = tools.formatter
 local linter = tools.linter
+local mason_exclude = tools.mason_excluse
 local server_names = vim.tbl_keys(servers)
 
 return {
@@ -44,7 +45,7 @@ return {
       local seen = {}
 
       local function add(name)
-        if not seen[name] then
+        if not seen[name] and not mason_exclude[name] then
           seen[name] = true
           table.insert(ensure_installed, name)
         end

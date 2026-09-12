@@ -11,6 +11,7 @@ return {
       { "<leader>w", group = "Window" },
       { "<leader>x", group = "Problems" },
       { "<leader>q", group = "Session / Quit" },
+      { "<leader>o", group = "Tasks" },
     },
   },
   keys = {

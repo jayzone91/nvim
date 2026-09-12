@@ -19,6 +19,11 @@ local parser = {
   toml = { install = true, autocmd = true },
   powershell = { install = true, autocmd = true },
   blade = { install = true, autocmd = true },
+  fish = { install = true, autocmd = true },
+  just = { install = true, autocmd = true },
+  make = { install = true, autocmd = true },
+  nu = { install = true, autocmd = true },
+  scss = { install = true, autocmd = true },
 }
 
 return {
