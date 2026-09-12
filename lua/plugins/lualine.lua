@@ -109,7 +109,6 @@ return {
         },
 
         lualine_x = {
-          { "filesize" },
           {
             "searchcount",
             maxcount = 9999,
@@ -140,6 +139,7 @@ return {
               hint = "󰛩 ",
             },
           },
+          { "filesize" },
           {
             "lsp_status",
             icon = "󰒋",
