@@ -124,20 +124,6 @@ autocmd("LspAttach", {
       vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = event.buf })
     end
 
-    if supports_method(client, "textDocument/signatureHelp", event.buf) then
-      vim.api.nvim_create_autocmd("CursorHoldI", {
-        group = augroup("signature_" .. event.buf),
-        buffer = event.buf,
-        callback = function()
-          vim.lsp.buf.signature_help({
-            border = "rounded",
-            focusable = false,
-            silent = true,
-          })
-        end,
-      })
-    end
-
     if
       supports_method(client, "textDocument/prepareCallHierarchy", event.buf)
     then
@@ -145,6 +131,7 @@ autocmd("LspAttach", {
       map("n", "<leader>cO", vim.lsp.buf.outgoing_calls, "Outgoing Calls")
     end
 
+    map("n", "K", vim.lsp.buf.hover, "Hover")
     map("n", "<F12>", vim.lsp.buf.definition, "Go to Definition")
     map("n", "<F2>", vim.lsp.buf.rename, "Rename Symbol")
     map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
