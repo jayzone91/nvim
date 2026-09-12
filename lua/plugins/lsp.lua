@@ -83,7 +83,6 @@ return {
         { path = "snacks.nvim", words = { "Snacks" } },
         { path = "trouble.nvim", words = { "trouble%." } },
         { path = "which-key.nvim", words = { "wk%." } },
-        { path = "nvim-treesitter-context", mods = { "treesitter-context" } },
 
         { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         { path = "mason-lspconfig.nvim", words = { "MasonLspconfigSettings" } },
