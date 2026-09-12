@@ -35,11 +35,16 @@ return {
         },
       },
       "neovim/nvim-lspconfig",
+      "b0o/SchemaStore.nvim",
     },
     ---@return MasonToolInstallerSettings
     opts = function()
       local servers = require("config.tools").lsp
       local formatter = require("config.tools").formatter
+      local SchemaStore = require("schemastore")
+
+      servers.jsonls.settings.json.schemas = SchemaStore.json.schemas()
+      servers.yamlls.settings.yaml.schemas = SchemaStore.yaml.schemas()
 
       local ensure_installed = {}
       local seen = {}

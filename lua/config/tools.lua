@@ -73,13 +73,21 @@ M.lsp = {
   },
   html = {},
   cssls = {},
-  jsonls = {},
+  jsonls = {
+    ---@type lspconfig.settings.jsonls
+    settings = {
+      json = {
+        validate = { enable = true },
+      },
+    },
+  },
   yamlls = {
     ---@type lspconfig.settings.yamlls
     settings = {
       yaml = {
-        schemas = {
-          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        schemaStore = {
+          enable = false,
+          url = "",
         },
       },
     },
@@ -161,3 +169,4 @@ M.formatter = {
 }
 
 return M
+
