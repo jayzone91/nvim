@@ -142,8 +142,8 @@ return {
           { "filesize" },
           {
             "lsp_status",
-            icon = "󰒋",
-            symobols = {
+            icon = "",
+            symbols = {
               spinner = {
                 "⠋",
                 "⠙",
@@ -156,7 +156,7 @@ return {
                 "⠇",
                 "⠏",
               },
-              done = "",
+              done = "󰒋 ",
               separator = " ",
             },
             show_name = false,
