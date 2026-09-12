@@ -166,7 +166,7 @@ M.formatter = {
   scss = { "prettier" },
   astro = { "prettier" },
   go = { "goimports", "gofumpt" },
-  markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
+  markdown = { "prettier", "markdown-toc" },
   mdx = { "prettier" },
   yaml = { "prettier" },
   sh = { "shfmt" },
@@ -181,6 +181,7 @@ M.linter = {
   sh = { "shellcheck" },
   bash = { "shellcheck" },
   make = { "checkmake" },
+  markdown = { "markdownlint-cli2" },
 }
 
 M.mason_exclude = {
