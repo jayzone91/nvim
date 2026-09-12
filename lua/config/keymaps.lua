@@ -1,5 +1,5 @@
 local map = function(mode, key, func, desc)
-	return vim.keymap.set(mode, key, func, { desc = desc or "" })
+  return vim.keymap.set(mode, key, func, { desc = desc or "" })
 end
 
 map({ "n", "i", "x" }, "<C-s>", "<cmd>write<cr>", "Save File")
@@ -42,6 +42,10 @@ map("n", "<leader>wo", "<cmd>only<cr>", "Close Other Windows")
 map("n", "<leader>we", "<C-w>=", "Equal Window Size")
 
 -- Enter Normal mode
-map({ "n", "i", "v", "x", "s", "o", "c" }, "<C-c>", "<Esc>", "Enter Normal Mode")
+map(
+  { "n", "i", "v", "x", "s", "o", "c" },
+  "<C-c>",
+  "<Esc>",
+  "Enter Normal Mode"
+)
 map("t", "<Esc>", "<C-\\><C-n>", "Enter Normal Mode")
-

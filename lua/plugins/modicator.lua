@@ -1,6 +1,5 @@
 return {
-	"mawkler/modicator.nvim",
-	event = "VeryLazy",
-	opts = {},
+  "mawkler/modicator.nvim",
+  event = "VeryLazy",
+  opts = {},
 }
-

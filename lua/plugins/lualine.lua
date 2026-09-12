@@ -1,82 +1,162 @@
+local colors = require("rose-pine.palette")
+
+local function lsp_clients()
+  local clients = vim.lsp.get_clients({
+    bufnr = vim.api.nvim_get_current_buf(),
+  })
+
+  if #clients == 0 then
+    return ""
+  end
+
+  local names = {}
+
+  for _, client in ipairs(clients) do
+    names[#names + 1] = client.name
+  end
+
+  table.sort(names)
+
+  return "󰒋 " .. table.concat(names, " + ")
+end
+
 return {
-	"nvim-lualine/lualine.nvim",
-	event = "VeryLazy",
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
-	opts = {
-		options = {
-			globalstatus = true,
+  "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  opts = {
+    options = {
+      globalstatus = true,
 
-			component_separators = {
-				left = "│",
-				right = "│",
-			},
+      component_separators = {
+        left = "│",
+        right = "│",
+      },
 
-			section_separators = {
-				left = "",
-				right = "",
-			},
+      section_separators = {
+        left = "",
+        right = "",
+      },
 
-			disabled_filetypes = {
-				statusline = {
-					"snacks_dashboard",
-				},
-			},
-		},
+      disabled_filetypes = {
+        statusline = {
+          "snacks_dashboard",
+        },
+      },
+    },
 
-		sections = {
-			lualine_a = {
-				"mode",
-			},
+    sections = {
+      lualine_a = {
+        {
+          "mode",
+          fmt = function(mode)
+            return "  " .. mode
+          end,
+          separator = {
+            right = "",
+          },
+        },
+      },
 
-			lualine_b = {
-				"branch",
-				"diff",
-			},
+      lualine_b = {
+        {
+          "branch",
+          icon = "",
+          separator = { right = "" },
+          color = {
+            fg = colors.iris,
+            bg = colors.surface,
+            gui = "bold",
+          },
+        },
+        {
+          "diff",
+          symbols = {
+            added = " ",
+            modified = " ",
+            removed = " ",
+          },
+        },
+      },
 
-			lualine_c = {
-				{
-					"filename",
-					path = 4,
-					symbols = {
-						modified = " ●",
-						readonly = " ",
-						unnamed = "[No Name]",
-					},
-				},
-			},
+      lualine_c = {
+        {
+          "filename",
+          path = 1,
+          symbols = {
+            modified = " ●",
+            readonly = " ",
+            unnamed = " [No Name]",
+            newfile = " ",
+          },
+        },
+      },
 
-			lualine_x = {
-				"diagnostics",
-				"encoding",
-				"filetype",
-			},
+      lualine_x = {
+        {
+          function()
+            return require("nvim-lightbulb").get_status_text()
+          end,
+          cond = function()
+            return require("nvim-lightbulb").get_status_text() ~= ""
+          end,
+        },
+        {
+          "diagnostics",
+          symbols = {
+            error = " ",
+            warn = " ",
+            info = " ",
+            hint = "󰌵 ",
+          },
+        },
+        {
+          lsp_clients,
+          colors = {
+            fg = colors.foam,
+            bg = colors.surface,
+          },
+        },
+      },
 
-			lualine_y = {
-				"progress",
-			},
+      lualine_y = {
+        {
+          "filetype",
+          icon_only = false,
+          colors = { fg = colors.rose, bg = colors.surface },
+        },
+        "progress",
+      },
 
-			lualine_z = {
-				"location",
-			},
-		},
+      lualine_z = {
+        {
+          "location",
+          fmt = function(location)
+            return "󰍎 " .. location
+          end,
+          separator = {
+            left = "",
+          },
+        },
+      },
+    },
 
-		inactive_sections = {
-			lualine_a = {},
-			lualine_b = {},
-			lualine_c = {
-				{
-					"filename",
-					path = 1,
-				},
-			},
-			lualine_x = {
-				"location",
-			},
-			lualine_y = {},
-			lualine_z = {},
-		},
-	},
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {
+        {
+          "filename",
+          path = 1,
+        },
+      },
+      lualine_x = {
+        "location",
+      },
+      lualine_y = {},
+      lualine_z = {},
+    },
+  },
 }
-

@@ -49,9 +49,9 @@ opt.completeopt = "menu,menuone,noselect"
 -- Whitespace
 opt.list = true
 vim.opt.listchars = {
-	tab = "→ ",
-	trail = "·",
-	nbsp = "␣",
+  tab = "→ ",
+  trail = "·",
+  nbsp = "␣",
 }
 
 -- Window Title
@@ -64,9 +64,8 @@ opt.foldlevelstart = 99
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.fillchars:append({
-	foldopen = "",
-	foldclose = "",
-	foldsep = " ",
-	foldinner = " ",
+  foldopen = "",
+  foldclose = "",
+  foldsep = " ",
+  foldinner = " ",
 })
-

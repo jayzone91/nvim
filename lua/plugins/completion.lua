@@ -1,102 +1,104 @@
 local function tabout()
-	local keys = vim.api.nvim_replace_termcodes("<Plug>(Tabout)", true, true, true)
+  local keys =
+    vim.api.nvim_replace_termcodes("<Plug>(Tabout)", true, true, true)
 
-	vim.api.nvim_feedkeys(keys, "", false)
+  vim.api.nvim_feedkeys(keys, "", false)
 
-	return true
+  return true
 end
 
 local function tabout_back()
-	local keys = vim.api.nvim_replace_termcodes("<Plug>(TaboutBack)", true, true, true)
+  local keys =
+    vim.api.nvim_replace_termcodes("<Plug>(TaboutBack)", true, true, true)
 
-	vim.api.nvim_feedkeys(keys, "", false)
+  vim.api.nvim_feedkeys(keys, "", false)
 
-	return true
+  return true
 end
 
 return {
-	"saghen/blink.cmp",
-	version = "1.*",
-	event = "InsertEnter",
-	dependencies = {
-		"rafamadriz/friendly-snippets",
-		"dsznajder/vscode-es7-javascript-react-snippets",
-	},
-	opts = {
-		keymap = {
-			preset = "enter",
-			["<Tab>"] = {
-				"select_next",
-				"snippet_forward",
-				tabout,
-				"fallback",
-			},
-			["<S-Tab>"] = {
-				"select_prev",
-				"snippet_backward",
-				tabout_back,
-				"fallback",
-			},
-			["<Esc>"] = {
-				"hide",
-				"fallback",
-			},
-		},
-		completion = {
-			documentation = {
-				auto_show = true,
-				auto_show_delay_ms = 300,
-			},
-			ghost_text = {
-				enabled = true,
-			},
-			menu = {
-				border = "rounded",
-				draw = {
-					padding = { 0, 1 },
-					columns = {
-						{ "kind_icon" },
-						{ "label", "label_description", gap = 1 },
-						{ "kind", gap = 1 },
-					},
-					components = {
-						kind_icon = {
-							text = function(ctx)
-								return " " .. ctx.kind_icon .. ctx.icon_gap .. " "
-							end,
-							highlight = function(ctx)
-								return {
-									{
-										group = ctx.kind_hl,
-										priority = 20000,
-									},
-								}
-							end,
-						},
-					},
-					treesitter = { "lsp" },
-				},
-			},
-		},
-		signature = {
-			enabled = true,
-		},
-		sources = {
-			providers = {
-				lsp = {
-					opts = {
-						tailwind_color_icon = "██",
-					},
-				},
-				snippets = {
-					opts = {
-						search_paths = {
-							vim.fn.stdpath("data") .. "/lazy/vscode-es7-javascript-react-snippets",
-						},
-					},
-				},
-			},
-		},
-	},
+  "saghen/blink.cmp",
+  version = "1.*",
+  event = "InsertEnter",
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    "dsznajder/vscode-es7-javascript-react-snippets",
+  },
+  opts = {
+    keymap = {
+      preset = "enter",
+      ["<Tab>"] = {
+        "select_next",
+        "snippet_forward",
+        tabout,
+        "fallback",
+      },
+      ["<S-Tab>"] = {
+        "select_prev",
+        "snippet_backward",
+        tabout_back,
+        "fallback",
+      },
+      ["<Esc>"] = {
+        "hide",
+        "fallback",
+      },
+    },
+    completion = {
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 300,
+      },
+      ghost_text = {
+        enabled = true,
+      },
+      menu = {
+        border = "rounded",
+        draw = {
+          padding = { 0, 1 },
+          columns = {
+            { "kind_icon" },
+            { "label", "label_description", gap = 1 },
+            { "kind", gap = 1 },
+          },
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                return " " .. ctx.kind_icon .. ctx.icon_gap .. " "
+              end,
+              highlight = function(ctx)
+                return {
+                  {
+                    group = ctx.kind_hl,
+                    priority = 20000,
+                  },
+                }
+              end,
+            },
+          },
+          treesitter = { "lsp" },
+        },
+      },
+    },
+    signature = {
+      enabled = true,
+    },
+    sources = {
+      providers = {
+        lsp = {
+          opts = {
+            tailwind_color_icon = "██",
+          },
+        },
+        snippets = {
+          opts = {
+            search_paths = {
+              vim.fn.stdpath("data")
+                .. "/lazy/vscode-es7-javascript-react-snippets",
+            },
+          },
+        },
+      },
+    },
+  },
 }
-
