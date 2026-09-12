@@ -90,6 +90,9 @@ return {
         { path = "snacks.nvim", words = { "Snacks" } },
         { path = "trouble.nvim", words = { "trouble%." } },
         { path = "which-key.nvim", words = { "wk%." } },
+        { path = "nvim-lightbulb", mods = { "nvim-lightbulb" } },
+        { path = "persistence.nvim", mods = { "persistence" } },
+        { path = "grug-far.nvim", mods = { "grug-far" } },
 
         { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         { path = "mason-lspconfig.nvim", words = { "MasonLspconfigSettings" } },
