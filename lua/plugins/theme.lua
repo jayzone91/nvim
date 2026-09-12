@@ -3,6 +3,7 @@ return {
   name = "rose-pine",
   lazy = false,
   priority = 1000,
+  ---@module "rose-pine"
   ---@type Options
   opts = {
     dim_inactive_windows = false,

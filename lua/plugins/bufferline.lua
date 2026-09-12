@@ -35,6 +35,7 @@ return {
   version = "*",
   event = "VeryLazy",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  ---@module "bufferline"
   ---@type bufferline.UserConfig
   opts = {
     options = {
