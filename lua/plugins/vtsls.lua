@@ -6,10 +6,6 @@ return {
     "typescript",
     "typescriptreact",
   },
-  cmd = {
-    "VtsExec",
-    "VtsRename",
-  },
   config = function()
     require("vtsls").config({
       refactor_auto_rename = true,
@@ -17,18 +13,24 @@ return {
   end,
   keys = {
     {
-      "<A-F12>",
+      "<leader>cD",
       "<cmd>VtsExec goto_source_definition<CR>",
       desc = "Go to Source Definition",
+    },
+    {
+      "<A-F12>",
+      function()
+        Snacks.picker.lsp_definitions()
+      end,
+      desc = "Peek Definition",
     },
     {
       "<S-F12>",
       function()
         Snacks.picker.lsp_references()
       end,
-      desc = "Find References",
+      desc = "Peek References",
     },
-
     {
       "<leader>co",
       "<cmd>VtsExec organize_imports<CR>",

@@ -248,6 +248,24 @@ return {
         },
       },
       sources = {
+        lsp_definitions = {
+          auto_confirm = false,
+          layout = {
+            preset = "ivy",
+            layout = {
+              height = 0.35,
+            },
+          },
+        },
+        lsp_references = {
+          auto_confirm = false,
+          layout = {
+            preset = "ivy",
+            layout = {
+              height = 0.35,
+            },
+          },
+        },
         explorer = {
           layout = {
             preset = "sidebar",
