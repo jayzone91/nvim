@@ -131,3 +131,55 @@ vim.keymap.set(
   "<cmd>w<cr><esc>",
   { desc = "Save File" }
 )
+
+-- multicursor
+if vim.fn.has("nvim-0.13") == 1 then
+  local function set_word_search()
+    local word = vim.fn.expand("<cword>")
+
+    if word == "" then
+      return false
+    end
+
+    vim.fn.setreg("/", "\\V\\<" .. vim.fn.escape(word, "\\") .. "\\>")
+    return true
+  end
+
+  map("n", "<C-n>", function()
+    if not set_word_search() then
+      return
+    end
+
+    vim.cmd("normal! Qn")
+  end, "Add Next Occurrence")
+
+  map("n", "<C-S-l>", function()
+    if not set_word_search() then
+      return
+    end
+
+    vim.cmd("normal! 1Q")
+  end, "Add All Occurrences")
+
+  local function add_cursor(offset)
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local row = cursor[1] + offset
+
+    if row < 1 and row > vim.api.nvim_buf_lust_count(0) then
+      return
+    end
+
+    local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+    local col = math.min(cursor[2], #line)
+
+    vim.api.nvim_mcursor(0, { row, col })
+  end
+
+  map("n", "<C-S-Up>", function()
+    add_cursor(-1)
+  end, "Add Cursor Above")
+
+  map("n", "<C-S-Down>", function()
+    add_cursor(1)
+  end, "Add Cursor Below")
+end
