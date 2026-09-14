@@ -120,6 +120,16 @@ autocmd("LspAttach", {
       return
     end
 
+    local ft = vim.bo[event.buf].filetype
+
+    if
+      client.name == "vtsls"
+      and (ft == "typescript" or ft == "typescriptreact")
+      and supports_method(client, "textDocument/inlayHint", event.buf)
+    then
+      vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+    end
+
     local map = function(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = event.buf })
     end
