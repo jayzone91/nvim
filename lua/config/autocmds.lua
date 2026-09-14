@@ -146,6 +146,9 @@ autocmd("LspAttach", {
     map("n", "<F2>", vim.lsp.buf.rename, "Rename Symbol")
     map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
     map({ "n", "x" }, "<A-CR>", vim.lsp.buf.code_action, "Code Action")
+    map({ "n", "x" }, "<C-S-r", function()
+      vim.lsp.buf.code_action({ context = { only = { "refactor" } } })
+    end, "Refactor")
     map("n", "<F8>", function()
       vim.diagnostic.jump({
         count = 1,
