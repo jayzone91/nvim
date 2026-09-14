@@ -2,14 +2,7 @@ return {
   "folke/trouble.nvim",
   cmd = "Trouble",
   ---@type trouble.Config
-  opts = {
-    modes = {
-      diagnostics_buffer = {
-        mode = "diagnostics",
-        filter = { buf = 0 },
-      },
-    },
-  },
+  opts = {},
   keys = {
     {
       "<leader>xx",
@@ -17,13 +10,6 @@ return {
         require("trouble").toggle("diagnostics")
       end,
       desc = "Problems",
-    },
-    {
-      "<leader>xX",
-      function()
-        require("trouble").toggle("diagnostics_buffer")
-      end,
-      desc = "Buffer Problems",
     },
     {
       "<leader>xq",
