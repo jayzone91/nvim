@@ -35,7 +35,6 @@ return {
         "fallback",
       },
       ["<S-Tab>"] = {
-        "select_prev",
         "snippet_backward",
         tabout_back,
         "fallback",
