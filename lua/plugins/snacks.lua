@@ -248,6 +248,22 @@ return {
         },
       },
       sources = {
+        diagnostics = {
+          layout = {
+            preset = "ivy",
+            layout = {
+              height = 0.35,
+            },
+          },
+        },
+        diagnostics_buffer = {
+          layout = {
+            preset = "ivy",
+            layout = {
+              height = 0.35,
+            },
+          },
+        },
         lsp_definitions = {
           auto_confirm = false,
           layout = {
@@ -508,6 +524,13 @@ return {
         Snacks.rename.rename_file()
       end,
       desc = "Rename File",
+    },
+    {
+      "<C-S-m>",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Problems",
     },
   },
   init = function()
