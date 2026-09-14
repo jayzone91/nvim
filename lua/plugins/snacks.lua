@@ -282,6 +282,24 @@ return {
             },
           },
         },
+        lsp_implementations = {
+          auto_confirm = false,
+          layout = {
+            preset = "ivy",
+            layout = {
+              height = 0.35,
+            },
+          },
+        },
+        lsp_type_definitions = {
+          auto_confirm = false,
+          layout = {
+            preset = "ivy",
+            layout = {
+              height = 0.35,
+            },
+          },
+        },
         explorer = {
           layout = {
             preset = "sidebar",
