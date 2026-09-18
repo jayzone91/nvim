@@ -12,6 +12,8 @@ for _, name in ipairs({
   "flash.nvim",
   "quicker.nvim",
   "colorful-menu.nvim",
+  "smear-cursor.nvim",
+  "mini.animate",
 }) do
   expect(lazy_config.plugins[name] ~= nil, "missing plugin: " .. name)
 end
@@ -33,6 +35,8 @@ expect(
 
 local snacks = plugin.values(lazy_config.plugins["snacks.nvim"], "opts", false)
 expect(snacks.scroll.enabled == true, "snacks smooth scroll")
+expect(snacks.indent.enabled == true, "snacks animated indent")
+expect(snacks.indent.animate.enabled == true, "snacks indent animation")
 
 vim.cmd("enew")
 vim.api.nvim_buf_set_lines(0, 0, -1, false, { "first", "last" })

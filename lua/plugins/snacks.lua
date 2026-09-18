@@ -214,6 +214,11 @@ return {
     },
     bigfile = { enabled = true },
     explorer = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = true },
+      scope = { enabled = true },
+    },
     input = { enabled = true },
     notifier = { enabled = true, timeout = 3000 },
     picker = {
