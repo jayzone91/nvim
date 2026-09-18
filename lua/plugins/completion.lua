@@ -23,6 +23,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "dsznajder/vscode-es7-javascript-react-snippets",
+    "xzbdmw/colorful-menu.nvim",
   },
   ---@module "blink.cmp"
   ---@type blink.cmp.Config
@@ -64,10 +65,18 @@ return {
           padding = { 0, 1 },
           columns = {
             { "kind_icon" },
-            { "label", "label_description", gap = 1 },
+            { "label", gap = 1 },
             { "kind", gap = 1 },
           },
           components = {
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+              end,
+            },
             kind_icon = {
               text = function(ctx)
                 return " " .. ctx.kind_icon .. ctx.icon_gap .. " "
@@ -89,20 +98,30 @@ return {
     signature = {
       enabled = true,
     },
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+      sorts = { "exact", "score", "sort_text" },
+    },
     sources = {
+      default = { "lsp", "snippets", "path", "buffer" },
       providers = {
         lsp = {
+          score_offset = 4,
           opts = {
             tailwind_color_icon = "██",
           },
         },
         snippets = {
+          score_offset = -1,
           opts = {
             search_paths = {
               vim.fn.stdpath("data")
                 .. "/lazy/vscode-es7-javascript-react-snippets",
             },
           },
+        },
+        buffer = {
+          score_offset = -3,
         },
       },
     },

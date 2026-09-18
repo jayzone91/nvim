@@ -43,7 +43,7 @@ return {
         desc = "Reset Git Change",
       },
       {
-        "<leader>gb",
+        "<leader>gB",
         function()
           require("gitsigns").blame_line({
             full = true,

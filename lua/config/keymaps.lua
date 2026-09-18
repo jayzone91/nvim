@@ -165,7 +165,7 @@ if vim.fn.has("nvim-0.13") == 1 then
     local cursor = vim.api.nvim_win_get_cursor(0)
     local row = cursor[1] + offset
 
-    if row < 1 and row > vim.api.nvim_buf_lust_count(0) then
+    if row < 1 or row > vim.api.nvim_buf_line_count(0) then
       return
     end
 

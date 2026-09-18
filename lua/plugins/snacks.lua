@@ -328,6 +328,7 @@ return {
     },
     quickfile = { enabled = true },
     rename = { enabled = true },
+    scroll = { enabled = true },
     terminal = { enabled = true },
     words = { enabled = true },
   },

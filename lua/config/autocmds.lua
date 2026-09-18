@@ -123,8 +123,12 @@ autocmd("LspAttach", {
     local ft = vim.bo[event.buf].filetype
 
     if
-      client.name == "vtsls"
-      and (ft == "typescript" or ft == "typescriptreact")
+      (
+        (
+          client.name == "vtsls"
+          and (ft == "typescript" or ft == "typescriptreact")
+        ) or (client.name == "gopls" and ft == "go")
+      )
       and supports_method(client, "textDocument/inlayHint", event.buf)
     then
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
@@ -315,6 +319,10 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(event.buf) then
+        return
+      end
+
       vim.keymap.set("n", "q", function()
         vim.cmd("close")
         pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
